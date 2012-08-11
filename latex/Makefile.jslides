@@ -1,0 +1,21 @@
+MAIN = presentation
+TEX = $(wildcard *.tex)
+FIGS = $(wildcard img/*)
+
+LATEX = pdflatex -interaction=batchmode
+
+.PHONY: clean
+
+all: slides.pdf handout.pdf
+
+slides.pdf: $(TEX) $(FIGS) jslides.cls
+	$(LATEX) -jobname slides $(MAIN)
+	$(LATEX) -jobname slides $(MAIN)
+
+handout.pdf: $(TEX) $(FIGS) jslides.cls
+	$(LATEX) -jobname handout "\newcommand\jsdefaultmode{handout}\input{$(MAIN)}"
+	$(LATEX) -jobname handout "\newcommand\jsdefaultmode{handout}\input{$(MAIN)}"
+
+clean:
+	rm -f *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc slides.pdf handout.pdf
+

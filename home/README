@@ -1,0 +1,7 @@
+Things that may change when this package is migrated to a new environment:
+
+* .profile: Paths
+
+* .bashrc: Default parallelism for make
+
+* .gvimrc: Settings

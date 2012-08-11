@@ -1,0 +1,184 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set nocompatible
+set bs=2
+
+" Remove all existing autocommands
+:autocmd!
+
+" Show incomplete commands
+set showcmd
+
+" Colors
+syntax on
+colorscheme nixcode_dark
+
+" Line numbers and ruler
+set number ruler
+
+" Text encoding and line endings
+set encoding=utf-8
+set ffs=unix,dos
+
+" Tab settings
+set tabstop=2 softtabstop=2 shiftwidth=2 expandtab smarttab
+set cindent
+
+" Columns and line wrapping
+set wrap linebreak nolist textwidth=0 wrapmargin=0
+set colorcolumn=80
+
+" Backspace through everything in insert mode
+set backspace=indent,eol,start
+
+" Highlight current line
+set cursorline
+
+" Highlight search results
+set hlsearch
+
+" Custom status line (always shown)
+set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
+set laststatus=2
+
+" Support for filetype-specific stuff
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
+" Wrap comments, but don't auto-continue comments otherwise
+set formatoptions+=c formatoptions-=r formatoptions-=o
+
+" One space after period
+set nojoinspaces
+
+" Folding
+set foldmethod=syntax foldcolumn=4 foldnestmax=3
+
+" Use the + register (which aliases to the system clipboard) by default
+set clipboard=unnamedplus
+
+" Strip trailing whitespace on save
+fun! <SID>StripTrailingWhitespace()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom commands and bindings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" j and k move visually up and down on wrapped lines
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
+
+" Allow certain capital commands
+command W w
+command Q q
+command Wq wq
+command WQ wq
+
+" Y copies from cursor to EOL
+noremap Y y$
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" When searching, keep search pattern at the center of the screen
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+nnoremap <silent> g# g#zz
+
+" Ctrl-a selects all text in current buffer
+nnoremap <silent> <C-a> ggVG
+vnoremap <silent> <C-a> ggVG
+
+" Ctrl-jk moves the current line up or down
+nnoremap <silent> <C-j> :m+<CR>
+vnoremap <silent> <C-j> :m'>+<CR>gv
+nnoremap <silent> <C-k> :m-2<CR>
+vnoremap <silent> <C-k> :m-2<CR>gv
+
+" F4 clears search highlight and recomputes syntax highlighting
+noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
+
+" F7 enables auto-wrapping, F8 disables auto-wrapping
+noremap <silent> <F7> :set fo+=a<CR>
+noremap <silent> <F8> :set fo-=a<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language-specific settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" C#
+autocmd FileType cs
+  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+" Git - show diff in window split when committing
+autocmd FileType gitcommit
+  \ DiffGitCached | wincmd p
+
+" Golang
+augroup filetype
+  au! BufRead,BufNewFile *.go set filetype=go
+augroup END
+
+" Haskell
+autocmd FileType haskell
+  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
+
+" JSON
+augroup filetype
+  au! BufRead,BufNewFile *.json set filetype=javascript
+augroup END
+
+" LLVM
+augroup filetype
+  au! BufRead,BufNewFile *.ll set filetype=llvm
+augroup END
+
+" Protobuf
+augroup filetype
+  au! BufRead,BufNewFile *.proto set filetype=proto
+augroup END
+
+" Python
+autocmd FileType python
+  \ setlocal nocindent autoindent nosmartindent
+  \ tabstop=4 softtabstop=4 shiftwidth=4
+
+" LaTeX
+let g:tex_flavor = "latex"
+autocmd FileType tex
+  \ setlocal nocindent autoindent nosmartindent
+  \ spell spelllang=en_us
+  \ fo+=t fo+=2
+
+" Plain text
+autocmd BufRead,BufNewFile *.txt
+  \ setlocal nocindent autoindent nosmartindent
+  \ spell spelllang=en_us
+  \ fo+=t fo+=a fo+=2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set runtimepath+=$HOME/.vim/plugins/ctrlp
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Environment-specific settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" System header tags
+set tags=./tags,../tags,../../tags,../../../tags,/opt/systags
