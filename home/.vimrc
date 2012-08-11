@@ -2,18 +2,14 @@ set nocompatible
 set bs=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set runtimepath+=$HOME/.vim/plugins/csapprox
-set runtimepath+=$HOME/.vim/plugins/ctrlp
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Remove all existing autocommands
 :autocmd!
+
+" Load plugins
+call pathogen#infect()
 
 " Show incomplete commands
 set showcmd
