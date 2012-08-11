@@ -28,6 +28,10 @@ text.
 * Background (highlight): L=5, a=0, b=0 => #111111
   Very, very dark neutral grey.
 
+* Background (weak): L=19, a=0, b=0 => #2e2e2e
+
+* Background (very weak): L=26, a=0, b=0 => #3e3e3d
+
 * Normal-highlight border: L=25, a=0, b=0 => #3b3b3b
 
 * Foreground (normal): L=88, a=-5, b=-5 => #cee0e4

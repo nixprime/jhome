@@ -1,9 +1,16 @@
+set nocompatible
+set bs=2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set runtimepath+=$HOME/.vim/plugins/csapprox
+set runtimepath+=$HOME/.vim/plugins/ctrlp
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible
-set bs=2
 
 " Remove all existing autocommands
 :autocmd!
@@ -13,7 +20,9 @@ set showcmd
 
 " Colors
 syntax on
-colorscheme nixcode_dark
+set t_Co=256 " Assume 256-color terminal
+let g:CSApprox_attr_map = { "bold": "bold", "italic": "", "sp": "" }
+colorscheme jcolor_dark
 
 " Line numbers and ruler
 set number ruler
@@ -169,12 +178,6 @@ autocmd BufRead,BufNewFile *.txt
   \ setlocal nocindent autoindent nosmartindent
   \ spell spelllang=en_us
   \ fo+=t fo+=a fo+=2
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set runtimepath+=$HOME/.vim/plugins/ctrlp
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings

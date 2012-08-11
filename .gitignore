@@ -2,5 +2,8 @@
 __pycache__/
 *.pyc
 
+# Vim
+*.swp
+
 # Miscellaneous
 *.pdf
