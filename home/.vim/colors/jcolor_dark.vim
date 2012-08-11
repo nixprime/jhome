@@ -30,9 +30,9 @@ hi Statement guibg=NONE guifg=#49bc50 gui=NONE
 
 hi PreProc guibg=NONE guifg=#dc82f6 gui=NONE
 
-hi Type guibg=NONE guifg=#e87b28 gui=NONE
+hi Type guibg=NONE guifg=#bbb924 gui=NONE
 
-hi Special guibg=NONE guifg=#bbb924 gui=NONE
+hi Special guibg=NONE guifg=#e87b28 gui=NONE
 
 hi Underlined guibg=NONE guifg=#cee0e4 gui=NONE
 
