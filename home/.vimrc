@@ -44,6 +44,9 @@ set cursorline
 " Highlight search results
 set hlsearch
 
+" Search/replace applies to all occurrences on the line by default
+set gdefault
+
 " Custom status line (always shown)
 set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
@@ -161,6 +164,11 @@ augroup END
 autocmd FileType python
   \ setlocal nocindent autoindent nosmartindent
   \ tabstop=4 softtabstop=4 shiftwidth=4
+
+" SCons
+augroup filetype
+  au! BufRead,BufNewFile SCons* set filetype=python
+augroup END
 
 " LaTeX
 let g:tex_flavor = "latex"
