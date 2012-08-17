@@ -80,11 +80,15 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 " Custom commands and bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" j and k move visually up and down on wrapped lines
+" jk move visually up and down on wrapped lines
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+
+" Shift-up/down move the screen up/down
+noremap <S-up> <C-Y>
+noremap <S-down> <C-E>
 
 " Allow certain capital commands
 command W w
