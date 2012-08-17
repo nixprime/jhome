@@ -1,0 +1,12 @@
+[user]
+	name = Jamie Liu
+	email = jliu@nixprime.com
+[core]
+
+[alias]
+  st = status
+  ci = commit
+  changes = diff --name-status -r
+  unstage = reset HEAD
+  ignored = ls-files --others -i --exclude-standard
+  ignored-paths = clean -ndX
