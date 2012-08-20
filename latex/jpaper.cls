@@ -132,6 +132,8 @@
 }{%
   \predate{}
   \postdate{}
+  \date{}
+  \let\date=\relax
 }
 
 % The abstract should be normally sized and italicized. Abstract leading
