@@ -11,8 +11,7 @@ ILLUMINANT_D65_2 = (0.31271, 0.32902, 1.0)
 ILLUMINANT_D65_10 = (0.31382, 0.33100, 1.0)
 
 # Constants for internal use.
-L_SERIES_DARK = 40.0
-L_SERIES_LIGHT = 65.0
+L_SERIES = [20, 60, 30, 70, 40, 80, 50, 90]
 AB_SERIES = [
         (15, -75),  # blue
         (40, 65),   # orange
@@ -21,7 +20,8 @@ AB_SERIES = [
         (80, 60),   # red
         (70, -30),  # pink
         (15, 35),   # brown
-        (0, 0),     # grey
+        #(0, 0),     # grey
+        (-20, 90),  # yellow
         ]
 L_FIG_FILL = 75.0
 L_FIG_LINE = 55.0
@@ -33,7 +33,7 @@ def series_color(i):
     """Choose a color for the (i+1)th series in a plot where series are
     qualitatively distinctive. Colors will repeat starting with i=8. Returns a
     color in the form #rrggbb."""
-    l = L_SERIES_LIGHT if i % 2 == 1 else L_SERIES_DARK
+    l = L_SERIES[i % len(L_SERIES)]
     (a, b) = AB_SERIES[i % len(AB_SERIES)]
     return lab_to_hex((l, a, b))
 
