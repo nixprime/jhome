@@ -55,8 +55,8 @@ set laststatus=2
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
-" Wrap comments, but don't auto-continue comments otherwise
-set formatoptions+=c formatoptions-=ro
+" No overly clever indentation by default
+set nocindent autoindent nosmartindent
 
 " One space after period
 set nojoinspaces
@@ -75,6 +75,13 @@ fun! <SID>StripTrailingWhitespace()
   call cursor(l, c)
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Settings usually overriden by plugins (but see .vim/after/ftplugin/)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Wrap comments, but don't auto-continue comments otherwise
+set formatoptions+=c formatoptions-=ro
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom commands and bindings
@@ -166,7 +173,6 @@ augroup END
 
 " Python
 autocmd FileType python
-  \ setlocal nocindent autoindent nosmartindent
   \ tabstop=4 softtabstop=4 shiftwidth=4
 
 " SCons
@@ -177,13 +183,11 @@ augroup END
 " LaTeX
 let g:tex_flavor = "latex"
 autocmd FileType tex
-  \ setlocal nocindent autoindent nosmartindent
   \ spell spelllang=en_us
   \ fo+=t2
 
 " Plain text
 autocmd BufRead,BufNewFile *.txt
-  \ setlocal nocindent autoindent nosmartindent
   \ spell spelllang=en_us
   \ fo+=ta2
 
