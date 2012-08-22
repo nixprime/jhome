@@ -139,6 +139,15 @@ noremap <silent> <F8> :set fo-=a<CR>
 " Language-specific settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" C/C++
+" Higher minlines
+let c_minlines=100
+" Do not fold comments
+let c_no_comment_fold=1
+let c_no_if0_fold=1
+" Do not highlight weird bracket nesting as an error (C++11 features)
+let c_no_curly_error=1
+
 " C#
 autocmd FileType cs
   \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
