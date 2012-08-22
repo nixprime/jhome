@@ -173,7 +173,7 @@ augroup END
 
 " Python
 autocmd FileType python
-  \ tabstop=4 softtabstop=4 shiftwidth=4
+  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
 " SCons
 augroup filetype
@@ -183,12 +183,12 @@ augroup END
 " LaTeX
 let g:tex_flavor = "latex"
 autocmd FileType tex
-  \ spell spelllang=en_us
+  \ setlocal spell spelllang=en_us
   \ fo+=t2
 
 " Plain text
 autocmd BufRead,BufNewFile *.txt
-  \ spell spelllang=en_us
+  \ setlocal spell spelllang=en_us
   \ fo+=ta2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
