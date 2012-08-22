@@ -56,7 +56,7 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 " Wrap comments, but don't auto-continue comments otherwise
-set formatoptions+=c formatoptions-=r formatoptions-=o
+set formatoptions+=c formatoptions-=ro
 
 " One space after period
 set nojoinspaces
@@ -179,13 +179,13 @@ let g:tex_flavor = "latex"
 autocmd FileType tex
   \ setlocal nocindent autoindent nosmartindent
   \ spell spelllang=en_us
-  \ fo+=t fo+=2
+  \ fo+=t2
 
 " Plain text
 autocmd BufRead,BufNewFile *.txt
   \ setlocal nocindent autoindent nosmartindent
   \ spell spelllang=en_us
-  \ fo+=t fo+=a fo+=2
+  \ fo+=ta2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings

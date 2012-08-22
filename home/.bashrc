@@ -115,6 +115,9 @@ umask 0022
 # Parallel make
 alias make="make -j8 2>&1"
 
+# Parallel scons
+export SCONSFLAGS="-Q -j8"
+
 # Aliases for some unclean programs
 alias chromium-browser="nohup chromium-browser &>/dev/null"
 alias evince="nohup evince &>/dev/null"

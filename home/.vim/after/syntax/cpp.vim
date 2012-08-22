@@ -5,7 +5,7 @@ syn keyword cpp11Statement      nullptr static_assert
 syn keyword cpp11StorageClass   alignas final noexcept override thread_local
 syn keyword cpp11Type           char16_t char32_t constexpr
 
-syn keyword jlcppStorageClass   COLD HOT NOTHROW READNONE READONLY
+syn keyword jlcppStorageClass   COLD HOT NOTHROW PURE READPURE
 syn keyword jlcppType           i8 i16 i32 i64 u8 u16 u32 u64 byte RESTRICT
 
 " Default highlighting

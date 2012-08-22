@@ -1,8 +1,3 @@
-# For loop
-snippet for
-	for (${1}; ${2}; ${3}) {
-		${4}
-	}
 # Include guard
 snippet once
 	#ifndef ${1:`toupper(Filename('', 'UNTITLED').'_H_')`}
@@ -11,10 +6,18 @@ snippet once
 	${2}
 
 	#endif /* $1 */
+# Include statement
+snippet inc
+	#include <${1}>
 # main
 snippet main
-	int main(int argc, char const* argv[]) {
+	int main(int argc, char* argv[]) {
 		${1}
 
 		return 0;
+	}
+# For loop
+snippet for
+	for (${1}; ${2}; ${3}) {
+		${4}
 	}
