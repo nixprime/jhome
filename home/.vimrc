@@ -67,6 +67,9 @@ set foldmethod=syntax foldcolumn=4 foldnestmax=3
 " Use the + register (which aliases to the system clipboard) by default
 set clipboard=unnamedplus
 
+" Enable spellchecking
+set spell spelllang=en_us
+
 " Strip trailing whitespace on save
 fun! <SID>StripTrailingWhitespace()
   let l = line(".")
@@ -76,12 +79,15 @@ fun! <SID>StripTrailingWhitespace()
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
 
+" Allow use of local .vimrc/.exrc
+set exrc secure
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings usually overriden by plugins (but see .vim/after/ftplugin/)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Wrap comments, but don't auto-continue comments otherwise
-set formatoptions+=c formatoptions-=ro
+" Wrap comments; continue comments after Enter; do not continue comments from o
+set formatoptions+=cr formatoptions-=o
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom commands and bindings

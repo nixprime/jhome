@@ -2,5 +2,5 @@
 " Settings usually set by plugins that we override here
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Wrap comments, but don't auto-continue comments otherwise
-set formatoptions+=c formatoptions-=ro
+" Wrap comments; continue comments after Enter; do not continue comments from o
+set formatoptions+=cr formatoptions-=o
