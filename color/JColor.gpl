@@ -1,0 +1,49 @@
+GIMP Palette
+Name: JColor
+Columns: 0
+#
+ 31  32  31	[Dark] Background
+ 17  17  17	[Dark] Background (Highlight)
+ 46  46  46	[Dark] Background (Weak)
+ 62  62  61	[Dark] Background (Very Weak)
+ 59  59  59	[Dark] Background (Border)
+206 224 228	[Dark] Foreground
+151 169 173	[Dark] Foreground (De-emphasized)
+254 104  80	[Dark] Red
+232 123  40	[Dark] Orange
+187 185  36	[Dark] Yellow
+ 73 188  80	[Dark] Green
+ 75 165 255	[Dark] Blue
+220 130 246	[Dark] Purple
+226 220 206	[Light] Background
+247 240 225	[Light] Background (Highlight)
+182 176 162	[Light] Background (Border)
+  0   0   0	[Light] Foreground
+ 82  82  82	[Light] Foreground (De-emphasized)
+165  17  16	[Light] Red
+161  65   0	[Light] Orange
+  0 112   1	[Light] Green
+  0  83 193	[Light] Blue
+127  42 154	[Light] Purple
+  0   0   0	Black
+255 255 255	White
+  0  52 162	[Series] Blue
+227 113  14	[Series] Orange
+121   0 157	[Series] Purple
+ 76 194  83	[Series] Green
+209   0   0	[Series] Red
+255 143 254	[Series] Pink
+159 108  59	[Series] Brown
+234 234   0	[Series] Yellow
+132 188 255	[Figure] Light 1
+ 72 135 199	[Figure] Dark 1
+255 159 148	[Figure] Light 2
+195 106  98	[Figure] Dark 2
+126 201 145	[Figure] Light 3
+ 73 146  95	[Figure] Dark 3
+205 171 240	[Figure] Light 4
+150 118 184	[Figure] Dark 4
+230 174 115	[Figure] Light 5
+172 122  65	[Figure] Dark 5
+ 59 205 195	[Figure] Light 6
+  0 150 141	[Figure] Dark 6
