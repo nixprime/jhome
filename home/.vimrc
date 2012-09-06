@@ -171,6 +171,10 @@ augroup END
 autocmd FileType haskell
   \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
+" Java
+autocmd FileType java
+  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+
 " JSON
 augroup filetype
   au! BufRead,BufNewFile *.json set filetype=javascript
