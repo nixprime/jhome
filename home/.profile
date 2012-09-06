@@ -44,6 +44,11 @@ if [ -d "/opt/go" ] ; then
     fi
 fi
 
+# Eclipse
+if [ -d "/opt/eclipse" ] ; then
+    PATH="/opt/eclipse:$PATH"
+fi
+
 # Sublime Text
 if [ -d "/opt/sublime-text-2" ] ; then
     PATH="/opt/sublime-text-2:$PATH"
