@@ -1,7 +1,24 @@
 % vim: set ft=tex
 
+%% jpaper.cls - v1.1 - 5 September 2012
+%% Copyright 2012 Jamie Liu <jliu@nixprime.com>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Jamie Liu.
+%
+% This work consists of the file jpaper.cls.
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/04/29 Paper template class]
+\ProvidesClass{jpaper}[2012/09/05 Paper template class]
 
 % jpaper provides three mode options:
 %
