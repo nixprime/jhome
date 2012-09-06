@@ -1,7 +1,8 @@
 This repo just contains configuration files and some private stylistic stuff.
 
 All files in this repository for which I, Jamie Liu, am the original author
-(most everything but the Vim plugins) are provided under the MIT License::
+(most everything but the Vim plugins) are provided under the MIT License unless
+otherwise stated::
 
   Copyright (C) 2012 Jamie Liu
 
