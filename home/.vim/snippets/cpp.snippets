@@ -5,6 +5,12 @@ snippet namespace
 	${2}
 
 	} // namespace $1
+snippet ns
+	namespace ${1:ns} {
+
+	${2}
+
+	} // namespace $1
 # Class
 snippet class
 	class ${1:Class} {
@@ -25,3 +31,6 @@ snippet fore
 	for (${1} : ${2}) {
 		${3}
 	}
+# Template
+snippet temp
+	template <${1}>
