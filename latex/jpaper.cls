@@ -36,7 +36,7 @@
 %
 % * couriers: Uses a scaled version of Courier for the monospaced typeface.
 %   Requires the couriers package. This is not recommended unless you really
-%   love courier, since Latin Modern Typewriter (which is used otherwise) is
+%   love Courier, since Latin Modern Typewriter (which is used otherwise) is
 %   scaled correctly by default and thus has correct leading.
 %
 % * date: Enables the date field in the title block. Most papers do not have a
