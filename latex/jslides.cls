@@ -248,6 +248,10 @@
 \setbeamercolor*{structure}{}
 \iftoggle{js@nav}{}{\setbeamertemplate{navigation symbols}{}}
 
+% Discourage hyphenation.
+\hyphenpenalty=5000
+\tolerance=1000
+
 % Reduced itemize indentation.
 \setlength{\leftmargini}{1em}
 \setlength{\leftmarginii}{1em}
