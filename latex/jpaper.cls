@@ -1,6 +1,6 @@
 % vim: set ft=tex
 
-%% jpaper.cls - v1.1 - 5 September 2012
+%% jpaper.cls - v1.3.0 - 6 September 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %
 % This work may be distributed and/or modified under the
@@ -16,71 +16,80 @@
 % The Current Maintainer of this work is Jamie Liu.
 %
 % This work consists of the file jpaper.cls.
-
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/09/05 Paper template class]
-
-% jpaper provides three mode options:
 %
-% * submission: 11pt font, double-spaced lines, one-column
-% * camera: 10pt font, single-spaced lines, two-column (default)
-% * final: as camera, but hyperref and pageno are turned on; intended for the
-%   standalone, online version of camera-ready submissions
+% jpaper provides a template class for papers that satisfy the requirements of
+% many current computer architecture conferences: 10pt Times New Roman,
+% single-spaced lines, two-column, 0.75" side margins, 1" top and bottom
+% margins. By default, jpaper emits documents that are suitable for
+% camera-ready submission to IEEE PDF-eXpress.
 %
 % In addition to the usual options leqno and fleqn, jpaper also provides the
 % following additional flags (each of which can be turned on by specifying the
 % flag as an option, or turned off by specifying "no"flag as an option):
 %
+% * anonymous: Hide the authors field in the title block. Off by default.
+%
 % * compact: Enables tighter spacing in certain contexts while remaining
-%   aesthetically acceptable. In situations where space is of no concern,
-%   setting nocompact may result in a more aesthetically pleasing document. On
-%   by default.
-% * date: Most papers do not have a field for the date. The date option is
-%   provided for those documents that do. Off by default.
+%   aesthetically acceptable. This option is provided for things like homework
+%   assignments and should not be used for conference submissions. Off by
+%   default.
+%
+% * date: Enables the date field in the title block. Most papers do not have a
+%   field for the date. The date option is provided for those documents that
+%   do. Off by default.
+%
 % * hyperref: Enables the hyperref package. While the hyperref package is
-%   convenient for your readers, IEEE PDF-eXpress does not allow it. On by
-%   default for submission; off by default for camera.
+%   convenient for your readers, IEEE PDF-eXpress does not allow it. Off by
+%   default.
+%
 % * lineno: Enables line numbering. This may be useful while editing. Off by
 %   default.
+%
 % * pageno: Enables page numbering. This is useful for standalone documents
 %   (technical reports, etc.) but not for papers that appear in conference
-%   proceedings or journals, since these provide their own page numbers. On by
-%   default for submission; off by default for camera.
+%   proceedings or journals, since these provide their own page numbers. Off by
+%   default.
+%
+% * orphans: Allows orphans (single lines at the beginning of a page) to exist.
+%   On by default.
+%
+% * widows: Allows widows (single lines at the end of a page) to exist. On by
+%   default.
+%
+% Widows and orphans have separate flags because orphans are often considered
+% more acceptable than widows; for example, the Chicago Manual of Style, 11th
+% Edition accepts orphans but not widows.
+%
+% jpaper also provides the following special "mode" options:
+%
+% * submission: Equivalent to "anonymous,hyperref,pageno". Intended for
+%   submissions for blind review.
+%
+% * camera: No-op. This option is provided for backward compatibility.
+%
+% * final: Equivalent to "hyperref,pageno". Intended for the standalone, online
+%   version of a camera-ready paper.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{jpaper}[2012/09/06 Paper template class]
 
 \RequirePackage{etoolbox}
-\DeclareOption{leqno}{\input{leqno.clo}}
-\DeclareOption{fleqn}{\input{fleqn.clo}}
-\newtoggle{jp@camera}
+
+% Configuration flags.
+\newtoggle{jp@anonymous}
 \newtoggle{jp@compact}
 \newtoggle{jp@date}
 \newtoggle{jp@hyperref}
-\newtoggle{jp@largefont}
 \newtoggle{jp@lineno}
 \newtoggle{jp@pageno}
-\DeclareOption{submission}{%
-  \togglefalse{jp@camera}
-  \toggletrue{jp@compact}
-  \togglefalse{jp@date}
-  \toggletrue{jp@hyperref}
-  \togglefalse{jp@lineno}
-  \toggletrue{jp@pageno}
-}
-\DeclareOption{camera}{%
-  \toggletrue{jp@camera}
-  \toggletrue{jp@compact}
-  \togglefalse{jp@date}
-  \togglefalse{jp@hyperref}
-  \togglefalse{jp@lineno}
-  \togglefalse{jp@pageno}
-}
-\DeclareOption{final}{%
-  \toggletrue{jp@camera}
-  \toggletrue{jp@compact}
-  \togglefalse{jp@date}
-  \toggletrue{jp@hyperref}
-  \togglefalse{jp@lineno}
-  \toggletrue{jp@pageno}
-}
+\newtoggle{jp@orphans}
+\newtoggle{jp@widows}
+
+% Basic options.
+\DeclareOption{leqno}{\input{leqno.clo}}
+\DeclareOption{fleqn}{\input{fleqn.clo}}
+\DeclareOption{anonymous}{\toggletrue{jp@anonymous}}
+\DeclareOption{noanonymous}{\togglefalse{jp@anonymous}}
 \DeclareOption{compact}{\toggletrue{jp@compact}}
 \DeclareOption{nocompact}{\togglefalse{jp@compact}}
 \DeclareOption{date}{\toggletrue{jp@date}}
@@ -91,13 +100,39 @@
 \DeclareOption{nolineno}{\togglefalse{jp@lineno}}
 \DeclareOption{pageno}{\toggletrue{jp@pageno}}
 \DeclareOption{nopageno}{\togglefalse{jp@pageno}}
-\ExecuteOptions{camera}
+\DeclareOption{orphans}{\toggletrue{jp@orphans}}
+\DeclareOption{noorphans}{\togglefalse{jp@orphans}}
+\DeclareOption{widows}{\toggletrue{jp@widows}}
+\DeclareOption{nowidows}{\togglefalse{jp@widows}}
+
+% Option groups.
+\DeclareOption{default}{%
+  \togglefalse{jp@anonymous}
+  \togglefalse{jp@compact}
+  \togglefalse{jp@date}
+  \togglefalse{jp@hyperref}
+  \togglefalse{jp@lineno}
+  \togglefalse{jp@pageno}
+  \toggletrue{jp@orphans}
+  \toggletrue{jp@widows}
+}
+\DeclareOption{submission}{%
+  \toggletrue{jp@anonymous}
+  \toggletrue{jp@hyperref}
+  \toggletrue{jp@pageno}
+}
+\DeclareOption{camera}{}
+\DeclareOption{final}{%
+  \toggletrue{jp@hyperref}
+  \toggletrue{jp@pageno}
+}
+
+% Process options.
+\ExecuteOptions{default}
 \ProcessOptions
 
 % Load the underlying article class.
-\iftoggle{jp@camera}{%
-  \LoadClass[letterpaper,10pt,twocolumn]{article}}{%
-  \LoadClass[letterpaper,11pt,onecolumn]{article}}
+\LoadClass[letterpaper,10pt,twocolumn]{article}
 
 % Standard packages.
 \RequirePackage[utf8]{inputenc}
@@ -110,30 +145,28 @@
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=0.833]{helvet}
 \RequirePackage[scaled=0.875]{couriers}
-\iftoggle{jp@camera}{%
-  \setlength{\parindent}{1em}}{%
-  \setlength{\parindent}{1.5em}}
+\setlength{\parindent}{1em}
 \RequirePackage{setspace}
 \RequirePackage{leading}
-\iftoggle{jp@camera}{%
-  \iftoggle{jp@compact}{%
-    \newcommand{\normalspacing}{\leading{1.125em}}}{%
-    \newcommand{\normalspacing}{\singlespace}}}{%
-  \newcommand{\normalspacing}{\leading{2em}}}
+\iftoggle{jp@compact}{%
+  \newcommand{\normalspacing}{\leading{1.125em}}}{%
+  \newcommand{\normalspacing}{\singlespace}}
 \RequirePackage{microtype}
-% Widows and orphans should not appear in the camera-ready.
-\iftoggle{jp@camera}{\widowpenalty=10000 \clubpenalty=10000}{}
+% Orphan and widow control. Orphans and widows are discouraged even with
+% orphans/widows enabled.
+\iftoggle{jp@orphans}{\clubpenalty=300}{\clubpenalty=10000}
+\iftoggle{jp@widows}{\widowpenalty=300}{\widowpenalty=10000}
 
-% Page margins:
-% Submission: 1" all sides.
-% Camera-ready: 3/4" left and right, 1" top, 1 1/4" bottom.
+% Page margins: 3/4" left and right, 1" top and bottom.
 \RequirePackage{geometry}
-\iftoggle{jp@camera}{%
-  \geometry{lmargin=0.75in,rmargin=0.75in,tmargin=1in,bmargin=1.125in}}{%
-  \geometry{lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in}}
+\geometry{lmargin=0.75in,rmargin=0.75in,tmargin=1in,bmargin=1in}
 
 % 1/4" space between columns.
 \setlength{\columnsep}{0.25in}
+
+% If anonymous is set, override the document author setting to ensure that the
+% user-provided value never sees the light of day.
+\iftoggle{jp@anonymous}{\author{}\renewcommand{\author}[1]{}}{}
 
 % Title formatting.
 \RequirePackage{titling}
@@ -153,16 +186,6 @@
   \let\date=\relax
 }
 
-% The abstract should be normally sized and italicized. Abstract leading
-% should, in general, follow the normal leading.
-\RequirePackage{abstract}
-\newcommand{\abstractspacing}{\normalspacing}
-\renewcommand{\abstractnamefont}{\normalfont\large\bfseries}
-\renewcommand{\abstracttextfont}{\normalfont\itshape\abstractspacing}
-\setlength{\absleftindent}{0in}
-\setlength{\absrightindent}{0in}
-\setlength{\abstitleskip}{-1.5em}
-
 % Compress vertical space around section and subsection headings. Make
 % subsubsection headings run-in (i.e. part of the following paragraph).
 \RequirePackage[compact]{titlesec}
@@ -173,10 +196,25 @@
 \titleformat{\subsubsection}[runin]{\normalfont\bfseries}{\thesubsubsection. }%
   {0pt}{}{}
 \newlength{\sectionspace}
-\setlength{\sectionspace}{0.5ex plus 0.25ex}
+\iftoggle{jp@compact}{%
+  \setlength{\sectionspace}{0.5ex plus 0.25ex}}{%
+  \setlength{\sectionspace}{1.5ex plus 0.25ex}}
 \titlespacing*{\section}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsection}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsubsection}{0pt}{\parskip}{0.25em plus 0.1em minus 0.05em}
+
+% The abstract should be normally sized and italicized. Abstract leading
+% should, in general, follow the normal leading.
+\titleclass{\centersection}{straight}[\chapter]
+\titleformat{\centersection}[hang]{\normalfont\large\bfseries\centering}{}%
+  {0pt}{}{}
+\titlespacing*{\centersection}{0pt}{\sectionspace}{\sectionspace}
+\newcommand{\abstractspacing}{\normalspacing}
+\renewenvironment{abstract}{%
+  \centersection*{Abstract}
+
+  \normalfont\itshape\abstractspacing
+}{}
 
 % Compress itemize and enumerate environments.
 \RequirePackage{enumerate}
@@ -221,17 +259,10 @@
 \renewcommand{\textfraction}{0.07}
 \renewcommand{\floatpagefraction}{0.85}
 \renewcommand{\dblfloatpagefraction}{0.85}
-\iftoggle{jp@camera}{%
-  \setlength{\floatsep}{0.5em plus 0.2em minus 0.2em}
-  \setlength{\dblfloatsep}{0.5em plus 0.2em minus 0.2em}
-  \setlength{\textfloatsep}{0.5em plus 0.2em minus 0.2em}
-  \setlength{\dbltextfloatsep}{0.5em plus 0.2em minus 0.2em}
-}{%
-  \setlength{\floatsep}{1em plus 0.2em minus 0.2em}
-  \setlength{\dblfloatsep}{1em plus 0.2em minus 0.2em}
-  \setlength{\textfloatsep}{1em plus 0.2em minus 0.2em}
-  \setlength{\dbltextfloatsep}{1em plus 0.2em minus 0.2em}
-}
+\setlength{\floatsep}{0.5em plus 0.2em minus 0.2em}
+\setlength{\dblfloatsep}{0.5em plus 0.2em minus 0.2em}
+\setlength{\textfloatsep}{0.5em plus 0.2em minus 0.2em}
+\setlength{\dbltextfloatsep}{0.5em plus 0.2em minus 0.2em}
 % Utility packages for floats and tables.
 \RequirePackage{float}
 \RequirePackage{graphicx}
@@ -271,9 +302,7 @@
 \renewcommand\marginpar[1]{\jp@marginpar%
   [\raggedleft\singlespacing\footnotesize\color{red} #1]%
   {\raggedright\singlespacing\footnotesize\color{red} #1}}
-\iftoggle{jp@camera}{%
-  \setlength{\marginparwidth}{0.65in}}{%
-  \setlength{\marginparwidth}{0.75in}}
+\setlength{\marginparwidth}{0.65in}
 
 % Link and URL formatting.
 \iftoggle{jp@hyperref}{%

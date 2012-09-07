@@ -1,6 +1,6 @@
 % vim: set ft=tex
 
-%% jslides.cls - v1.1 - 11 June 2012
+%% jslides.cls - v1.1.0 - 11 June 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %
 % This work may be distributed and/or modified under the
@@ -16,10 +16,7 @@
 % The Current Maintainer of this work is Jamie Liu.
 %
 % This work consists of the file jslides.cls.
-
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jslides}[2012/06/11 Presentation template class]
-
+%
 % jslides provides three mode options:
 %
 % * talk: frame number in footer (default)
@@ -31,6 +28,9 @@
 % "no"flag as an option):
 %
 % * nav: Enables the navigation symbol bar on each slide. Off by default.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{jslides}[2012/06/11 Presentation template class]
 
 \RequirePackage{etoolbox}
 \newtoggle{js@handout}
