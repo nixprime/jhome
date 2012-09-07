@@ -252,16 +252,27 @@
 \RequirePackage{enumitem}
 \setlist{noitemsep, leftmargin=*, topsep=0pt, partopsep=0pt}
 
-% Bibliography formatting.
-\newcommand{\bibspacing}{\normalspacing}
-\jp@iftoggle{jp@compact}{%
-  \newcommand{\setbibitemsep}{\setlength{\itemsep}{-0.25em}}}{%
-  \newcommand{\setbibitemsep}{}}
-\let\jp@bibliography\thebibliography
-\renewcommand{\thebibliography}[1]{%
-  \footnotesize \bibspacing%
-  \jp@bibliography{#1}
-  \setbibitemsep}
+% Remove spacing between bibliography entries and use 8pt font. Adapted from
+% http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html
+\renewenvironment{thebibliography}[1]{%
+  \section*{\refname\@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}}%
+    \scriptsize \list{\@biblabel{\@arabic\c@enumiv}}{%
+      \settowidth\labelwidth{\@biblabel{#1}}%
+      \leftmargin\labelwidth
+      \advance\leftmargin\labelsep
+      \itemsep\z@skip
+      \parsep\z@skip
+      \@openbib@code
+      \usecounter{enumiv}%
+      \let\p@enumiv\@empty
+      \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+    \sloppy\clubpenalty4000\widowpenalty4000%
+    \sfcode`\.\@m
+}{%
+  \def\@noitemerr{\@latex@warning{Empty `thebibliography' environment}}%
+  \endlist
+}
+
 % This is IEEEtran's bibliography formatting control macro.
 \def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
 \def\@bstctlcite[#1]#2{\@bsphack
