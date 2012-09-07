@@ -1,5 +1,5 @@
 % vim: set ft=tex
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% jslides.cls - v1.1.0 - 11 June 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %
@@ -11,12 +11,13 @@
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
-% This work has the LPPL maintenance status `maintained'.
+% This work has the LPPL maintenance status `author-maintained'.
 %
-% The Current Maintainer of this work is Jamie Liu.
-%
-% This work consists of the file jslides.cls.
-%
+% This software is provided 'as is', without warranty of any kind,
+% either expressed or implied, including, but not limited to, the
+% implied warranties of merchantability and fitness for a
+% particular purpose.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jslides provides three mode options:
 %
 % * talk: frame number in footer (default)

@@ -1,6 +1,6 @@
 % vim: set ft=tex
-
-%% jpaper.cls - v1.3.0 - 6 September 2012
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% jpaper.cls - v2.0.0 - 6 September 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %
 % This work may be distributed and/or modified under the
@@ -11,12 +11,13 @@
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
-% This work has the LPPL maintenance status `maintained'.
+% This work has the LPPL maintenance status `author-maintained'.
 %
-% The Current Maintainer of this work is Jamie Liu.
-%
-% This work consists of the file jpaper.cls.
-%
+% This software is provided 'as is', without warranty of any kind,
+% either expressed or implied, including, but not limited to, the
+% implied warranties of merchantability and fitness for a
+% particular purpose.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % jpaper provides a template class for papers that satisfy the requirements of
 % many current computer architecture conferences: 10pt Times New Roman,
 % single-spaced lines, two-column, 0.75" side margins, 1" top and bottom
@@ -30,9 +31,13 @@
 % * anonymous: Hide the authors field in the title block. Off by default.
 %
 % * compact: Enables tighter spacing in certain contexts while remaining
-%   aesthetically acceptable. This option is provided for things like homework
-%   assignments and should not be used for conference submissions. Off by
-%   default.
+%   aesthetically acceptable. This option is provided for things like class
+%   papers and should not be used for conference submissions. Off by default.
+%
+% * couriers: Uses a scaled version of Courier for the monospaced typeface.
+%   Requires the couriers package. This is not recommended unless you really
+%   love courier, since Latin Modern Typewriter (which is used otherwise) is
+%   scaled correctly by default and thus has correct leading.
 %
 % * date: Enables the date field in the title block. Most papers do not have a
 %   field for the date. The date option is provided for those documents that
@@ -50,11 +55,11 @@
 %   proceedings or journals, since these provide their own page numbers. Off by
 %   default.
 %
-% * orphans: Allows orphans (single lines at the beginning of a page) to exist.
-%   On by default.
+% * orphans: Allows orphans (single lines at the beginning of a page or column)
+%   to exist. On by default.
 %
-% * widows: Allows widows (single lines at the end of a page) to exist. On by
-%   default.
+% * widows: Allows widows (single lines at the end of a page or column) to
+%   exist. On by default.
 %
 % Widows and orphans have separate flags because orphans are often considered
 % more acceptable than widows; for example, the Chicago Manual of Style, 11th
@@ -65,66 +70,79 @@
 % * submission: Equivalent to "anonymous,hyperref,pageno". Intended for
 %   submissions for blind review.
 %
-% * camera: No-op. This option is provided for backward compatibility.
+% * camera: No-op. This option is provided for backward compatibility to v1.x,
+%   for which submission and camera were distinctly different modes.
 %
 % * final: Equivalent to "hyperref,pageno". Intended for the standalone, online
 %   version of a camera-ready paper.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/09/06 Paper template class]
+\ProvidesClass{jpaper}[2012/09/06 v2.0.0 Paper template class]
 
-\RequirePackage{etoolbox}
+% Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
+\RequirePackage{etex}
+\newcommand{\cslet}[2]{\expandafter\let\csname#1\endcsname#2}
+\let\jp@bool@true\@firstoftwo
+\let\jp@bool@false\@secondoftwo
+\newcommand*{\jp@newtoggle}[1]{\cslet{jp@tgl@#1}\jp@bool@false}
+\newcommand*{\jp@toggletrue}[1]{\cslet{jp@tgl@#1}\jp@bool@true}
+\newcommand*{\jp@togglefalse}[1]{\cslet{jp@tgl@#1}\jp@bool@false}
+\newcommand*{\jp@iftoggle}[1]{\csname jp@tgl@#1\endcsname}
 
 % Configuration flags.
-\newtoggle{jp@anonymous}
-\newtoggle{jp@compact}
-\newtoggle{jp@date}
-\newtoggle{jp@hyperref}
-\newtoggle{jp@lineno}
-\newtoggle{jp@pageno}
-\newtoggle{jp@orphans}
-\newtoggle{jp@widows}
+\jp@newtoggle{jp@anonymous}
+\jp@newtoggle{jp@compact}
+\jp@newtoggle{jp@couriers}
+\jp@newtoggle{jp@date}
+\jp@newtoggle{jp@hyperref}
+\jp@newtoggle{jp@lineno}
+\jp@newtoggle{jp@pageno}
+\jp@newtoggle{jp@orphans}
+\jp@newtoggle{jp@widows}
 
 % Basic options.
 \DeclareOption{leqno}{\input{leqno.clo}}
 \DeclareOption{fleqn}{\input{fleqn.clo}}
-\DeclareOption{anonymous}{\toggletrue{jp@anonymous}}
-\DeclareOption{noanonymous}{\togglefalse{jp@anonymous}}
-\DeclareOption{compact}{\toggletrue{jp@compact}}
-\DeclareOption{nocompact}{\togglefalse{jp@compact}}
-\DeclareOption{date}{\toggletrue{jp@date}}
-\DeclareOption{nodate}{\togglefalse{jp@date}}
-\DeclareOption{hyperref}{\toggletrue{jp@hyperref}}
-\DeclareOption{nohyperref}{\togglefalse{jp@hyperref}}
-\DeclareOption{lineno}{\toggletrue{jp@lineno}}
-\DeclareOption{nolineno}{\togglefalse{jp@lineno}}
-\DeclareOption{pageno}{\toggletrue{jp@pageno}}
-\DeclareOption{nopageno}{\togglefalse{jp@pageno}}
-\DeclareOption{orphans}{\toggletrue{jp@orphans}}
-\DeclareOption{noorphans}{\togglefalse{jp@orphans}}
-\DeclareOption{widows}{\toggletrue{jp@widows}}
-\DeclareOption{nowidows}{\togglefalse{jp@widows}}
+\DeclareOption{anonymous}{\jp@toggletrue{jp@anonymous}}
+\DeclareOption{noanonymous}{\jp@togglefalse{jp@anonymous}}
+\DeclareOption{compact}{\jp@toggletrue{jp@compact}}
+\DeclareOption{nocompact}{\jp@togglefalse{jp@compact}}
+\DeclareOption{couriers}{\jp@toggletrue{jp@couriers}}
+\DeclareOption{nocouriers}{\jp@togglefalse{jp@couriers}}
+\DeclareOption{date}{\jp@toggletrue{jp@date}}
+\DeclareOption{nodate}{\jp@togglefalse{jp@date}}
+\DeclareOption{hyperref}{\jp@toggletrue{jp@hyperref}}
+\DeclareOption{nohyperref}{\jp@togglefalse{jp@hyperref}}
+\DeclareOption{lineno}{\jp@toggletrue{jp@lineno}}
+\DeclareOption{nolineno}{\jp@togglefalse{jp@lineno}}
+\DeclareOption{pageno}{\jp@toggletrue{jp@pageno}}
+\DeclareOption{nopageno}{\jp@togglefalse{jp@pageno}}
+\DeclareOption{orphans}{\jp@toggletrue{jp@orphans}}
+\DeclareOption{noorphans}{\jp@togglefalse{jp@orphans}}
+\DeclareOption{widows}{\jp@toggletrue{jp@widows}}
+\DeclareOption{nowidows}{\jp@togglefalse{jp@widows}}
 
 % Option groups.
 \DeclareOption{default}{%
-  \togglefalse{jp@anonymous}
-  \togglefalse{jp@compact}
-  \togglefalse{jp@date}
-  \togglefalse{jp@hyperref}
-  \togglefalse{jp@lineno}
-  \togglefalse{jp@pageno}
-  \toggletrue{jp@orphans}
-  \toggletrue{jp@widows}
+  \jp@togglefalse{jp@anonymous}
+  \jp@togglefalse{jp@compact}
+  \jp@togglefalse{jp@couriers}
+  \jp@togglefalse{jp@date}
+  \jp@togglefalse{jp@hyperref}
+  \jp@togglefalse{jp@lineno}
+  \jp@togglefalse{jp@pageno}
+  \jp@toggletrue{jp@orphans}
+  \jp@toggletrue{jp@widows}
 }
 \DeclareOption{submission}{%
-  \toggletrue{jp@anonymous}
-  \toggletrue{jp@hyperref}
-  \toggletrue{jp@pageno}
+  \jp@toggletrue{jp@anonymous}
+  \jp@toggletrue{jp@hyperref}
+  \jp@toggletrue{jp@pageno}
 }
 \DeclareOption{camera}{}
 \DeclareOption{final}{%
-  \toggletrue{jp@hyperref}
-  \toggletrue{jp@pageno}
+  \jp@toggletrue{jp@hyperref}
+  \jp@toggletrue{jp@pageno}
 }
 
 % Process options.
@@ -141,21 +159,35 @@
 \RequirePackage{fixltx2e}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
-% Basic text typesetting options.
+% Taken from leading.sty (v0.3, 2008/12/11, by Will Robertson).
+\RequirePackage{calc}
+\newcommand\jp@leading[1]{%
+  \begingroup
+    \@tempdima=\f@baselineskip\relax
+    \@tempdimb=#1\relax
+    \setlength\@tempdimc{1pt*\ratio{\@tempdimb}{\@tempdima}}%
+    \global\@tempdimc=\@tempdimc
+  \endgroup
+  \linespread{\strip@pt\@tempdimc}\selectfont\ignorespaces}
+
+% Basic text typesetting options. Load lmodern first to provide a good baseline
+% (and LModern TT). Fonts are scaled for optical consistency, which generally
+% means constant x-height.
+\RequirePackage{lmodern}
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=0.833]{helvet}
-\RequirePackage[scaled=0.875]{couriers}
+\jp@iftoggle{jp@couriers}{%
+  \RequirePackage[scaled=0.875]{couriers}
+}{}
 \setlength{\parindent}{1em}
 \RequirePackage{setspace}
-\RequirePackage{leading}
-\iftoggle{jp@compact}{%
-  \newcommand{\normalspacing}{\leading{1.125em}}}{%
+\jp@iftoggle{jp@compact}{%
+  \newcommand{\normalspacing}{\jp@leading{1.125em}}}{%
   \newcommand{\normalspacing}{\singlespace}}
 \RequirePackage{microtype}
-% Orphan and widow control. Orphans and widows are discouraged even with
-% orphans/widows enabled.
-\iftoggle{jp@orphans}{\clubpenalty=300}{\clubpenalty=10000}
-\iftoggle{jp@widows}{\widowpenalty=300}{\widowpenalty=10000}
+% Orphan and widow control.
+\jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
+\jp@iftoggle{jp@widows}{}{\widowpenalty=10000}
 
 % Page margins: 3/4" left and right, 1" top and bottom.
 \RequirePackage{geometry}
@@ -166,7 +198,7 @@
 
 % If anonymous is set, override the document author setting to ensure that the
 % user-provided value never sees the light of day.
-\iftoggle{jp@anonymous}{\author{}\renewcommand{\author}[1]{}}{}
+\jp@iftoggle{jp@anonymous}{\author{~}\renewcommand{\author}[1]{}}{}
 
 % Title formatting.
 \RequirePackage{titling}
@@ -176,7 +208,7 @@
 \preauthor{\begin{center}\normalfont\large%
   \begin{tabular}[t]{c}}
 \postauthor{\end{tabular}\par\end{center}}
-\iftoggle{jp@date}{%
+\jp@iftoggle{jp@date}{%
   \predate{\begin{center}\normalfont}
   \postdate{\end{center}}
 }{%
@@ -196,9 +228,9 @@
 \titleformat{\subsubsection}[runin]{\normalfont\bfseries}{\thesubsubsection. }%
   {0pt}{}{}
 \newlength{\sectionspace}
-\iftoggle{jp@compact}{%
-  \setlength{\sectionspace}{0.5ex plus 0.25ex}}{%
-  \setlength{\sectionspace}{1.5ex plus 0.25ex}}
+\jp@iftoggle{jp@compact}{%
+  \setlength{\sectionspace}{4pt plus 5pt minus 3pt}}{%
+  \setlength{\sectionspace}{8pt plus 2pt minus 6pt}}
 \titlespacing*{\section}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsection}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsubsection}{0pt}{\parskip}{0.25em plus 0.1em minus 0.05em}
@@ -212,7 +244,6 @@
 \newcommand{\abstractspacing}{\normalspacing}
 \renewenvironment{abstract}{%
   \centersection*{Abstract}
-
   \normalfont\itshape\abstractspacing
 }{}
 
@@ -223,11 +254,9 @@
 
 % Bibliography formatting.
 \newcommand{\bibspacing}{\normalspacing}
-\iftoggle{jp@compact}{%
-  \newcommand{\setbibitemsep}{\setlength{\itemsep}{-0.25em}}
-}{%
-  \newcommand{\setbibitemsep}{}
-}
+\jp@iftoggle{jp@compact}{%
+  \newcommand{\setbibitemsep}{\setlength{\itemsep}{-0.25em}}}{%
+  \newcommand{\setbibitemsep}{}}
 \let\jp@bibliography\thebibliography
 \renewcommand{\thebibliography}[1]{%
   \footnotesize \bibspacing%
@@ -270,14 +299,14 @@
 \RequirePackage{multirow}
 
 % Page numbering.
-\iftoggle{jp@pageno}{%
+\jp@iftoggle{jp@pageno}{%
   \pagestyle{plain}
   \newcommand{\jp@mt@pageno}{}}{%
   \pagestyle{empty}
   \newcommand{\jp@mt@pageno}{\thispagestyle{empty}}}
 
 % Line numbering.
-\iftoggle{jp@lineno}{%
+\jp@iftoggle{jp@lineno}{%
   \RequirePackage{lineno}
   \renewcommand{\linenumberfont}{\normalfont\tt\small}
   \newcommand{\jp@mt@lineno}{\linenumbers}
@@ -305,7 +334,7 @@
 \setlength{\marginparwidth}{0.65in}
 
 % Link and URL formatting.
-\iftoggle{jp@hyperref}{%
+\jp@iftoggle{jp@hyperref}{%
   \RequirePackage{hyperref}
   \hypersetup{%
     unicode=true,%
@@ -314,7 +343,8 @@
     citecolor=black,%
     filecolor=black,%
     linkcolor=black,%
-    urlcolor=black}}{}
+    urlcolor=black}
+}{}
 \RequirePackage{url}
 
 % Scientific units.
