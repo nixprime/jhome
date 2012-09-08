@@ -30,6 +30,10 @@
 %
 % * anonymous: Hide the authors field in the title block. Off by default.
 %
+% * bfcaption: Captions (for figures and tables) always used the sans-serif
+%   face; this option controls whether or not they are in bold as well. On by
+%   default.
+%
 % * compact: Enables tighter spacing in certain contexts while remaining
 %   aesthetically acceptable. This option is provided for things like class
 %   papers and should not be used for conference submissions. Off by default.
@@ -95,6 +99,7 @@
 
 % Configuration flags.
 \jp@newtoggle{jp@anonymous}
+\jp@newtoggle{jp@bfcaption}
 \jp@newtoggle{jp@compact}
 \jp@newtoggle{jp@couriers}
 \jp@newtoggle{jp@date}
@@ -110,6 +115,8 @@
 \DeclareOption{fleqn}{\input{fleqn.clo}}
 \DeclareOption{anonymous}{\jp@toggletrue{jp@anonymous}}
 \DeclareOption{noanonymous}{\jp@togglefalse{jp@anonymous}}
+\DeclareOption{bfcaption}{\jp@toggletrue{jp@bfcaption}}
+\DeclareOption{nobfcaption}{\jp@togglefalse{jp@bfcaption}}
 \DeclareOption{compact}{\jp@toggletrue{jp@compact}}
 \DeclareOption{nocompact}{\jp@togglefalse{jp@compact}}
 \DeclareOption{couriers}{\jp@toggletrue{jp@couriers}}
@@ -132,6 +139,7 @@
 % Option groups.
 \DeclareOption{default}{%
   \jp@togglefalse{jp@anonymous}
+  \jp@toggletrue{jp@bfcaption}
   \jp@togglefalse{jp@compact}
   \jp@togglefalse{jp@couriers}
   \jp@togglefalse{jp@date}
@@ -292,7 +300,9 @@
 
 % Settings for figures and tables. Figure captions are placed below the figure,
 % while table captions are placed above the table. All captions are sans-serif.
-\RequirePackage[font={normalsize,sf,bf,stretch=0.8}, format=hang]{caption}
+\jp@iftoggle{jp@bfcaption}{%
+  \RequirePackage[font={normalsize,sf,bf,stretch=0.8}, format=hang]{caption}}{%
+  \RequirePackage[font={normalsize,sf,stretch=0.8}, format=hang]{caption}}
 \RequirePackage[position=bottom]{subfig}
 \captionsetup[table]{aboveskip=0.5em, belowskip=0.5em}
 \captionsetup[figure]{aboveskip=0.5em, belowskip=0em}
