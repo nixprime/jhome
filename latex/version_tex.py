@@ -73,5 +73,5 @@ if __name__ == "__main__":
             revision = None
     if revision is not None:
         with open("version.tex", 'w') as version_tex:
-            version_tex.write("\\newcommand{\\revision}{%s}\n" % revision)
-            version_tex.write("\\newcommand{\\datetime}{%s}\n" % now())
+            version_tex.write("\\newcommand{\\jp@revision}{%s}\n" % revision)
+            version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % now())

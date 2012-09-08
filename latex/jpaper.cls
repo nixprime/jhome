@@ -327,8 +327,8 @@
 \jp@iftoggle{jp@version}{%
   \IfFileExists{version.tex}{%
     \input{version}
-    \fancyfoot[L]{\revision}
-    \fancyfoot[R]{\datetime}
+    \fancyfoot[L]{\jp@revision}
+    \fancyfoot[R]{\jp@datetime}
   }{}
 }{}
 \pagestyle{fancy}
