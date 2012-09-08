@@ -6,6 +6,7 @@ Installing Fonts on Debian
 
 ::
 
+  sudo vim /etc/texmf/updmap.d/90whatever.cfg
   sudo mktexlsr
   sudo update-updmap
   sudo updmap-sys
