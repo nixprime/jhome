@@ -55,6 +55,10 @@
 %   proceedings or journals, since these provide their own page numbers. Off by
 %   default.
 %
+% * version: If version control information is available in a version.tex file,
+%   include version information in the document footer. Very useful for drafts.
+%   Off by default.
+%
 % * orphans: Allows orphans (single lines at the beginning of a page or column)
 %   to exist. On by default.
 %
@@ -97,6 +101,7 @@
 \jp@newtoggle{jp@hyperref}
 \jp@newtoggle{jp@lineno}
 \jp@newtoggle{jp@pageno}
+\jp@newtoggle{jp@version}
 \jp@newtoggle{jp@orphans}
 \jp@newtoggle{jp@widows}
 
@@ -117,6 +122,8 @@
 \DeclareOption{nolineno}{\jp@togglefalse{jp@lineno}}
 \DeclareOption{pageno}{\jp@toggletrue{jp@pageno}}
 \DeclareOption{nopageno}{\jp@togglefalse{jp@pageno}}
+\DeclareOption{version}{\jp@toggletrue{jp@version}}
+\DeclareOption{noversion}{\jp@togglefalse{jp@version}}
 \DeclareOption{orphans}{\jp@toggletrue{jp@orphans}}
 \DeclareOption{noorphans}{\jp@togglefalse{jp@orphans}}
 \DeclareOption{widows}{\jp@toggletrue{jp@widows}}
@@ -131,6 +138,7 @@
   \jp@togglefalse{jp@hyperref}
   \jp@togglefalse{jp@lineno}
   \jp@togglefalse{jp@pageno}
+  \jp@togglefalse{jp@version}
   \jp@toggletrue{jp@orphans}
   \jp@toggletrue{jp@widows}
 }
@@ -309,12 +317,21 @@
 \RequirePackage{booktabs}
 \RequirePackage{multirow}
 
-% Page numbering.
-\jp@iftoggle{jp@pageno}{%
-  \pagestyle{plain}
-  \newcommand{\jp@mt@pageno}{}}{%
-  \pagestyle{empty}
-  \newcommand{\jp@mt@pageno}{\thispagestyle{empty}}}
+% Page headers and footers.
+\RequirePackage{fancyhdr}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\jp@iftoggle{jp@pageno}{\fancyfoot[C]{\thepage}}{}
+\jp@iftoggle{jp@version}{%
+  \IfFileExists{version.tex}{%
+    \input{version}
+    \fancyfoot[L]{\revision}
+    \fancyfoot[R]{\datetime}
+  }{}
+}{}
+\pagestyle{fancy}
 
 % Line numbering.
 \jp@iftoggle{jp@lineno}{%
@@ -330,8 +347,8 @@
 \let\jp@maketitle\maketitle
 \renewcommand{\maketitle}{%
   \jp@maketitle%
-  \jp@mt@pageno%
   \jp@mt@lineno%
+  \thispagestyle{fancy}%
   \normalspacing}
 
 % Footnotes may not span pages.

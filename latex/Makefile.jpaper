@@ -5,14 +5,19 @@ FIGS = $(wildcard figures/*.pdf figures/*.png graphs/*.pdf graphs/*.png)
 
 LATEX = pdflatex -interaction=nonstopmode
 
-.PHONY: clean
+.PHONY: all clean version.tex
 
-$(PAPER).pdf: $(TEX) $(BIB) $(FIGS) jpaper.cls
+all: $(PAPER).pdf version.tex
+
+$(PAPER).pdf: $(TEX) $(BIB) $(FIGS) jpaper.cls version.tex
 	$(LATEX) $(PAPER)
 	bibtex $(PAPER)
 	$(LATEX) $(PAPER)
 	$(LATEX) $(PAPER)
 
 clean:
-	rm -f *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc $(PAPER).pdf
+	rm -f *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc $(PAPER).pdf version.tex
 
+version.tex:
+	rm -f version.tex
+	./version_tex.py
