@@ -6,6 +6,7 @@ import subprocess
 import time
 
 def now():
+    """Get a string identifying the current local time."""
     # Get a time.time() timestamp just for timezone calculation purposes
     ts = time.time()
     # Figure out the timezone offset
@@ -21,10 +22,14 @@ def now():
     return t.strftime("%Y-%m-%d~%H:%M:%S") + tz_str
 
 def run(tokens):
+    """Run the program whose command-line tokens are given in tokens and return
+    what it prints to stdout."""
     return subprocess.Popen(tokens, stdout=subprocess.PIPE,
             stderr=subprocess.PIPE).communicate()[0].strip()
 
 def is_valid_sha1(s):
+    """Returns true if s is a valid SHA-1 hash in hexadecimal and false
+    otherwise."""
     if len(s) != 40:
         return False
     hexchars = set(list("0123456789abcdef"))
@@ -34,6 +39,11 @@ def is_valid_sha1(s):
     return True
 
 def git_revision():
+    """Get the SHA-1 hash that identifies the current version of the Git
+    repository that contains the current working directory. If the current
+    working tree is modified, append an asterisk (*) to the end of the hash. If
+    the current working directory is not part of a Git repository, or if Git is
+    not available, return None."""
     try:
         sha = run(["git", "rev-parse", "HEAD"])
         if not is_valid_sha1(sha):
@@ -48,6 +58,10 @@ def git_revision():
         return None
 
 def svn_revision():
+    """Get the Subversion revision number of the current working directory. If
+    the current working copy is modified, append an asterisk (*) to the end of
+    the hash. IF the current working directory is not a working copy, or if SVN
+    is not available, return None."""
     try:
         info = run(["svn", "info"])
         rev_match = re.search("^Revision: (.+)$", info, re.MULTILINE)
