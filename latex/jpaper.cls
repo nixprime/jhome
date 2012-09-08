@@ -30,13 +30,13 @@
 %
 % * anonymous: Hide the authors field in the title block. Off by default.
 %
-% * bfcaption: Captions (for figures and tables) always used the sans-serif
-%   face; this option controls whether or not they are in bold as well. On by
-%   default.
+% * bfcaption: Captions (for figures and tables) always use the sans-serif
+%   face; this option controls whether or not they are in bold as well. You
+%   should probably leave this option on if using Helvetica. On by default.
 %
 % * compact: Enables tighter spacing in certain contexts while remaining
 %   aesthetically acceptable. This option is provided for things like class
-%   papers and should not be used for conference submissions. Off by default.
+%   papers and is not recommended for professional work. Off by default.
 %
 % * couriers: Uses a scaled version of Courier for the monospaced typeface.
 %   Requires the couriers package. This is not recommended unless you really
