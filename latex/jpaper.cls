@@ -32,7 +32,8 @@
 %
 % * bfcaption: Captions (for figures and tables) always use the sans-serif
 %   face; this option controls whether or not they are in bold as well. You
-%   should probably leave this option on if using Helvetica. On by default.
+%   should probably leave this option on if using Helvetica, the default
+%   sans-serif typeface. On by default.
 %
 % * compact: Enables tighter spacing in certain contexts while remaining
 %   aesthetically acceptable. This option is provided for things like class
@@ -69,9 +70,9 @@
 % * widows: Allows widows (single lines at the end of a page or column) to
 %   exist. On by default.
 %
-% Widows and orphans have separate flags because orphans are often considered
-% more acceptable than widows; for example, the Chicago Manual of Style, 11th
-% Edition accepts orphans but not widows.
+% Widows and orphans have separate flags because orphans are sometimes
+% considered more acceptable than widows; for example, the Chicago Manual of
+% Style, 11th Edition accepts orphans but not widows.
 %
 % jpaper also provides the following special "mode" options:
 %
