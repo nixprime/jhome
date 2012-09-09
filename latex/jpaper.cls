@@ -176,6 +176,16 @@
 \RequirePackage{fixltx2e}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
+% Font selection. Load lmodern first to replace CM for any glyphs not provided
+% by another package, and to provide LModern TT. Fonts are scaled for optical
+% consistency.
+\RequirePackage{lmodern}
+\RequirePackage{mathptmx}
+\RequirePackage[scaled=0.833]{helvet}
+\jp@iftoggle{jp@couriers}{%
+  \RequirePackage[scaled=0.875]{couriers}
+}{}
+
 % Taken from leading.sty (v0.3, 2008/12/11, by Will Robertson).
 \RequirePackage{calc}
 \newcommand\jp@leading[1]{%
@@ -187,21 +197,14 @@
   \endgroup
   \linespread{\strip@pt\@tempdimc}\selectfont\ignorespaces}
 
-% Basic text typesetting options. Load lmodern first to provide a good baseline
-% (and LModern TT). Fonts are scaled for optical consistency, which generally
-% means constant x-height.
-\RequirePackage{lmodern}
-\RequirePackage{mathptmx}
-\RequirePackage[scaled=0.833]{helvet}
-\jp@iftoggle{jp@couriers}{%
-  \RequirePackage[scaled=0.875]{couriers}
-}{}
+% Leading and microtypography.
 \setlength{\parindent}{1em}
 \RequirePackage{setspace}
 \jp@iftoggle{jp@compact}{%
   \newcommand{\normalspacing}{\jp@leading{1.125em}}}{%
   \newcommand{\normalspacing}{\singlespace}}
 \RequirePackage{microtype}
+
 % Orphan and widow control.
 \jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
 \jp@iftoggle{jp@widows}{}{\widowpenalty=10000}
