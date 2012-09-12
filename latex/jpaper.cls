@@ -218,7 +218,7 @@
 
 % If anonymous is set, override the document author setting to ensure that the
 % user-provided value never sees the light of day.
-\jp@iftoggle{jp@anonymous}{\author{~}\renewcommand{\author}[1]{}}{}
+\jp@iftoggle{jp@anonymous}{\author{}\renewcommand{\author}[1]{}}{}
 
 % Title formatting.
 \RequirePackage{titling}

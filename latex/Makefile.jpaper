@@ -3,13 +3,14 @@ TEX = $(wildcard *.tex)
 BIB = biblio.bib
 FIGS = $(wildcard figures/*.pdf figures/*.png graphs/*.pdf graphs/*.png)
 
+DEPS = $(TEX) $(BIB) $(FIGS) jpaper.cls
 LATEX = pdflatex -interaction=nonstopmode
 
-.PHONY: all clean version.tex
+.PHONY: all clean
 
 all: $(PAPER).pdf version.tex
 
-$(PAPER).pdf: $(TEX) $(BIB) $(FIGS) jpaper.cls version.tex
+$(PAPER).pdf: $(DEPS) version.tex
 	$(LATEX) $(PAPER)
 	bibtex $(PAPER)
 	$(LATEX) $(PAPER)
@@ -18,6 +19,6 @@ $(PAPER).pdf: $(TEX) $(BIB) $(FIGS) jpaper.cls version.tex
 clean:
 	rm -f *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc $(PAPER).pdf version.tex
 
-version.tex:
+version.tex: $(DEPS)
 	rm -f version.tex
 	./version_tex.py
