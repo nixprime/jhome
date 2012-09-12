@@ -76,9 +76,6 @@ set omnifunc=syntaxcomplete#Complete
 " One space after period
 set nojoinspaces
 
-" Folding
-set foldmethod=syntax foldcolumn=4 foldnestmax=3
-
 " Use the + register (which aliases to the system clipboard) by default
 set clipboard=unnamedplus
 
