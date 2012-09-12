@@ -1,5 +1,5 @@
 PAPER = paper
-TEX = $(wildcard *.tex)
+TEX = $(addsuffix .tex,$(PAPER)) $(wildcard sections/*.tex)
 BIB = biblio.bib
 FIGS = $(wildcard figures/*.pdf figures/*.png graphs/*.pdf graphs/*.png)
 
