@@ -2,6 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% jslides.cls - v1.1.0 - 11 June 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
+%% https://github.com/nixprime/jhome/tree/master/latex
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
