@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jslides.cls - v1.1.0 - 11 June 2012
+%% jslides.cls - v1.2.0 - 12 September 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -32,7 +32,7 @@
 % * nav: Enables the navigation symbol bar on each slide. Off by default.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jslides}[2012/06/11 Presentation template class]
+\ProvidesClass{jslides}[2012/09/12 Presentation template class]
 
 \RequirePackage{etoolbox}
 \newtoggle{js@handout}
@@ -61,7 +61,7 @@
   \LoadClass[handout,xcolor=svgnames]{beamer}}{%
   \LoadClass[xcolor=svgnames]{beamer}}
 
-% In handout mode, place 6 slides on each page.
+% Add layouts for 3/6 slides per page.
 \RequirePackage{pgfpages}
 \pgfpagesdeclarelayout{3 on 1}{%
   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
@@ -207,6 +207,8 @@
     }%
   \fi
 }
+
+% In handout mode, place 6 slides per page.
 \iftoggle{js@handout}{%
   \pgfpagesuselayout{6 on 1}[letterpaper,border shrink=5mm]}{}
 
@@ -218,7 +220,8 @@
 
 % Font selection. lmodern is loaded first for backup symbols in e.g. math.
 \RequirePackage{lmodern}
-\RequirePackage{dejavu}
+\RequirePackage[fullfamily,opticals,lf]{MinionPro}
+\RequirePackage[lf]{MyriadPro}
 
 % Beamer theming.
 \useinnertheme{default}
@@ -268,9 +271,14 @@
 % As a convenience, change \maketitle to emit the title slide.
 \renewcommand{\maketitle}{\begin{frame}[plain] \titlepage \end{frame}}
 
+% Change the shade of red used by \alert.
+\definecolor{JCLRed}{RGB}{165,17,16}
+\setbeamercolor{alerted text}{fg=JCLRed}
+
 % Change \emph to make stuff green.
-\setbeamercolor{emphasized text}{fg=ForestGreen}
-\renewcommand{\emph}[1]{\textcolor{ForestGreen}{#1}}
+\definecolor{JCLGreen}{RGB}{0,112,1}
+\setbeamercolor{emphasized text}{fg=JCLGreen}
+\renewcommand{\emph}[1]{\textcolor{JCLGreen}{#1}}
 \newenvironment{emphenv}{\begin{altenv}{%
   \usebeamertemplate{emphasized text begin}%
   \usebeamercolor[fg]{emphasized text}%
@@ -282,8 +290,9 @@
 }{}}{\end{altenv}}
 
 % Positive counterpart to alert that makes stuff blue.
-\setbeamercolor{good text}{fg=blue}
-\newcommand{\good}[1]{\textcolor{blue}{#1}}
+\definecolor{JCLBlue}{RGB}{0,83,193}
+\setbeamercolor{good text}{fg=JCLBlue}
+\newcommand{\good}[1]{\textcolor{JCLBlue}{#1}}
 \newenvironment{goodenv}{\begin{altenv}{%
   \usebeamertemplate{good text begin}%
   \usebeamercolor[fg]{good text}%
@@ -294,9 +303,10 @@
   \color{.}%
 }{}}{\end{altenv}}
 
-% De-emphasis that makes stuff gray.
-\setbeamercolor{deemphasized text}{fg=gray}
-\newcommand{\deemph}[1]{\textcolor{gray}{#1}}
+% De-emphasis that makes stuff grey.
+\definecolor{JCLGrey}{RGB}{128,128,128}
+\setbeamercolor{deemphasized text}{fg=JCLGrey}
+\newcommand{\deemph}[1]{\textcolor{JCLGrey}{#1}}
 \newenvironment{deemphenv}{\begin{altenv}{%
   \usebeamertemplate{deemphasized text begin}%
   \usebeamercolor[fg]{deemphasized text}%
