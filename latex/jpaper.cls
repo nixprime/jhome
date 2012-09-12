@@ -1,7 +1,8 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.0.0 - 7 September 2012
+%% jpaper.cls - v2.0.0 - 12 September 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
+%% https://github.com/nixprime/jhome/tree/master/latex
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -39,10 +40,10 @@
 %   aesthetically acceptable. This option is provided for things like class
 %   papers and is not recommended for professional work. Off by default.
 %
-% * couriers: Uses a scaled version of Courier for the monospaced typeface.
-%   Requires the couriers package. This is not recommended unless you really
-%   love Courier, since Latin Modern Typewriter (which is used otherwise) is
-%   scaled correctly by default and thus has correct leading.
+% * courier: Uses Courier for the monospaced typeface. This is not recommended
+%   unless you really love Courier, since the psfnss version of Courier (which
+%   this uses) is unnaturally huge, while Latin Modern Typewriter (which is
+%   used otherwise) is scaled correctly by default.
 %
 % * date: Enables the date field in the title block. Most papers do not have a
 %   field for the date. The date option is provided for those documents that
@@ -60,6 +61,11 @@
 %   proceedings or journals, since these provide their own page numbers. Off by
 %   default.
 %
+% * tabcaptbelow: Makes the spacing correct for table captions that are placed
+%   *below* tables. When this option is off, spacing is correct for table
+%   captions *above* tables. Off by default. "tabcaptabove" is synonymous with
+%   "notabcaptbelow".
+%
 % * version: If version control information is available in a version.tex file,
 %   include version information in the document footer. Very useful for drafts.
 %   Off by default.
@@ -74,7 +80,7 @@
 % considered more acceptable than widows; for example, the Chicago Manual of
 % Style, 11th Edition accepts orphans but not widows.
 %
-% jpaper also provides the following special "mode" options:
+% jpaper also provides the following special meta-options:
 %
 % * submission: Equivalent to "anonymous,hyperref,pageno". Intended for
 %   submissions for blind review.
@@ -102,11 +108,12 @@
 \jp@newtoggle{jp@anonymous}
 \jp@newtoggle{jp@bfcaption}
 \jp@newtoggle{jp@compact}
-\jp@newtoggle{jp@couriers}
+\jp@newtoggle{jp@courier}
 \jp@newtoggle{jp@date}
 \jp@newtoggle{jp@hyperref}
 \jp@newtoggle{jp@lineno}
 \jp@newtoggle{jp@pageno}
+\jp@newtoggle{jp@tabcaptbelow}
 \jp@newtoggle{jp@version}
 \jp@newtoggle{jp@orphans}
 \jp@newtoggle{jp@widows}
@@ -120,8 +127,8 @@
 \DeclareOption{nobfcaption}{\jp@togglefalse{jp@bfcaption}}
 \DeclareOption{compact}{\jp@toggletrue{jp@compact}}
 \DeclareOption{nocompact}{\jp@togglefalse{jp@compact}}
-\DeclareOption{couriers}{\jp@toggletrue{jp@couriers}}
-\DeclareOption{nocouriers}{\jp@togglefalse{jp@couriers}}
+\DeclareOption{courier}{\jp@toggletrue{jp@courier}}
+\DeclareOption{nocourier}{\jp@togglefalse{jp@courier}}
 \DeclareOption{date}{\jp@toggletrue{jp@date}}
 \DeclareOption{nodate}{\jp@togglefalse{jp@date}}
 \DeclareOption{hyperref}{\jp@toggletrue{jp@hyperref}}
@@ -130,6 +137,9 @@
 \DeclareOption{nolineno}{\jp@togglefalse{jp@lineno}}
 \DeclareOption{pageno}{\jp@toggletrue{jp@pageno}}
 \DeclareOption{nopageno}{\jp@togglefalse{jp@pageno}}
+\DeclareOption{tabcaptbelow}{\jp@toggletrue{jp@tabcaptbelow}}
+\DeclareOption{notabcaptbelow}{\jp@togglefalse{jp@tabcaptbelow}}
+\DeclareOption{tabcaptabove}{\jp@togglefalse{jp@tabcaptbelow}}
 \DeclareOption{version}{\jp@toggletrue{jp@version}}
 \DeclareOption{noversion}{\jp@togglefalse{jp@version}}
 \DeclareOption{orphans}{\jp@toggletrue{jp@orphans}}
@@ -137,16 +147,17 @@
 \DeclareOption{widows}{\jp@toggletrue{jp@widows}}
 \DeclareOption{nowidows}{\jp@togglefalse{jp@widows}}
 
-% Option groups.
+% Combined options.
 \DeclareOption{default}{%
   \jp@togglefalse{jp@anonymous}
   \jp@toggletrue{jp@bfcaption}
   \jp@togglefalse{jp@compact}
-  \jp@togglefalse{jp@couriers}
+  \jp@togglefalse{jp@courier}
   \jp@togglefalse{jp@date}
   \jp@togglefalse{jp@hyperref}
   \jp@togglefalse{jp@lineno}
   \jp@togglefalse{jp@pageno}
+  \jp@togglefalse{jp@tabcaptbelow}
   \jp@togglefalse{jp@version}
   \jp@toggletrue{jp@orphans}
   \jp@toggletrue{jp@widows}
@@ -182,9 +193,7 @@
 \RequirePackage{lmodern}
 \RequirePackage{mathptmx}
 \RequirePackage[scaled=0.833]{helvet}
-\jp@iftoggle{jp@couriers}{%
-  \RequirePackage[scaled=0.875]{couriers}
-}{}
+\jp@iftoggle{jp@courier}{\RequirePackage{courier}}{}
 
 % Taken from leading.sty (v0.3, 2008/12/11, by Will Robertson).
 \RequirePackage{calc}
@@ -308,8 +317,10 @@
   \RequirePackage[font={normalsize,sf,bf,stretch=0.8}, format=hang]{caption}}{%
   \RequirePackage[font={normalsize,sf,stretch=0.8}, format=hang]{caption}}
 \RequirePackage[position=bottom]{subfig}
-\captionsetup[table]{aboveskip=0.5em, belowskip=0.5em}
 \captionsetup[figure]{aboveskip=0.5em, belowskip=0em}
+\jp@iftoggle{jp@tabcaptbelow}{%
+  \captionsetup[table]{aboveskip=0.5em, belowskip=0em}}{%
+  \captionsetup[table]{aboveskip=0.5em, belowskip=0.5em}}
 \captionsetup[subfloat]{font={small,sf}}
 \setcounter{topnumber}{2}
 \setcounter{dbltopnumber}{2}
