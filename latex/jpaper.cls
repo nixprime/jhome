@@ -92,7 +92,7 @@
 %   version of a camera-ready paper.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/09/07 v2.0.0 Paper template class]
+\ProvidesClass{jpaper}[2012/09/12 v2.0.0 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
