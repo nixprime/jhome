@@ -6,7 +6,7 @@ set nocompatible
 set bs=2
 
 " Remove all existing autocommands
-:autocmd!
+autocmd!
 
 " Load plugins
 call pathogen#infect()
@@ -92,7 +92,9 @@ fun! <SID>StripTrailingWhitespace()
   %s/\s\+$//e
   call cursor(l, c)
 endfun
-autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+augroup autocleanup
+  autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-related settings
@@ -103,9 +105,6 @@ set showcmd
 
 " Longer command history
 set history=1000
-
-" Never timeout commands; timeout on key codes
-set notimeout ttimeout
 
 " Shell-like autocomplete
 set wildmenu wildmode=list:longest
@@ -229,6 +228,10 @@ autocmd FileType python
 augroup filetype
   au! BufRead,BufNewFile SCons* set filetype=python
 augroup END
+
+" Snippets
+autocmd FileType snippet
+  \ au! autocleanup
 
 " LaTeX
 let g:tex_flavor = "latex"
