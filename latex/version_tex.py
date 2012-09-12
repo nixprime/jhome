@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""Try to get version information for the current working directory from a
+version control system. Write the current date and time, and version
+information if available, as LaTeX macros in the file version.tex."""
+
 import datetime
 import re
 import subprocess
@@ -60,8 +64,8 @@ def git_revision():
 def svn_revision():
     """Get the Subversion revision number of the current working directory. If
     the current working copy is modified, append an asterisk (*) to the end of
-    the hash. IF the current working directory is not a working copy, or if SVN
-    is not available, return None."""
+    the version number. IF the current working directory is not a working copy,
+    or if SVN is not available, return None."""
     try:
         info = run(["svn", "info"])
         rev_match = re.search("^Revision: (.+)$", info, re.MULTILINE)
@@ -85,7 +89,9 @@ if __name__ == "__main__":
             revision = "svn:" + svn_rev
         else:
             revision = None
-    if revision is not None:
-        with open("version.tex", 'w') as version_tex:
+    with open("version.tex", 'w') as version_tex:
+        if revision is not None:
             version_tex.write("\\newcommand{\\jp@revision}{%s}\n" % revision)
-            version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % now())
+        else:
+            version_tex.write("\\newcommand{\\jp@revision}{}\n")
+        version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % now())
