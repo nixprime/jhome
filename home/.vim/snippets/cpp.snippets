@@ -1,16 +1,22 @@
+# Bracketed comment
+snippet ///
+	///////////////////////////////////////////////////////////////////////////////
+	// ${1}
+	///////////////////////////////////////////////////////////////////////////////
 # Namespace
-snippet namespace
-	namespace ${1:ns} {
-
-	${2}
-
-	} // namespace $1
 snippet ns
 	namespace ${1:ns} {
 
 	${2}
 
 	} // namespace $1
+# Anonymous namespace
+snippet nsa
+	namespace {
+
+	${1}
+
+	} // anonymous namespace
 # Class
 snippet class
 	class ${1:Class} {
@@ -19,6 +25,9 @@ snippet class
 
 		private:
 	};
+# Template
+snippet temp
+	template <${1}>
 # Try/catch
 snippet try
 	try {
@@ -31,6 +40,3 @@ snippet fore
 	for (${1} : ${2}) {
 		${3}
 	}
-# Template
-snippet temp
-	template <${1}>

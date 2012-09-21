@@ -14,8 +14,7 @@ snippet once
 	#endif /* $1 */
 # Include statement
 snippet #in
-	#include <${1}>
-	${2}
+	#include <${1}>${2}
 # main
 snippet main
 	int main(int argc, char* argv[]) {
@@ -28,3 +27,8 @@ snippet for
 	for (${1}; ${2}; ${3}) {
 		${4}
 	}
+# Doxygen comment
+snippet /**
+	/**
+	 * ${1}
+	 */
