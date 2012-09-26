@@ -64,7 +64,7 @@ def git_revision():
 def svn_revision():
     """Get the Subversion revision number of the current working directory. If
     the current working copy is modified, append an asterisk (*) to the end of
-    the version number. IF the current working directory is not a working copy,
+    the version number. If the current working directory is not a working copy,
     or if SVN is not available, return None."""
     try:
         info = run(["svn", "info"])

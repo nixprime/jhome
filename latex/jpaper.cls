@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.0.0 - 12 September 2012
+%% jpaper.cls - v2.0.1 - 26 September 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -80,6 +80,10 @@
 % considered more acceptable than widows; for example, the Chicago Manual of
 % Style, 11th Edition accepts orphans but not widows.
 %
+% For font sizes, jpaper supports 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, and
+% 20pt. Use of sizes other than 10pt, 11pt, and 12pt requires the extsizes
+% LaTeX package to be installed, although this is common.
+%
 % jpaper also provides the following special meta-options:
 %
 % * submission: Equivalent to "anonymous,hyperref,pageno". Intended for
@@ -92,7 +96,7 @@
 %   version of a camera-ready paper.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/09/12 v2.0.0 Paper template class]
+\ProvidesClass{jpaper}[2012/09/26 v2.0.1 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -110,6 +114,7 @@
 \jp@newtoggle{jp@compact}
 \jp@newtoggle{jp@courier}
 \jp@newtoggle{jp@date}
+\jp@newtoggle{jp@extsizes}
 \jp@newtoggle{jp@hyperref}
 \jp@newtoggle{jp@lineno}
 \jp@newtoggle{jp@pageno}
@@ -117,6 +122,7 @@
 \jp@newtoggle{jp@version}
 \jp@newtoggle{jp@orphans}
 \jp@newtoggle{jp@widows}
+\newcommand{\jp@ptsize}{10pt}
 
 % Basic options.
 \DeclareOption{leqno}{\input{leqno.clo}}
@@ -146,6 +152,32 @@
 \DeclareOption{noorphans}{\jp@togglefalse{jp@orphans}}
 \DeclareOption{widows}{\jp@toggletrue{jp@widows}}
 \DeclareOption{nowidows}{\jp@togglefalse{jp@widows}}
+
+% Font size options.
+\DeclareOption{8pt}{%
+  \renewcommand{\jp@ptsize}{8pt}
+  \jp@toggletrue{jp@extsizes}}
+\DeclareOption{9pt}{%
+  \renewcommand{\jp@ptsize}{9pt}
+  \jp@toggletrue{jp@extsizes}}
+\DeclareOption{10pt}{%
+  \renewcommand{\jp@ptsize}{10pt}
+  \jp@togglefalse{jp@extsizes}}
+\DeclareOption{11pt}{%
+  \renewcommand{\jp@ptsize}{11pt}
+  \jp@togglefalse{jp@extsizes}}
+\DeclareOption{12pt}{%
+  \renewcommand{\jp@ptsize}{12pt}
+  \jp@togglefalse{jp@extsizes}}
+\DeclareOption{14pt}{%
+  \renewcommand{\jp@ptsize}{14pt}
+  \jp@toggletrue{jp@extsizes}}
+\DeclareOption{17pt}{%
+  \renewcommand{\jp@ptsize}{17pt}
+  \jp@toggletrue{jp@extsizes}}
+\DeclareOption{20pt}{%
+  \renewcommand{\jp@ptsize}{20pt}
+  \jp@toggletrue{jp@extsizes}}
 
 % Combined options.
 \DeclareOption{default}{%
@@ -178,7 +210,9 @@
 \ProcessOptions
 
 % Load the underlying article class.
-\LoadClass[letterpaper,10pt,twocolumn]{article}
+\jp@iftoggle{jp@extsizes}{%
+  \LoadClass[letterpaper,\jp@ptsize,twocolumn]{extarticle}}{%
+  \LoadClass[letterpaper,\jp@ptsize,twocolumn]{article}}
 
 % Standard packages.
 \RequirePackage[utf8]{inputenc}
