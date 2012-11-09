@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.0.1 - 26 September 2012
+%% jpaper.cls - v2.0.2 - 9 November 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -108,6 +108,17 @@
 \newcommand*{\jp@togglefalse}[1]{\cslet{jp@tgl@#1}\jp@bool@false}
 \newcommand*{\jp@iftoggle}[1]{\csname jp@tgl@#1\endcsname}
 
+% Feature detection flags.
+\newcommand*{\jp@newfiletoggle}[2]{\IfFileExists{#2}{%
+  \jp@toggletrue{#1}}{%
+  \jp@togglefalse{#1}}}
+\jp@newfiletoggle{jp@have@microtype}{microtype.sty}
+\jp@newfiletoggle{jp@have@siunits}{SIunits.sty}
+\jp@newfiletoggle{jp@have@tikz}{tikz.sty}
+\jp@newfiletoggle{jp@have@ulem}{ulem.sty}
+\jp@newfiletoggle{jp@have@url}{url.sty}
+\jp@newfiletoggle{jp@have@version}{version.tex}
+
 % Configuration flags.
 \jp@newtoggle{jp@anonymous}
 \jp@newtoggle{jp@bfcaption}
@@ -186,6 +197,7 @@
   \jp@togglefalse{jp@compact}
   \jp@togglefalse{jp@courier}
   \jp@togglefalse{jp@date}
+  \jp@togglefalse{jp@extsizes}
   \jp@togglefalse{jp@hyperref}
   \jp@togglefalse{jp@lineno}
   \jp@togglefalse{jp@pageno}
@@ -246,7 +258,7 @@
 \jp@iftoggle{jp@compact}{%
   \newcommand{\normalspacing}{\jp@leading{1.125em}}}{%
   \newcommand{\normalspacing}{\singlespace}}
-\RequirePackage{microtype}
+\jp@iftoggle{jp@have@microtype}{\RequirePackage{microtype}}{}
 
 % Orphan and widow control.
 \jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
@@ -383,12 +395,11 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \jp@iftoggle{jp@pageno}{\fancyfoot[C]{\thepage}}{}
+\jp@iftoggle{jp@have@version}{}{\jp@togglefalse{jp@version}}
 \jp@iftoggle{jp@version}{%
-  \IfFileExists{version.tex}{%
-    \input{version}
-    \fancyfoot[L]{\jp@revision}
-    \fancyfoot[R]{\jp@datetime}
-  }{}
+  \input{version}
+  \fancyfoot[L]{\jp@revision}
+  \fancyfoot[R]{\jp@datetime}
 }{}
 \pagestyle{fancy}
 
@@ -432,9 +443,14 @@
     linkcolor=black,%
     urlcolor=black}
 }{}
-\RequirePackage{url}
+\jp@iftoggle{jp@have@url}{\RequirePackage{url}}{}
 
-% Scientific units.
-\RequirePackage[squaren]{SIunits}
+% Utility packages.
+\jp@iftoggle{jp@have@siunits}{\RequirePackage[squaren]{SIunits}}{}
+\jp@iftoggle{jp@have@tikz}{\RequirePackage{tikz}}{}
+\jp@iftoggle{jp@have@ulem}{\RequirePackage[normalem]{ulem}}{}
+
+% Command for formatting author emails in the author block.
+\newcommand{\authemail}[1]{{\large\texttt{#1}}}
 
 \endinput
