@@ -1,10 +1,11 @@
 PAPER = paper
 TEX = $(addsuffix .tex,$(PAPER)) $(wildcard sections/*.tex)
 BIB = biblio.bib
-FIGS = $(wildcard figures/*.pdf figures/*.png graphs/*.pdf graphs/*.png)
+FIGS = $(wildcard figures/* graphs/*)
 
 DEPS = $(TEX) $(BIB) $(FIGS) jpaper.cls
 LATEX = pdflatex -interaction=nonstopmode
+BIBTEX = bibtex
 
 .PHONY: all clean
 
@@ -12,7 +13,7 @@ all: $(PAPER).pdf version.tex
 
 $(PAPER).pdf: $(DEPS) version.tex
 	$(LATEX) $(PAPER)
-	bibtex $(PAPER)
+	$(BIBTEX) $(PAPER)
 	$(LATEX) $(PAPER)
 	$(LATEX) $(PAPER)
 

@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.0.2 - 9 November 2012
+%% jpaper.cls - v2.1.0 - 10 November 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -35,15 +35,6 @@
 %   face; this option controls whether or not they are in bold as well. You
 %   should probably leave this option on if using Helvetica, the default
 %   sans-serif typeface. On by default.
-%
-% * compact: Enables tighter spacing in certain contexts while remaining
-%   aesthetically acceptable. This option is provided for things like class
-%   papers and is not recommended for professional work. Off by default.
-%
-% * courier: Uses Courier for the monospaced typeface. This is not recommended
-%   unless you really love Courier, since the psfnss version of Courier (which
-%   this uses) is unnaturally huge, while Latin Modern Typewriter (which is
-%   used otherwise) is scaled correctly by default.
 %
 % * date: Enables the date field in the title block. Most papers do not have a
 %   field for the date. The date option is provided for those documents that
@@ -80,9 +71,11 @@
 % considered more acceptable than widows; for example, the Chicago Manual of
 % Style, 11th Edition accepts orphans but not widows.
 %
-% For font sizes, jpaper supports 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, and
-% 20pt. Use of sizes other than 10pt, 11pt, and 12pt requires the extsizes
-% LaTeX package to be installed, although this is common.
+% jpaper uses Times New Roman, Helvetica, and Latin Modern Typewriter as
+% default fonts; these can be overridden by defining the commands
+% \jp@select@rm, \jp@select@sf, and \jp@select@tt respectively.
+% For font sizes, jpaper supports 10pt (the default) and 9pt. Use of 9pt
+% requires the extsizes LaTeX package to be installed, although this is common.
 %
 % jpaper also provides the following special meta-options:
 %
@@ -94,9 +87,27 @@
 %
 % * final: Equivalent to "hyperref,pageno". Intended for the standalone, online
 %   version of a camera-ready paper.
+%
+% Finally, jpaper provides the following space-reducing options, all of which
+% are off by default (note that use of these options is strongly discouraged
+% unless absolutely necessary, since they *will* have a negative impact on the
+% aesthetic acceptability and readability of the document):
+%
+% * compact: Reduces the leading (line spacing). This is probably the most
+%   dangerous space-reducing option, since this option is likely to have the
+%   greatest impact on readability.
+%
+% * narrowgutter: Reduces the size of the gutter (space between columns). This
+%   is probably the safest space-reducing option overall.
+%
+% * narrowmargins: Reduces the page margins. This option is extremely dangerous
+%   for conference submissions; side margins are required to ensure that when a
+%   page is bound into a book, no text on the sides is rendered unreadable due
+%   to the binding, while page number will be printed in the bottom margin.
+%   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/09/26 v2.0.1 Paper template class]
+\ProvidesClass{jpaper}[2012/11/10 v2.1.0 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -113,6 +124,7 @@
   \jp@toggletrue{#1}}{%
   \jp@togglefalse{#1}}}
 \jp@newfiletoggle{jp@have@microtype}{microtype.sty}
+\jp@newfiletoggle{jp@have@pgf}{pgf.sty}
 \jp@newfiletoggle{jp@have@siunits}{SIunits.sty}
 \jp@newfiletoggle{jp@have@tikz}{tikz.sty}
 \jp@newfiletoggle{jp@have@ulem}{ulem.sty}
@@ -123,17 +135,19 @@
 \jp@newtoggle{jp@anonymous}
 \jp@newtoggle{jp@bfcaption}
 \jp@newtoggle{jp@compact}
-\jp@newtoggle{jp@courier}
 \jp@newtoggle{jp@date}
 \jp@newtoggle{jp@extsizes}
 \jp@newtoggle{jp@hyperref}
 \jp@newtoggle{jp@lineno}
+\jp@newtoggle{jp@narrowgutter}
+\jp@newtoggle{jp@narrowmargins}
 \jp@newtoggle{jp@pageno}
 \jp@newtoggle{jp@tabcaptbelow}
 \jp@newtoggle{jp@version}
 \jp@newtoggle{jp@orphans}
 \jp@newtoggle{jp@widows}
 \newcommand{\jp@ptsize}{10pt}
+\newlength{\jp@normalsize}
 
 % Basic options.
 \DeclareOption{leqno}{\input{leqno.clo}}
@@ -144,14 +158,16 @@
 \DeclareOption{nobfcaption}{\jp@togglefalse{jp@bfcaption}}
 \DeclareOption{compact}{\jp@toggletrue{jp@compact}}
 \DeclareOption{nocompact}{\jp@togglefalse{jp@compact}}
-\DeclareOption{courier}{\jp@toggletrue{jp@courier}}
-\DeclareOption{nocourier}{\jp@togglefalse{jp@courier}}
 \DeclareOption{date}{\jp@toggletrue{jp@date}}
 \DeclareOption{nodate}{\jp@togglefalse{jp@date}}
 \DeclareOption{hyperref}{\jp@toggletrue{jp@hyperref}}
 \DeclareOption{nohyperref}{\jp@togglefalse{jp@hyperref}}
 \DeclareOption{lineno}{\jp@toggletrue{jp@lineno}}
 \DeclareOption{nolineno}{\jp@togglefalse{jp@lineno}}
+\DeclareOption{narrowgutter}{\jp@toggletrue{jp@narrowgutter}}
+\DeclareOption{nonarrowgutter}{\jp@togglefalse{jp@narrowgutter}}
+\DeclareOption{narrowmargins}{\jp@toggletrue{jp@narrowmargins}}
+\DeclareOption{nonarrowmargins}{\jp@togglefalse{jp@narrowmargins}}
 \DeclareOption{pageno}{\jp@toggletrue{jp@pageno}}
 \DeclareOption{nopageno}{\jp@togglefalse{jp@pageno}}
 \DeclareOption{tabcaptbelow}{\jp@toggletrue{jp@tabcaptbelow}}
@@ -165,46 +181,32 @@
 \DeclareOption{nowidows}{\jp@togglefalse{jp@widows}}
 
 % Font size options.
-\DeclareOption{8pt}{%
-  \renewcommand{\jp@ptsize}{8pt}
-  \jp@toggletrue{jp@extsizes}}
 \DeclareOption{9pt}{%
   \renewcommand{\jp@ptsize}{9pt}
+  \setlength{\jp@normalsize}{9pt}
   \jp@toggletrue{jp@extsizes}}
 \DeclareOption{10pt}{%
   \renewcommand{\jp@ptsize}{10pt}
+  \setlength{\jp@normalsize}{10pt}
   \jp@togglefalse{jp@extsizes}}
-\DeclareOption{11pt}{%
-  \renewcommand{\jp@ptsize}{11pt}
-  \jp@togglefalse{jp@extsizes}}
-\DeclareOption{12pt}{%
-  \renewcommand{\jp@ptsize}{12pt}
-  \jp@togglefalse{jp@extsizes}}
-\DeclareOption{14pt}{%
-  \renewcommand{\jp@ptsize}{14pt}
-  \jp@toggletrue{jp@extsizes}}
-\DeclareOption{17pt}{%
-  \renewcommand{\jp@ptsize}{17pt}
-  \jp@toggletrue{jp@extsizes}}
-\DeclareOption{20pt}{%
-  \renewcommand{\jp@ptsize}{20pt}
-  \jp@toggletrue{jp@extsizes}}
 
 % Combined options.
 \DeclareOption{default}{%
   \jp@togglefalse{jp@anonymous}
   \jp@toggletrue{jp@bfcaption}
   \jp@togglefalse{jp@compact}
-  \jp@togglefalse{jp@courier}
   \jp@togglefalse{jp@date}
   \jp@togglefalse{jp@extsizes}
   \jp@togglefalse{jp@hyperref}
   \jp@togglefalse{jp@lineno}
+  \jp@togglefalse{jp@narrowgutter}
+  \jp@togglefalse{jp@narrowmargins}
   \jp@togglefalse{jp@pageno}
   \jp@togglefalse{jp@tabcaptbelow}
   \jp@togglefalse{jp@version}
   \jp@toggletrue{jp@orphans}
   \jp@toggletrue{jp@widows}
+  \setlength{\jp@normalsize}{10pt}
 }
 \DeclareOption{submission}{%
   \jp@toggletrue{jp@anonymous}
@@ -234,12 +236,14 @@
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 % Font selection. Load lmodern first to replace CM for any glyphs not provided
-% by another package, and to provide LModern TT. Fonts are scaled for optical
-% consistency.
+% by another package. Helvetica is scaled for optical consistency.
 \RequirePackage{lmodern}
-\RequirePackage{mathptmx}
-\RequirePackage[scaled=0.833]{helvet}
-\jp@iftoggle{jp@courier}{\RequirePackage{courier}}{}
+\providecommand{\jp@select@rm}{\RequirePackage{mathptmx}}
+\providecommand{\jp@select@sf}{\RequirePackage[scaled=0.833]{helvet}}
+\providecommand{\jp@select@tt}{} % LModern TT is already default
+\jp@select@rm
+\jp@select@sf
+\jp@select@tt
 
 % Taken from leading.sty (v0.3, 2008/12/11, by Will Robertson).
 \RequirePackage{calc}
@@ -252,24 +256,30 @@
   \endgroup
   \linespread{\strip@pt\@tempdimc}\selectfont\ignorespaces}
 
-% Leading and microtypography.
+% Leading and microtypography. Leading of 1.2x (10pt/12pt or 9pt/10.8pt)
+% *should* be default, but we set it explicitly here to be safe.
 \setlength{\parindent}{1em}
 \RequirePackage{setspace}
 \jp@iftoggle{jp@compact}{%
-  \newcommand{\normalspacing}{\jp@leading{1.125em}}}{%
-  \newcommand{\normalspacing}{\singlespace}}
+  \newcommand{\normalspacing}{\jp@leading{1.125\jp@normalsize}}}{%
+  \newcommand{\normalspacing}{\jp@leading{1.2\jp@normalsize}}}
 \jp@iftoggle{jp@have@microtype}{\RequirePackage{microtype}}{}
 
 % Orphan and widow control.
 \jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
 \jp@iftoggle{jp@widows}{}{\widowpenalty=10000}
 
-% Page margins: 3/4" left and right, 1" top and bottom.
+% Default page margins: 3/4" left and right, 1" top and bottom.
+% Narrow page margins: 1/2" left, right, and top, 3/4" bottom.
 \RequirePackage{geometry}
-\geometry{lmargin=0.75in,rmargin=0.75in,tmargin=1in,bmargin=1in}
+\jp@iftoggle{jp@narrowmargins}{%
+  \geometry{lmargin=0.5in, rmargin=0.5in, tmargin=0.5in, bmargin=0.75in}}{%
+  \geometry{lmargin=0.75in, rmargin=0.75in, tmargin=1in, bmargin=1in}}
 
-% 1/4" space between columns.
-\setlength{\columnsep}{0.25in}
+% The gutter size is 1/4" by default, and 1 pica (~1/6") with narrowgutter.
+\jp@iftoggle{jp@narrowgutter}{%
+  \setlength{\columnsep}{1pc}}{%
+  \setlength{\columnsep}{0.25in}}
 
 % If anonymous is set, override the document author setting to ensure that the
 % user-provided value never sees the light of day.
@@ -285,17 +295,18 @@
 \postauthor{\end{tabular}\par\end{center}}
 \jp@iftoggle{jp@date}{%
   \predate{\begin{center}\normalfont}
-  \postdate{\end{center}}
+  \postdate{\end{center}\vspace{-1em}}
 }{%
   \predate{}
-  \postdate{}
+  \postdate{\vspace{-1em}}
   \date{}
-  \let\date=\relax
+  \renewcommand{\date}[1]{}
 }
 
 % Compress vertical space around section and subsection headings. Make
 % subsubsection headings run-in (i.e. part of the following paragraph).
 \RequirePackage[compact]{titlesec}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
 \titleformat{\section}[hang]{\normalfont\large\bfseries}{\thesection. }%
   {0pt}{}{}
 \titleformat{\subsection}[hang]{\normalfont\bfseries}{\thesubsection. }%
@@ -303,9 +314,8 @@
 \titleformat{\subsubsection}[runin]{\normalfont\bfseries}{\thesubsubsection. }%
   {0pt}{}{}
 \newlength{\sectionspace}
-\jp@iftoggle{jp@compact}{%
-  \setlength{\sectionspace}{4pt plus 5pt minus 3pt}}{%
-  \setlength{\sectionspace}{8pt plus 2pt minus 6pt}}
+\setlength{\sectionspace}{0.6\jp@normalsize %
+  plus 0.6\jp@normalsize minus 0.4\jp@normalsize}
 \titlespacing*{\section}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsection}{0pt}{\sectionspace}{\sectionspace}
 \titlespacing*{\subsubsection}{0pt}{\parskip}{0.25em plus 0.1em minus 0.05em}
@@ -327,7 +337,7 @@
 \RequirePackage{enumitem}
 \setlist{noitemsep, leftmargin=*, topsep=0pt, partopsep=0pt}
 
-% Remove spacing between bibliography entries and use 8pt font. Adapted from
+% Remove spacing between bibliography entries and use small font. Adapted from
 % http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html
 \renewenvironment{thebibliography}[1]{%
   \section*{\refname\@mkboth{\MakeUppercase\refname}{\MakeUppercase\refname}}%
@@ -429,7 +439,9 @@
 \renewcommand\marginpar[1]{\jp@marginpar%
   [\raggedleft\singlespacing\footnotesize\color{red} #1]%
   {\raggedright\singlespacing\footnotesize\color{red} #1}}
-\setlength{\marginparwidth}{0.65in}
+\jp@iftoggle{jp@narrowmargins}{%
+  \setlength{\marginparwidth}{0.4in}}{%
+  \setlength{\marginparwidth}{0.65in}}
 
 % Link and URL formatting.
 \jp@iftoggle{jp@hyperref}{%
@@ -447,7 +459,14 @@
 
 % Utility packages.
 \jp@iftoggle{jp@have@siunits}{\RequirePackage[squaren]{SIunits}}{}
-\jp@iftoggle{jp@have@tikz}{\RequirePackage{tikz}}{}
+\jp@iftoggle{jp@have@pgf}{\RequirePackage{pgf}}{}
+\jp@iftoggle{jp@have@tikz}{%
+  \RequirePackage{tikz}
+  % Better circled numerals.
+  \renewcommand*{\textcircled}[1]{%
+    \tikz[baseline={([yshift=-0.1em] char.base)}]{%
+        \node[shape=circle, draw, inner sep=0.1em] (char) {\scriptsize #1};}}
+}{}
 \jp@iftoggle{jp@have@ulem}{\RequirePackage[normalem]{ulem}}{}
 
 % Command for formatting author emails in the author block.
