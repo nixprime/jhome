@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.1.0 - 10 November 2012
+%% jpaper.cls - v2.1.1 - 21 November 2012
 %% Copyright 2012 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -107,7 +107,7 @@
 %   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/11/10 v2.1.0 Paper template class]
+\ProvidesClass{jpaper}[2012/11/21 v2.1.1 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -123,6 +123,7 @@
 \newcommand*{\jp@newfiletoggle}[2]{\IfFileExists{#2}{%
   \jp@toggletrue{#1}}{%
   \jp@togglefalse{#1}}}
+\jp@newfiletoggle{jp@have@amsmath}{amsmath.sty}
 \jp@newfiletoggle{jp@have@microtype}{microtype.sty}
 \jp@newfiletoggle{jp@have@pgf}{pgf.sty}
 \jp@newfiletoggle{jp@have@siunits}{SIunits.sty}
@@ -290,9 +291,10 @@
 \setlength{\droptitle}{-3.5em}
 \pretitle{\begin{center}\normalfont\Large\bfseries}
 \posttitle{\par\end{center}}
-\preauthor{\begin{center}\normalfont\large%
+\let\jp@normal@and=\and
+\preauthor{\begin{center}\normalfont\large\let\and=\quad%
   \begin{tabular}[t]{c}}
-\postauthor{\end{tabular}\par\end{center}}
+\postauthor{\end{tabular}\let\and=\jp@normal@and\par\end{center}}
 \jp@iftoggle{jp@date}{%
   \predate{\begin{center}\normalfont}
   \postdate{\end{center}\vspace{-1em}}
@@ -458,6 +460,7 @@
 \jp@iftoggle{jp@have@url}{\RequirePackage{url}}{}
 
 % Utility packages.
+\jp@iftoggle{jp@have@amsmath}{\RequirePackage{amsmath}}{}
 \jp@iftoggle{jp@have@siunits}{\RequirePackage[squaren]{SIunits}}{}
 \jp@iftoggle{jp@have@pgf}{\RequirePackage{pgf}}{}
 \jp@iftoggle{jp@have@tikz}{%
