@@ -1,25 +1,41 @@
-PAPER = paper
-TEX = $(addsuffix .tex,$(PAPER)) $(wildcard sections/*.tex)
-BIB = biblio.bib
+# Input files
+MAIN = paper
+TEXEXTRA = $(wildcard sections/*.tex)
 FIGS = $(wildcard figures/* graphs/*)
+BIB = $(wildcard *.bib)
+TEMPLATE = jpaper.cls
 
-DEPS = $(TEX) $(BIB) $(FIGS) jpaper.cls
+# Programs
 LATEX = pdflatex -interaction=nonstopmode
 BIBTEX = bibtex
+MAKEIDX = makeindex
+# If version_tex.py is unavailable, unset GENVERSION here
+GENVERSION = ./version_tex.py
+
+# Automatic dependencies
+TEXMAIN = $(wildcard $(addsuffix .tex,$(MAIN)))
+TEX = $(TEXMAIN) $(TEXEXTRA)
+DEPS = $(TEX) $(FIGS) $(BIB) $(TEMPLATE)
+TARGET = $(addsuffix .pdf,$(MAIN))
+VERSION = version.tex
+ifeq ($(strip $(wildcard $(GENVERSION))),)
+	GENVERSION = touch $(VERSION)
+endif
 
 .PHONY: all clean
 
-all: $(PAPER).pdf version.tex
+all: $(TARGET)
 
-$(PAPER).pdf: $(DEPS) version.tex
-	$(LATEX) $(PAPER)
-	$(BIBTEX) $(PAPER)
-	$(LATEX) $(PAPER)
-	$(LATEX) $(PAPER)
+$(TARGET): $(DEPS) $(VERSION)
+	$(LATEX) $(MAIN)
+	$(BIBTEX) $(MAIN)
+	$(LATEX) $(MAIN)
+	$(LATEX) $(MAIN)
 
-clean:
-	rm -f *.aux *.bbl *.blg *.log *.nav *.out *.snm *.toc $(PAPER).pdf version.tex
-
-version.tex: $(DEPS)
+$(VERSION): $(DEPS)
 	rm -f version.tex
 	./version_tex.py
+
+clean:
+	rm -f $(TARGET) *.aux *.bbl *.blg *.idx *.ilg *.ind *.lof *.log *.lot *.nav *.out *.snm *.toc $(VERSION)
+
