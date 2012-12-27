@@ -1,0 +1,3 @@
+DiffGitCached
+wincmd p
+

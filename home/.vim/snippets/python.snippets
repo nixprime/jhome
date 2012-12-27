@@ -1,6 +1,18 @@
 # Hashbang string
 snippet #!
 	#!/usr/bin/env python
+	# -*- coding: utf-8 -*-
+
+# Maximize Py3k feature usage in Python 2
+snippet 2to3
+	from __future__ import absolute_import, division, print_function, \
+					unicode_literals
+	import sys
+	if sys.version_info.major < 3:
+		str = unicode
+		chr = unichr
+		from io import open
+
 # MPL v2.0
 snippet mpl
 	# This Source Code Form is subject to the terms of the Mozilla Public

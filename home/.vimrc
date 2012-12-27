@@ -121,10 +121,10 @@ noremap <S-up> <C-Y>
 noremap <S-down> <C-E>
 
 " Allow certain capital commands
-command W w
-command Q q
-command Wq wq
-command WQ wq
+command! W w
+command! Q q
+command! Wq wq
+command! WQ wq
 
 " Y copies from cursor to EOL
 noremap Y y$
@@ -158,6 +158,10 @@ noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
 noremap <silent> <F7> :set fo+=a<CR>
 noremap <silent> <F8> :set fo-=a<CR>
 
+" F9 infers indentation settings
+:let g:detectindent_preferred_indent = 2
+noremap <silent> <F9> :DetectIndent<CR>
+
 " F12 prints document stats (notably word count)
 noremap <silent> <F12> g<C-g>
 
@@ -170,6 +174,7 @@ set formatoptions+=cr formatoptions-=o
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language-specific settings
+" (that must be present before the syntax file is loaded)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " C/C++
@@ -181,26 +186,15 @@ let c_no_if0_fold=1
 " Do not highlight weird bracket nesting as an error (C++11 features)
 let c_no_curly_error=1
 
-" C#
-autocmd FileType cs
-  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
-
-" Git - show diff in window split when committing
-autocmd FileType gitcommit
-  \ DiffGitCached | wincmd p
+" GLSL
+augroup filetype
+  au! BufNewFile,BufRead *.glsl\|*.vert\|*.frag setlocal filetype=glsl
+augroup END
 
 " Golang
 augroup filetype
-  au! BufRead,BufNewFile *.go set filetype=go
+  au! BufRead,BufNewFile *.go setlocal filetype=go
 augroup END
-
-" Haskell
-autocmd FileType haskell
-  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
-
-" Java
-autocmd FileType java
-  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
 
 " JSON
 augroup filetype
@@ -217,24 +211,18 @@ augroup filetype
   au! BufRead,BufNewFile *.proto set filetype=proto
 augroup END
 
-" Python
-autocmd FileType python
-  \ setlocal tabstop=4 softtabstop=4 shiftwidth=4
-
 " SCons
 augroup filetype
   au! BufRead,BufNewFile SCons* set filetype=python
 augroup END
 
 " Snippets
+" Do not strip trailing whitespace on save
 autocmd FileType snippet
   \ au! autocleanup
 
-" LaTeX
+" TeX (LaTeX)
 let g:tex_flavor = "latex"
-autocmd FileType tex
-  \ setlocal spell spelllang=en_us
-  \ fo+=t2
 
 " Plain text
 autocmd BufRead,BufNewFile *.txt
@@ -247,3 +235,4 @@ autocmd BufRead,BufNewFile *.txt
 
 " System header tags
 set tags=./tags,../tags,../../tags,../../../tags,/opt/systags
+

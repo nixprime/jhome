@@ -104,21 +104,19 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# ICC
-if [ -d "/opt/intel/bin" ] ; then
-    source /opt/intel/bin/compilervars.sh intel64
-fi
-
 # Set umask so only owner can write
 umask 0022
 
-# Parallel make
-alias make="make -j8 2>&1"
-
-# Parallel scons
-export SCONSFLAGS="-Q -j8"
+# Parallel make and SCons
+PARALLELISM=8
+alias make="make -j${PARALLELISM} 2>&1"
+export SCONSFLAGS="-Q -j${PARALLELISM}"
 
 # Aliases for some unclean programs
 alias chromium-browser="nohup chromium-browser &>/dev/null"
 alias evince="nohup evince &>/dev/null"
 alias inkscape="nohup inkscape &>/dev/null"
+
+# Fix PyPy module search path
+alias pypy="PYTHONPATH=\"/usr/lib/python2.7/dist-packages\" pypy"
+
