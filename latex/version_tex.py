@@ -4,13 +4,15 @@
 version control system. Write the current date and time, and version
 information if available, as LaTeX macros in the file version.tex."""
 
+from __future__ import division
+
 import datetime
 import re
 import subprocess
 import time
 
 def now():
-    """Get a string identifying the current local time."""
+    """Get the current time in the form of an ISO 8601-compliant string."""
     # Get a time.time() timestamp just for timezone calculation purposes
     ts = time.time()
     # Figure out the timezone offset
@@ -23,7 +25,7 @@ def now():
     tz_str = "%+03d%02d" % (tz_hr, tz_min)
     # Finally print the time nicely
     t = datetime.datetime.now()
-    return t.strftime("%Y-%m-%d %H:%M:%S") + tz_str
+    return t.strftime("%Y-%m-%dT%H:%M:%S") + tz_str
 
 def run(*args):
     """Run the program whose command-line tokens are ``args`` and return what
@@ -106,7 +108,7 @@ def __main():
         version_tex.write("\\newcommand{\\jp@versionid}{%s}\n" % \
                           (version if version else ""))
         version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % \
-                          now().replace(" ", "~"))
+                          now().replace("T", "~"))
 
 if __name__ == "__main__":
     __main()
