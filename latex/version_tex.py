@@ -23,75 +23,90 @@ def now():
     tz_str = "%+03d%02d" % (tz_hr, tz_min)
     # Finally print the time nicely
     t = datetime.datetime.now()
-    return t.strftime("%Y-%m-%d~%H:%M:%S") + tz_str
+    return t.strftime("%Y-%m-%d %H:%M:%S") + tz_str
 
-def run(tokens):
-    """Run the program whose command-line tokens are given in tokens and return
-    what it prints to stdout."""
-    return subprocess.Popen(tokens, stdout=subprocess.PIPE,
+def run(*args):
+    """Run the program whose command-line tokens are ``args`` and return what
+    it prints to stdout, stripping trailing and leading whitespace."""
+    return subprocess.Popen(args, stdout=subprocess.PIPE,
             stderr=subprocess.PIPE).communicate()[0].strip()
 
-def is_valid_sha1(s):
-    """Returns true if s is a valid SHA-1 hash in hexadecimal and false
-    otherwise."""
-    if len(s) != 40:
-        return False
-    hexchars = set(list("0123456789abcdef"))
-    for c in s.lower():
-        if c not in hexchars:
-            return False
-    return True
-
-def git_revision():
+def cwd_git_version(short=False):
     """Get the SHA-1 hash that identifies the current version of the Git
-    repository that contains the current working directory. If the current
-    working tree is modified, append an asterisk (*) to the end of the hash. If
-    the current working directory is not part of a Git repository, or if Git is
-    not available, return None."""
+    repository that contains the current working directory. If ``short`` is
+    True, the short (7-character) form of the hash will be returned. If the
+    current working tree is modified, a plus sign is appended to the end of the
+    hash. If the current working directory is not part of a Git repository, or
+    if Git is not available, return None."""
     try:
-        sha = run(["git", "rev-parse", "HEAD"])
-        if not is_valid_sha1(sha):
-            return None
-        status = run(["git", "status"])
-        if status.find("Changes not staged for commit") >= 0 or \
-                status.find("Changes to be committed") >= 0:
-            return sha + '*'
+        if short:
+            hash = run("git", "rev-parse", "--short", "HEAD")
         else:
-            return sha
+            hash = run("git", "rev-parse", "HEAD")
+        if len(hash) >= 5 and hash[:5] == "fatal":
+            return None
+        changes = run("git", "status", "--porcelain", "-uno")
+        return hash + ("+" if changes else "")
     except:
         return None
 
-def svn_revision():
-    """Get the Subversion revision number of the current working directory. If
-    the current working copy is modified, append an asterisk (*) to the end of
-    the version number. If the current working directory is not a working copy,
-    or if SVN is not available, return None."""
+def cwd_hg_version(short=False):
+    """Get the Mercurial changeset hash of the repository that contains the
+    current working directory. If ``short`` is True, the short (12-character)
+    form of the changeset hash will be returned. If the current working copy of
+    the repository is modified, a plus sign is appended to the end of the hash.
+    If the current working directory is not part of a Mercurial repository, or
+    if Mercurial is not available, return None."""
     try:
-        info = run(["svn", "info"])
-        rev_match = re.search("^Revision: (.+)$", info, re.MULTILINE)
-        if rev_match is not None:
-            rev = rev_match.group(1)
-            status = run(["svn", "status"])
-            if status != "":
-                return rev + '*'
-            else:
-                return rev
+        if short:
+            hash = run("hg", "log", "-l", "1", "--template", "{node|short}\\n")
+        else:
+            hash = run("hg", "log", "-l", "1", "--template", "{node}\\n")
+        if len(hash) >= 5 and hash[:5] == "abort":
+            return None
+        changes = run("hg", "status", "-q")
+        return hash + ("+" if changes else "")
     except:
         return None
+
+def cwd_svn_version():
+    """Get the Subversion revision number of the current working directory, as
+    returned by svnversion. (Among other things, this means that if the current
+    working directory or a subdirectory thereof has been modified, an M will
+    appear in the revision number.) If the current working directory is not a
+    Subversion working copy, or if svnversion is not available, return
+    None."""
+    try:
+        version = run("svnversion")
+        if len(version) >= 11 and version[:11] == "Unversioned":
+            return None
+        return version
+    except:
+        return None
+
+def cwd_version(short=False):
+    """Get a string identifying the version of the current working directory,
+    as provided by a version control system. The string consists of a short
+    prefix identifying the VCS, followed by a VCS-specific version
+    identifier. If no version information is available, return None."""
+    version = cwd_git_version(short)
+    if version:
+        return "git:" + version
+    version = cwd_hg_version(short)
+    if version:
+        return "hg:" + version
+    version = cwd_svn_version()
+    if version:
+        return "svn:" + version
+    return None
+
+def __main():
+    version = cwd_version()
+    with open("version.tex", 'w') as version_tex:
+        version_tex.write("\\newcommand{\\jp@versionid}{%s}\n" % \
+                          (version if version else ""))
+        version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % \
+                          now().replace(" ", "~"))
 
 if __name__ == "__main__":
-    git_rev = git_revision()
-    if git_rev is not None:
-        revision = "git:" + git_rev
-    else:
-        svn_rev = svn_revision()
-        if svn_rev is not None:
-            revision = "svn:" + svn_rev
-        else:
-            revision = None
-    with open("version.tex", 'w') as version_tex:
-        if revision is not None:
-            version_tex.write("\\newcommand{\\jp@revision}{%s}\n" % revision)
-        else:
-            version_tex.write("\\newcommand{\\jp@revision}{}\n")
-        version_tex.write("\\newcommand{\\jp@datetime}{%s}\n" % now())
+    __main()

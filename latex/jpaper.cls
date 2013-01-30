@@ -1,7 +1,7 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.1.1 - 21 November 2012
-%% Copyright 2012 Jamie Liu <jliu@nixprime.com>
+%% jpaper.cls - v2.1.2 - 30 January 2013
+%% Copyright 2013 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
 % This work may be distributed and/or modified under the
@@ -107,7 +107,7 @@
 %   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2012/11/21 v2.1.1 Paper template class]
+\ProvidesClass{jpaper}[2013/01/30 v2.1.2 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -410,7 +410,7 @@
 \jp@iftoggle{jp@have@version}{}{\jp@togglefalse{jp@version}}
 \jp@iftoggle{jp@version}{%
   \input{version}
-  \fancyfoot[L]{\jp@revision}
+  \fancyfoot[L]{\jp@versionid}
   \fancyfoot[R]{\jp@datetime}
 }{}
 \pagestyle{fancy}
