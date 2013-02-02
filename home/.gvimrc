@@ -9,4 +9,5 @@ set laststatus=1
 set lines=60 columns=90
 
 " Font
-set guifont=DejaVu\ Sans\ Mono\ 10
+set guifont=Anonymous\ Pro\ 11
+set linespace=2
