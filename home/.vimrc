@@ -79,9 +79,6 @@ set nojoinspaces
 " Use the + register (which aliases to the system clipboard) by default
 set clipboard=unnamedplus
 
-" Enable spellchecking
-set spell spelllang=en_us
-
 " Strip trailing whitespace on save
 fun! <SID>StripTrailingWhitespace()
   let l = line(".")
@@ -204,6 +201,11 @@ augroup END
 " LLVM
 augroup filetype
   au! BufRead,BufNewFile *.ll set filetype=llvm
+augroup END
+
+" Markdown
+augroup filetype
+  au! BufRead,BufNewFile *.md set filetype=markdown
 augroup END
 
 " Protobuf
