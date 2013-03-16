@@ -28,7 +28,7 @@ endif
 
 " Colors
 syntax on
-set t_Co=256 " Assume 256-color terminal
+" set t_Co=256 " Assume 256-color terminal
 let g:CSApprox_attr_map = { "bold": "bold", "italic": "", "sp": "" }
 colorscheme jcolor_dark
 
