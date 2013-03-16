@@ -29,7 +29,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 # fix gnome-terminal
-if [ "$COLORTERM" = "gnome-terminal" ]; then
+if [ "$COLORTERM" = "gnome-terminal" ] && [ -z "$TMUX" ] ; then
     export TERM="gnome-256color"
 fi
 
@@ -37,6 +37,7 @@ fi
 case "$TERM" in
     xterm-color) color_prompt=yes;;
     gnome-256color) color_prompt=yes;;
+    screen-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
