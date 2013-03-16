@@ -30,13 +30,13 @@ fi
 
 # fix gnome-terminal
 if [ "$COLORTERM" = "gnome-terminal" ] && [ -z "$TMUX" ] ; then
-    export TERM="gnome-256color"
+    export TERM="xterm-256color"
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
-    gnome-256color) color_prompt=yes;;
+    xterm-256color) color_prompt=yes;;
     screen-256color) color_prompt=yes;;
 esac
 
