@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.2.0 - 29 April 2013
+%% jpaper.cls - v2.2.1 - 29 April 2013
 %% Copyright 2013 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -66,8 +66,9 @@
 %   "notabcaptbelow".
 %
 % * version: If version control information is available in a version.tex file,
-%   include version information in the document footer. Very useful for drafts.
-%   Off by default.
+%   include version information in the document footer. In addition, if
+%   anonymous is set, the author field is replaced by version information. Very
+%   useful for drafts. Off by default.
 %
 % * orphans: Allows orphans (single lines at the beginning of a page or column)
 %   to exist. On by default.
@@ -97,10 +98,7 @@
 %   version of a camera-ready paper.
 %
 % * tablet: Equivalent to "noborder,hyperref,nolineno,nomarginnotes,nopageno".
-%   Produces a document that is more readable on tablets. If you are using this
-%   option, you should probably list it last in the options list, since
-%   changing any of the options it sets (aside from hyperref) will break the
-%   document horribly.
+%   Produces a document that is more readable on tablets.
 %
 % Finally, jpaper provides the following space-reducing options, all of which
 % are off by default (note that use of these options is strongly discouraged
@@ -121,7 +119,7 @@
 %   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2013/04/29 v2.2.0 Paper template class]
+\ProvidesClass{jpaper}[2013/04/29 v2.2.1 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -301,7 +299,8 @@
   \setlength{\jp@topcut}{0pt}
   \setlength{\jp@botcut}{0pt}
 }{%
-  \newcommand{\jp@nobordermargin}{5pt}
+  \newlength{\jp@nobordermargin}
+  \setlength{\jp@nobordermargin}{5pt}
   \setlength{\jp@sidecut}{\jp@sidemargin-\jp@nobordermargin}
   \setlength{\jp@topcut}{\jp@topmargin-\jp@nobordermargin}
   \setlength{\jp@botcut}{\jp@botmargin-\jp@nobordermargin}
@@ -350,9 +349,24 @@
 \jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
 \jp@iftoggle{jp@widows}{}{\widowpenalty=10000}
 
+% Load version information.
+\jp@iftoggle{jp@have@version}{%
+  \input{version}
+}{%
+  \newcommand{\jp@versionid}{}
+  \newcommand{\jp@datetime}{}
+}
+
 % If anonymous is set, override the document author setting to ensure that the
 % user-provided value never sees the light of day.
-\jp@iftoggle{jp@anonymous}{\author{}\renewcommand{\author}[1]{}}{}
+\jp@iftoggle{jp@anonymous}{%
+  \jp@iftoggle{jp@version}{%
+    \author{\jp@versionid\quad\jp@datetime\vspace{-\jp@normalsize}}
+  }{%
+    \author{}
+  }
+  \renewcommand{\author}[1]{}
+}{}
 
 % Title formatting.
 \RequirePackage{titling}
@@ -478,9 +492,7 @@
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \jp@iftoggle{jp@pageno}{\fancyfoot[C]{\thepage}}{}
-\jp@iftoggle{jp@have@version}{}{\jp@togglefalse{jp@version}}
 \jp@iftoggle{jp@version}{%
-  \input{version}
   \fancyfoot[L]{\jp@versionid}
   \fancyfoot[R]{\jp@datetime}
 }{}
