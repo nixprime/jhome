@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.1.2 - 30 January 2013
+%% jpaper.cls - v2.2.0 - 29 April 2013
 %% Copyright 2013 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -36,6 +36,11 @@
 %   should probably leave this option on if using Helvetica, the default
 %   sans-serif typeface. On by default.
 %
+% * border: If turned off, page margins are set to nearly 0, and page size is
+%   reduced to match. This option is intended for reading on smaller devices
+%   such as tablets. If you want to turn this option off, you probably want to
+%   use the "tablet" meta-option instead (described below). On by default.
+%
 % * date: Enables the date field in the title block. Most papers do not have a
 %   field for the date. The date option is provided for those documents that
 %   do. Off by default.
@@ -46,6 +51,9 @@
 %
 % * lineno: Enables line numbering. This may be useful while editing. Off by
 %   default.
+%
+% * marginnotes: Enables display of margin notes. This may be useful while
+%   editing. On by default.
 %
 % * pageno: Enables page numbering. This is useful for standalone documents
 %   (technical reports, etc.) but not for papers that appear in conference
@@ -88,6 +96,12 @@
 % * final: Equivalent to "hyperref,pageno". Intended for the standalone, online
 %   version of a camera-ready paper.
 %
+% * tablet: Equivalent to "noborder,hyperref,nolineno,nomarginnotes,nopageno".
+%   Produces a document that is more readable on tablets. If you are using this
+%   option, you should probably list it last in the options list, since
+%   changing any of the options it sets (aside from hyperref) will break the
+%   document horribly.
+%
 % Finally, jpaper provides the following space-reducing options, all of which
 % are off by default (note that use of these options is strongly discouraged
 % unless absolutely necessary, since they *will* have a negative impact on the
@@ -107,7 +121,7 @@
 %   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2013/01/30 v2.1.2 Paper template class]
+\ProvidesClass{jpaper}[2013/04/29 v2.2.0 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -135,11 +149,13 @@
 % Configuration flags.
 \jp@newtoggle{jp@anonymous}
 \jp@newtoggle{jp@bfcaption}
+\jp@newtoggle{jp@border}
 \jp@newtoggle{jp@compact}
 \jp@newtoggle{jp@date}
 \jp@newtoggle{jp@extsizes}
 \jp@newtoggle{jp@hyperref}
 \jp@newtoggle{jp@lineno}
+\jp@newtoggle{jp@marginnotes}
 \jp@newtoggle{jp@narrowgutter}
 \jp@newtoggle{jp@narrowmargins}
 \jp@newtoggle{jp@pageno}
@@ -157,6 +173,8 @@
 \DeclareOption{noanonymous}{\jp@togglefalse{jp@anonymous}}
 \DeclareOption{bfcaption}{\jp@toggletrue{jp@bfcaption}}
 \DeclareOption{nobfcaption}{\jp@togglefalse{jp@bfcaption}}
+\DeclareOption{border}{\jp@toggletrue{jp@border}}
+\DeclareOption{noborder}{\jp@togglefalse{jp@border}}
 \DeclareOption{compact}{\jp@toggletrue{jp@compact}}
 \DeclareOption{nocompact}{\jp@togglefalse{jp@compact}}
 \DeclareOption{date}{\jp@toggletrue{jp@date}}
@@ -165,6 +183,8 @@
 \DeclareOption{nohyperref}{\jp@togglefalse{jp@hyperref}}
 \DeclareOption{lineno}{\jp@toggletrue{jp@lineno}}
 \DeclareOption{nolineno}{\jp@togglefalse{jp@lineno}}
+\DeclareOption{marginnotes}{\jp@toggletrue{jp@marginnotes}}
+\DeclareOption{nomarginnotes}{\jp@togglefalse{jp@marginnotes}}
 \DeclareOption{narrowgutter}{\jp@toggletrue{jp@narrowgutter}}
 \DeclareOption{nonarrowgutter}{\jp@togglefalse{jp@narrowgutter}}
 \DeclareOption{narrowmargins}{\jp@toggletrue{jp@narrowmargins}}
@@ -191,15 +211,17 @@
   \setlength{\jp@normalsize}{10pt}
   \jp@togglefalse{jp@extsizes}}
 
-% Combined options.
+% Meta-options.
 \DeclareOption{default}{%
   \jp@togglefalse{jp@anonymous}
   \jp@toggletrue{jp@bfcaption}
+  \jp@toggletrue{jp@border}
   \jp@togglefalse{jp@compact}
   \jp@togglefalse{jp@date}
   \jp@togglefalse{jp@extsizes}
   \jp@togglefalse{jp@hyperref}
   \jp@togglefalse{jp@lineno}
+  \jp@toggletrue{jp@marginnotes}
   \jp@togglefalse{jp@narrowgutter}
   \jp@togglefalse{jp@narrowmargins}
   \jp@togglefalse{jp@pageno}
@@ -219,6 +241,13 @@
   \jp@toggletrue{jp@hyperref}
   \jp@toggletrue{jp@pageno}
 }
+\DeclareOption{tablet}{%
+  \jp@togglefalse{jp@border}
+  \jp@toggletrue{jp@hyperref}
+  \jp@togglefalse{jp@lineno}
+  \jp@togglefalse{jp@marginnotes}
+  \jp@togglefalse{jp@pageno}
+}
 
 % Process options.
 \ExecuteOptions{default}
@@ -235,6 +264,7 @@
 \RequirePackage{verbatim}
 \RequirePackage{fixltx2e}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\RequirePackage{calc}
 
 % Font selection. Load lmodern first to replace CM for any glyphs not provided
 % by another package. Helvetica is scaled for optical consistency.
@@ -246,8 +276,58 @@
 \jp@select@sf
 \jp@select@tt
 
+% Set page margins and page size.
+% Default page margins: 3/4" left and right, 1" top and bottom.
+% Narrow page margins: 1/2" left, right, and top, 3/4" bottom.
+% Noborder page margins: 5pt all sides.
+\RequirePackage{geometry}
+\newlength{\jp@sidemargin}
+\newlength{\jp@topmargin}
+\newlength{\jp@botmargin}
+\jp@iftoggle{jp@narrowmargins}{%
+  \setlength{\jp@sidemargin}{0.5in}
+  \setlength{\jp@topmargin}{0.5in}
+  \setlength{\jp@botmargin}{0.75in}
+}{%
+  \setlength{\jp@sidemargin}{0.75in}
+  \setlength{\jp@topmargin}{1in}
+  \setlength{\jp@botmargin}{1in}
+}
+\newlength{\jp@sidecut}
+\newlength{\jp@topcut}
+\newlength{\jp@botcut}
+\jp@iftoggle{jp@border}{%
+  \setlength{\jp@sidecut}{0pt}
+  \setlength{\jp@topcut}{0pt}
+  \setlength{\jp@botcut}{0pt}
+}{%
+  \newcommand{\jp@nobordermargin}{5pt}
+  \setlength{\jp@sidecut}{\jp@sidemargin-\jp@nobordermargin}
+  \setlength{\jp@topcut}{\jp@topmargin-\jp@nobordermargin}
+  \setlength{\jp@botcut}{\jp@botmargin-\jp@nobordermargin}
+  \setlength{\jp@sidemargin}{\jp@nobordermargin}
+  \setlength{\jp@topmargin}{\jp@nobordermargin}
+  \setlength{\jp@botmargin}{\jp@nobordermargin}
+}
+\newlength{\jp@paperwidth}
+\newlength{\jp@paperheight}
+\setlength{\jp@paperwidth}{8.5in-2.0\jp@sidecut}
+\setlength{\jp@paperheight}{11in-\jp@topcut-\jp@botcut}
+\geometry{%
+  paperwidth=\jp@paperwidth,
+  paperheight=\jp@paperheight,
+  lmargin=\jp@sidemargin,
+  rmargin=\jp@sidemargin,
+  tmargin=\jp@topmargin,
+  bmargin=\jp@botmargin
+}
+
+% The gutter size is 1/4" by default, and 1 pica (~1/6") with narrowgutter.
+\jp@iftoggle{jp@narrowgutter}{%
+  \setlength{\columnsep}{1pc}}{%
+  \setlength{\columnsep}{0.25in}}
+
 % Taken from leading.sty (v0.3, 2008/12/11, by Will Robertson).
-\RequirePackage{calc}
 \newcommand\jp@leading[1]{%
   \begingroup
     \@tempdima=\f@baselineskip\relax
@@ -269,18 +349,6 @@
 % Orphan and widow control.
 \jp@iftoggle{jp@orphans}{}{\clubpenalty=10000}
 \jp@iftoggle{jp@widows}{}{\widowpenalty=10000}
-
-% Default page margins: 3/4" left and right, 1" top and bottom.
-% Narrow page margins: 1/2" left, right, and top, 3/4" bottom.
-\RequirePackage{geometry}
-\jp@iftoggle{jp@narrowmargins}{%
-  \geometry{lmargin=0.5in, rmargin=0.5in, tmargin=0.5in, bmargin=0.75in}}{%
-  \geometry{lmargin=0.75in, rmargin=0.75in, tmargin=1in, bmargin=1in}}
-
-% The gutter size is 1/4" by default, and 1 pica (~1/6") with narrowgutter.
-\jp@iftoggle{jp@narrowgutter}{%
-  \setlength{\columnsep}{1pc}}{%
-  \setlength{\columnsep}{0.25in}}
 
 % If anonymous is set, override the document author setting to ensure that the
 % user-provided value never sees the light of day.
@@ -304,6 +372,9 @@
   \date{}
   \renewcommand{\date}[1]{}
 }
+
+% Command for formatting author emails in the author block.
+\newcommand{\authemail}[1]{{\large\texttt{#1}}}
 
 % Compress vertical space around section and subsection headings. Make
 % subsubsection headings run-in (i.e. part of the following paragraph).
@@ -436,14 +507,18 @@
 % Footnotes may not span pages.
 \interfootnotelinepenalty=10000
 
-% Formatting for margin notes (which you may find useful during editing).
+% Formatting for margin notes.
 \let\jp@marginpar\marginpar
-\renewcommand\marginpar[1]{\jp@marginpar%
-  [\raggedleft\singlespacing\footnotesize\color{red} #1]%
-  {\raggedright\singlespacing\footnotesize\color{red} #1}}
-\jp@iftoggle{jp@narrowmargins}{%
-  \setlength{\marginparwidth}{0.4in}}{%
-  \setlength{\marginparwidth}{0.65in}}
+\jp@iftoggle{jp@marginnotes}{%
+  \renewcommand\marginpar[1]{\jp@marginpar%
+    [\raggedleft\singlespacing\footnotesize\color{red} #1]%
+    {\raggedright\singlespacing\footnotesize\color{red} #1}}
+  \jp@iftoggle{jp@narrowmargins}{%
+    \setlength{\marginparwidth}{0.4in}}{%
+    \setlength{\marginparwidth}{0.65in}}
+}{%
+  \renewcommand\marginpar[1]{}
+}
 
 % Link and URL formatting.
 \jp@iftoggle{jp@hyperref}{%
@@ -471,8 +546,5 @@
         \node[shape=circle, draw, inner sep=0.1em] (char) {\scriptsize #1};}}
 }{}
 \jp@iftoggle{jp@have@ulem}{\RequirePackage[normalem]{ulem}}{}
-
-% Command for formatting author emails in the author block.
-\newcommand{\authemail}[1]{{\large\texttt{#1}}}
 
 \endinput
