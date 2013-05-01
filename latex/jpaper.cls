@@ -1,6 +1,6 @@
 % vim: set ft=tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% jpaper.cls - v2.2.1 - 29 April 2013
+%% jpaper.cls - v2.2.2 - 30 April 2013
 %% Copyright 2013 Jamie Liu <jliu@nixprime.com>
 %% https://github.com/nixprime/jhome/tree/master/latex
 %
@@ -119,7 +119,7 @@
 %   If your document is not a conference submission, this option is safe.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{jpaper}[2013/04/29 v2.2.1 Paper template class]
+\ProvidesClass{jpaper}[2013/04/30 v2.2.2 Paper template class]
 
 % Taken from etoolbox.sty (v2.1, 2011/01/03, by Philipp Lehman).
 \RequirePackage{etex}
@@ -393,13 +393,12 @@
 % Compress vertical space around section and subsection headings. Make
 % subsubsection headings run-in (i.e. part of the following paragraph).
 \RequirePackage[compact]{titlesec}
-\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
-\titleformat{\section}[hang]{\normalfont\large\bfseries}{\thesection. }%
-  {0pt}{}{}
-\titleformat{\subsection}[hang]{\normalfont\bfseries}{\thesubsection. }%
-  {0pt}{}{}
-\titleformat{\subsubsection}[runin]{\normalfont\bfseries}{\thesubsubsection. }%
-  {0pt}{}{}
+\titleformat{\section}[hang]{\normalfont\large\bfseries}%
+  {\thesection. }{0pt}{}{}
+\titleformat{\subsection}[hang]{\normalfont\bfseries}%
+  {\thesubsection. }{0pt}{}{}
+\titleformat{\subsubsection}[runin]{\normalfont\bfseries}%
+  {\arabic{subsubsection}. }{0pt}{}{}
 \newlength{\sectionspace}
 \setlength{\sectionspace}{0.6\jp@normalsize %
   plus 0.6\jp@normalsize minus 0.4\jp@normalsize}
