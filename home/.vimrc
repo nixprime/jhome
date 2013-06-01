@@ -96,9 +96,6 @@ set omnifunc=syntaxcomplete#Complete
 " One space after period
 set nojoinspaces
 
-" Use the + register (which aliases to the system clipboard) by default
-set clipboard=unnamedplus
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-related settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,4 +263,7 @@ let g:ycm_confirm_extra_conf = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use the + register (which aliases to the system clipboard) by default
+set clipboard=unnamedplus
 
