@@ -1,0 +1,18 @@
+snippet #! "Hashbang string"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+endsnippet
+
+snippet 2to3 "Py3k feature usage in Python 2"
+from __future__ import absolute_import, division, print_function, \
+        unicode_literals
+import sys
+if sys.version_info.major < 3:
+  str = unicode
+  chr = unichr
+  from io import open
+endsnippet
+
+snippet main "Main"
+if __name__ == "__main__":
+endsnippet
