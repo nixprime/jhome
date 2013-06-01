@@ -71,8 +71,14 @@ set colorcolumn=80
 
 " Tab settings
 set tabstop=2 softtabstop=2 shiftwidth=2 smarttab
+let g:detectindent_preferred_indent = 2
 " Spaces instead of tabs
 set expandtab
+let g:detectindent_preferred_expandtab = 1
+" Automatically infer indentation settings on existing files
+augroup setup
+  au! BufRead * DetectIndent
+augroup END
 
 " No overly clever indentation by default
 set nocindent autoindent nosmartindent
@@ -86,17 +92,6 @@ set nojoinspaces
 
 " Use the + register (which aliases to the system clipboard) by default
 set clipboard=unnamedplus
-
-" Strip trailing whitespace on save
-fun! <SID>StripTrailingWhitespace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  call cursor(l, c)
-endfun
-augroup autocleanup
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
-augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-related settings
@@ -159,12 +154,20 @@ vnoremap <silent> <C-k> :m-2<CR>gv
 " F4 clears search highlight and recomputes syntax highlighting
 noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
 
+" F6 strips trailing whitespace
+fun! <SID>StripTrailingWhitespace()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
+endfun
+noremap <silent> <F6> :call <SID>StripTrailingWhitespace()<CR>
+
 " F7 enables auto-wrapping, F8 disables auto-wrapping
 noremap <silent> <F7> :set fo+=a<CR>
 noremap <silent> <F8> :set fo-=a<CR>
 
 " F9 infers indentation settings
-:let g:detectindent_preferred_indent = 2
 noremap <silent> <F9> :DetectIndent<CR>
 
 " F12 prints document stats (notably word count)
@@ -203,33 +206,28 @@ augroup END
 
 " JSON
 augroup filetype
-  au! BufRead,BufNewFile *.json set filetype=javascript
+  au! BufRead,BufNewFile *.json setlocal filetype=javascript
 augroup END
 
 " LLVM
 augroup filetype
-  au! BufRead,BufNewFile *.ll set filetype=llvm
+  au! BufRead,BufNewFile *.ll setlocal filetype=llvm
 augroup END
 
 " Markdown
 augroup filetype
-  au! BufRead,BufNewFile *.md set filetype=markdown
+  au! BufRead,BufNewFile *.md setlocal filetype=markdown
 augroup END
 
 " Protobuf
 augroup filetype
-  au! BufRead,BufNewFile *.proto set filetype=proto
+  au! BufRead,BufNewFile *.proto setlocal filetype=proto
 augroup END
 
 " SCons
 augroup filetype
-  au! BufRead,BufNewFile SCons* set filetype=python
+  au! BufRead,BufNewFile SCons* setlocal filetype=python
 augroup END
-
-" Snippets
-" Do not strip trailing whitespace on save
-autocmd FileType snippet
-  \ au! autocleanup
 
 " TeX (LaTeX)
 let g:tex_flavor = "latex"
@@ -242,7 +240,4 @@ autocmd BufRead,BufNewFile *.txt
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" System header tags
-set tags=./tags,../tags,../../tags,../../../tags,/opt/systags
 
