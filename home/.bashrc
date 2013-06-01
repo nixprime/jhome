@@ -33,6 +33,7 @@ if [ -z "$TMUX" ]; then
     case "$COLORTERM" in
         gnome-terminal) fix_term=yes;;
         Terminal) fix_term=tes;;
+        xfce4-terminal) fix_term=tes;;
     esac
 fi
 if [ -n "$fix_term" ]; then
