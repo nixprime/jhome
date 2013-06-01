@@ -62,3 +62,6 @@ hi SpellBad guibg=NONE guifg=NONE guisp=#fe6850 gui=Undercurl
 hi SpellCap guibg=NONE guifg=NONE guisp=#49bc50 gui=Undercurl
 hi SpellRare guibg=NONE guifg=NONE guisp=#bbb924 gui=Undercurl
 hi SpellLocal guibg=NONE guifg=NONE guisp=#dc82f6 gui=Undercurl
+
+hi Pmenu guibg=#111111 guifg=#97a9ad gui=NONE
+hi PmenuSel guibg=NONE guifg=NONE gui=Underline

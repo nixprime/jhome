@@ -254,6 +254,9 @@ let g:syntastic_check_on_wq = 0
 " Syntastic: enable error signs
 let g:syntastic_enable_signs = 1
 
+" YouCompleteMe: don't confirm .ycm_extra_conf.py files
+let g:ycm_confirm_extra_conf = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
