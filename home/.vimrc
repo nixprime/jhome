@@ -45,6 +45,12 @@ set hlsearch
 set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
 
+" Always show a 2-char sign column
+augroup signcol
+  au! BufEnter * sign define dummy
+  au BufEnter * execute 'sign place 99 line=1 name=dummy buffer=' . bufnr('')
+augroup END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor behavior
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,6 +242,17 @@ let g:tex_flavor = "latex"
 autocmd BufRead,BufNewFile *.txt
   \ setlocal spell spelllang=en_us
   \ fo+=ta2
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Syntastic: run syntax checks on open
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Syntastic: enable error signs
+let g:syntastic_enable_signs = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Environment-specific settings

@@ -48,6 +48,7 @@ hi CursorColumn guibg=#2e2e2e guifg=NONE gui=NONE
 hi Visual guibg=#3e3e3d guifg=NONE gui=NONE
 
 hi LineNr guibg=#1f201f guifg=#97a9ad gui=NONE
+hi SignColumn guibg=#1f201f guifg=#97a9ad gui=NONE
 hi NonText guibg=NONE guifg=#97a9ad gui=NONE
 
 hi ColorColumn guibg=#111111 guifg=NONE gui=NONE
