@@ -31,7 +31,7 @@ endfunction
 function! SyntaxCheckers_text_atdtool_GetLocList()
     let makeprg = syntastic#makeprg#build({
         \ 'exe': 'atdtool',
-        \ 'tail': '2>/dev/null',
+        \ 'tail': '2>' . syntastic#util#DevNull(),
         \ 'filetype': 'text',
         \ 'subchecker': 'atdtool' })
 
@@ -42,6 +42,7 @@ function! SyntaxCheckers_text_atdtool_GetLocList()
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
+        \ 'returns': [0],
         \ 'subtype': 'Style' })
 
     for n in range(len(loclist))
