@@ -45,12 +45,6 @@ set hlsearch
 set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
 
-" Always show a 2-char sign column
-augroup signcol
-  au! BufEnter * sign define dummy
-  au BufEnter * execute 'sign place 99 line=1 name=dummy buffer=' . bufnr('')
-augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor behavior
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

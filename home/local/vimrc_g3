@@ -1,0 +1,18 @@
+" Use ~/.vim_g3 instead of ~/.vim
+let &runtimepath = substitute(&rtp, $HOME . "/\.vim", $HOME . "/\.vim_g3", "g")
+
+source ~/.vimrc
+
+" Always show a 2-char sign column
+augroup signcol
+  au! BufEnter * sign define dummy
+  au BufEnter * execute 'sign place 99 line=1 name=dummy buffer=' . bufnr('')
+augroup END
+
+source /usr/share/vim/google/google.vim
+
+Glug youcompleteme-google
+
+" F5 invokes clang-format
+noremap <F5> :ClangFormat<CR>
+inoremap <F5> <C-O>:ClangFormat<CR>
