@@ -1,0 +1,9 @@
+# Parallel make and SCons
+PARALLELISM=8
+alias make="make -j${PARALLELISM} 2>&1"
+export SCONSFLAGS="-Q -j${PARALLELISM}"
+
+# Aliases for some unclean programs
+alias chromium-browser="nohup chromium-browser &>/dev/null"
+alias evince="nohup evince &>/dev/null"
+alias inkscape="nohup inkscape &>/dev/null"

@@ -32,8 +32,8 @@ fi
 if [ -z "$TMUX" ]; then
     case "$COLORTERM" in
         gnome-terminal) fix_term=yes;;
-        Terminal) fix_term=tes;;
-        xfce4-terminal) fix_term=tes;;
+        Terminal) fix_term=yes;;
+        xfce4-terminal) fix_term=yes;;
     esac
 fi
 if [ -n "$fix_term" ]; then
@@ -84,8 +84,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -93,9 +91,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
 alias l='ls'
 alias ll='ls'
 
@@ -122,16 +117,7 @@ fi
 # Set umask so only owner can write
 umask 0022
 
-# Parallel make and SCons
-PARALLELISM=8
-alias make="make -j${PARALLELISM} 2>&1"
-export SCONSFLAGS="-Q -j${PARALLELISM}"
-
-# Aliases for some unclean programs
-alias chromium-browser="nohup chromium-browser &>/dev/null"
-alias evince="nohup evince &>/dev/null"
-alias inkscape="nohup inkscape &>/dev/null"
-
-# Fix PyPy module search path
-alias pypy="PYTHONPATH=\"/usr/lib/python2.7/dist-packages\" pypy"
-
+# Pull in local settings
+if [ -f ~/.bashrc_local ]; then
+    . ~/.bashrc_local
+fi

@@ -81,10 +81,6 @@ let g:detectindent_preferred_indent = 2
 " Spaces instead of tabs
 set expandtab
 let g:detectindent_preferred_expandtab = 1
-" Automatically infer indentation settings on existing files
-augroup setup
-  au! BufRead * DetectIndent
-augroup END
 
 " No overly clever indentation by default
 set nocindent autoindent nosmartindent
@@ -261,9 +257,9 @@ let g:UltiSnipsJumpBackwardTrigger = "<C-S-Tab>"
 let g:ycm_confirm_extra_conf = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Environment-specific settings
+" Local settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Use the + register (which aliases to the system clipboard) by default
-set clipboard=unnamedplus
-
+if filereadable(expand("~/.vimrc_local"))
+  source ~/.vimrc_local
+endif

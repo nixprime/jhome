@@ -16,26 +16,13 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# LLVM
-if [ -d "/opt/llvm" ] ; then
-    PATH="/opt/llvm/bin:$PATH"
-fi
-
-# Golang
-if [ -d "/opt/go" ] ; then
-    export GOROOT="/opt/go"
-    export GOPATH="$HOME/src/go_ext:$HOME/src/go_my"
-    PATH="/opt/go/bin:$PATH"
-    if [ -d "$HOME/src/go_ext/bin" ] ; then
-        PATH="$HOME/src/go_ext/bin:$PATH"
-    fi
-    if [ -d "$HOME/src/go_my/bin" ] ; then
-        PATH="$HOME/src/go_my/bin:$PATH"
-    fi
+# Pull in local settings
+if [ -f "$HOME/.profile_local" ]; then
+    . "$HOME/.profile_local"
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
+if [ -d "$HOME/bin" ]; then
     PATH="$HOME/bin:$PATH"
 fi
 
