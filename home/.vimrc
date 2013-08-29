@@ -71,10 +71,8 @@ set colorcolumn=80
 
 " Tab settings
 set tabstop=2 softtabstop=2 shiftwidth=2 smarttab
-let g:detectindent_preferred_indent = 2
 " Spaces instead of tabs
 set expandtab
-let g:detectindent_preferred_expandtab = 1
 
 " No overly clever indentation by default
 set nocindent autoindent nosmartindent
@@ -159,9 +157,6 @@ noremap <silent> <F6> :call <SID>StripTrailingWhitespace()<CR>
 " F7 enables auto-wrapping, F8 disables auto-wrapping
 noremap <silent> <F7> :set fo+=a<CR>
 noremap <silent> <F8> :set fo-=a<CR>
-
-" F9 infers indentation settings
-noremap <silent> <F9> :DetectIndent<CR>
 
 " F12 prints document stats (notably word count)
 noremap <silent> <F12> g<C-g>
