@@ -229,6 +229,10 @@ autocmd BufRead,BufNewFile *.txt
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" DelimitMate: enable space and newline expansion
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+
 " Syntastic: run syntax checks on open
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
