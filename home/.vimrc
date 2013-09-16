@@ -84,6 +84,9 @@ set omnifunc=syntaxcomplete#Complete
 " One space after period
 set nojoinspaces
 
+" Treat _ as a word boundary
+set iskeyword-=_
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-related settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
