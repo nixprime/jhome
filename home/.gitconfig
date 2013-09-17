@@ -12,5 +12,6 @@
   unstage = reset HEAD
   ignored = ls-files --others -i --exclude-standard
   ignored-paths = clean -ndX
+  history = reflog --date=relative
 [diff]
   algorithm = patience
