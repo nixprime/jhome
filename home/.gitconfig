@@ -1,6 +1,8 @@
 [user]
 	name = Jamie Liu
 	email = jliu@nixprime.com
+[sendemail]
+  from = Jamie Liu <jliu@nixprime.com>
 [core]
 
 [alias]
@@ -10,3 +12,5 @@
   unstage = reset HEAD
   ignored = ls-files --others -i --exclude-standard
   ignored-paths = clean -ndX
+[diff]
+  algorithm = patience
