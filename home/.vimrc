@@ -255,3 +255,7 @@ let g:ycm_confirm_extra_conf = 0
 if filereadable(expand("~/.vimrc_local"))
   source ~/.vimrc_local
 endif
+
+if filereadable(expand("~/vimrc_local"))
+  source ~/vimrc_local
+endif
