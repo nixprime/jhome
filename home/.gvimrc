@@ -5,9 +5,14 @@ set guioptions-=m guioptions-=T
 " the status line is redundant with the title bar
 set laststatus=1
 
-" Default window size
-set lines=60 columns=117
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Local settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Font
-set guifont=Anonymous\ Pro\ 11
-set linespace=2
+if filereadable(expand("~/.gvimrc_local"))
+  source ~/.gvimrc_local
+endif
+
+if filereadable(expand("~/gvimrc_local"))
+  source ~/gvimrc_local
+endif

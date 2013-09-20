@@ -1,0 +1,6 @@
+" Default window size
+set lines=59 columns=90
+
+" Font
+set guifont=Anonymous_Pro:h11:cANSI
+set linespace=1
