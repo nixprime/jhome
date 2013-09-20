@@ -223,7 +223,6 @@ let g:tex_flavor = "latex"
 " Plain text
 autocmd BufRead,BufNewFile *.txt
   \ setlocal spell spelllang=en_us
-  \ fo+=ta2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
