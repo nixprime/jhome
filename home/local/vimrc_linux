@@ -6,3 +6,6 @@ augroup signcol
   au! BufEnter * sign define dummy
   au BufEnter * execute 'sign place 99 line=1 name=dummy buffer=' . bufnr('')
 augroup END
+
+" Automatically strip trailing whitespace on save
+autocmd BufWritePre <buffer> :call StripTrailingWhitespace()

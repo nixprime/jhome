@@ -1,2 +1,5 @@
-" Use the * register (which aliases to the system clipboard) by default
+" Use the unnamed register (which aliases to the system clipboard) by default
 set clipboard=unnamed
+
+" Automatically strip trailing whitespace on save
+autocmd BufWritePre <buffer> :call StripTrailingWhitespace()

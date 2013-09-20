@@ -146,13 +146,13 @@ vnoremap <silent> <C-k> :m-2<CR>gv
 noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
 
 " F6 strips trailing whitespace
-fun! <SID>StripTrailingWhitespace()
+fun! StripTrailingWhitespace()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
   call cursor(l, c)
 endfun
-noremap <silent> <F6> :call <SID>StripTrailingWhitespace()<CR>
+noremap <silent> <F6> :call StripTrailingWhitespace()<CR>
 
 " F7 enables auto-wrapping, F8 disables auto-wrapping
 noremap <silent> <F7> :set fo+=a<CR>
