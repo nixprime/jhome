@@ -15,3 +15,5 @@
   history = reflog --date=relative
 [diff]
   algorithm = patience
+[push]
+	default = simple
