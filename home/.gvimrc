@@ -6,7 +6,7 @@ set guioptions-=m guioptions-=T
 set laststatus=1
 
 " Default window size
-set lines=60 columns=90
+set lines=60 columns=117
 
 " Font
 set guifont=Anonymous\ Pro\ 11
