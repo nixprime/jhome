@@ -3,11 +3,17 @@ let &runtimepath = substitute(&rtp, $HOME . "/\.vim", $HOME . "/\.vim_g3", "g")
 
 source ~/.vimrc
 
+" Use the + register (which aliases to the system clipboard) by default
+set clipboard=unnamedplus
+
 " Always show a 2-char sign column
 augroup signcol
   au! BufEnter * sign define dummy
   au BufEnter * execute 'sign place 99 line=1 name=dummy buffer=' . bufnr('')
 augroup END
+
+" Automatically strip trailing whitespace on save
+autocmd BufWritePre <buffer> :call StripTrailingWhitespace()
 
 source /usr/share/vim/google/google.vim
 
