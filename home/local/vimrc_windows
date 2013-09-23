@@ -1,5 +1,8 @@
 " Use the unnamed register (which aliases to the system clipboard) by default
 set clipboard=unnamed
 
+" Fix swap file location for unsaved buffers
+set directory=.$TEMP
+
 " Automatically strip trailing whitespace on save
 autocmd BufWritePre <buffer> :call StripTrailingWhitespace()
