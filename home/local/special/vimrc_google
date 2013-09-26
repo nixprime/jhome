@@ -1,5 +1,5 @@
-" Use ~/.vim_g3 instead of ~/.vim
-let &runtimepath = substitute(&rtp, $HOME . "/\.vim", $HOME . "/\.vim_g3", "g")
+" Use ~/.vim_google instead of ~/.vim
+let &runtimepath = substitute(&rtp, $HOME . "/\.vim", $HOME . "/\.vim_google", "g")
 
 source ~/.vimrc
 

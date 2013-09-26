@@ -3,8 +3,7 @@ alias evince="nohup evince &>/dev/null"
 alias inkscape="nohup inkscape &>/dev/null"
 alias ssh="TERM=xterm ssh"
 
-alias g3vim="vim -u ${HOME}/.vimrc_g3"
-alias g3v="vim -u ${HOME}/.vimrc_g3"
+alias gvim="vim -u ${HOME}/.vimrc_google"
 
 # chdir to bug directory
 b () {
