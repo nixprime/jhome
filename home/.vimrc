@@ -142,6 +142,11 @@ vnoremap <silent> <C-j> :m'>+<CR>gv
 nnoremap <silent> <C-k> :m-2<CR>
 vnoremap <silent> <C-k> :m-2<CR>gv
 
+" F2 uses 2 spaces for indentation
+" F3 uses 8-space tabs for indentation
+noremap <F2> :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<CR>
+noremap <F3> :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<CR>
+
 " F4 clears search highlight and recomputes syntax highlighting
 noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
 
