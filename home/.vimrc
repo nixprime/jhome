@@ -158,7 +158,7 @@ noremap <silent> <F6> :call StripTrailingWhitespace()<CR>
 noremap <silent> <F7> :set fo+=a<CR>
 noremap <silent> <F8> :set fo-=a<CR>
 
-" F12 prints document stats (notably word count)
+" F12 shows document stats (notably word count)
 noremap <silent> <F12> g<C-g>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
