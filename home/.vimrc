@@ -212,6 +212,11 @@ augroup filetype
   au! BufRead,BufNewFile *.proto setlocal filetype=proto
 augroup END
 
+" Rust
+augroup filetype
+  au! BufRead,BufNewFile *.rs setlocal filetype=rust
+augroup END
+
 " SCons
 augroup filetype
   au! BufRead,BufNewFile SCons* setlocal filetype=python
