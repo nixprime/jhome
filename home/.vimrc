@@ -45,6 +45,10 @@ set hlsearch
 set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
 
+" Show leading whitespace
+set lcs=tab:¦\  list
+let g:indentLine_showFirstIndentLevel = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor behavior
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -66,7 +70,7 @@ set incsearch
 set gdefault
 
 " Columns and line wrapping
-set wrap linebreak nolist textwidth=0 wrapmargin=0
+set wrap linebreak textwidth=0 wrapmargin=0
 set colorcolumn=80
 
 " Tab settings

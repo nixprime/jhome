@@ -11,6 +11,7 @@ let colors_name = "jcolor_dark"
 " background_veryweak: #3e3e3d
 " foreground: #cee0e4
 " foreground_deemph: #97a9ad
+" foreground_weak: #58686d
 " red: #fe6850
 " orange: #e87b28
 " yellow: #bbb924
@@ -65,3 +66,6 @@ hi SpellLocal guibg=NONE guifg=NONE guisp=#dc82f6 gui=Undercurl
 
 hi Pmenu guibg=#111111 guifg=#97a9ad gui=NONE
 hi PmenuSel guibg=NONE guifg=NONE gui=Underline
+
+hi SpecialKey guibg=NONE guifg=#58686d gui=NONE
+hi Conceal guibg=NONE guifg=#58686d gui=NONE
