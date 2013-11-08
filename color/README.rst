@@ -41,7 +41,7 @@ text.
 * Foreground (de-emphasized): L=68, a=-5, b=-5 => #97a9ad
   Medium grey, tinted slightly blue.
 
-* Foreground (weak): L=43, a=-5, b=-5 => #58686d
+* Foreground (weak): L=33, a=-5, b=-5 => #405055
   Dark grey, tinted slightly blue.
 
 * Red: L=63, a=56, b=42 => #fe6850
