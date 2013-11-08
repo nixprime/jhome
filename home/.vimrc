@@ -46,8 +46,11 @@ set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
 
 " Show leading whitespace
-set lcs=tab:¦\  list
+set lcs=tab:┊\  list
+let g:indentLine_char = "┊"
+let g:indentLine_first_char = "┊"
 let g:indentLine_showFirstIndentLevel = 1
+let g:indentLine_setColors = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor behavior
