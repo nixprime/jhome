@@ -13,6 +13,8 @@
   ignored = ls-files --others -i --exclude-standard
   ignored-paths = clean -ndX
   history = reflog --date=relative
+[color]
+  ui = true
 [diff]
   algorithm = patience
 [push]
