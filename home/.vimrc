@@ -88,6 +88,9 @@ set nocindent autoindent nosmartindent
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
+" Do not open preview window for completions
+set completeopt=menuone
+
 " One space after period
 set nojoinspaces
 
@@ -142,12 +145,6 @@ nnoremap <silent> g# g#zz
 " Ctrl-a selects all text in current buffer
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
-
-" Ctrl-jk moves the current line up or down
-nnoremap <silent> <C-j> :m+<CR>
-vnoremap <silent> <C-j> :m'>+<CR>gv
-nnoremap <silent> <C-k> :m-2<CR>
-vnoremap <silent> <C-k> :m-2<CR>gv
 
 " F2 uses 2 spaces for indentation
 " F3 uses 8-space tabs for indentation
@@ -245,10 +242,6 @@ autocmd BufRead,BufNewFile *.txt
 " Plugin settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" DelimitMate: enable space and newline expansion
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-
 " Syntastic: run syntax checks on open
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
@@ -256,11 +249,11 @@ let g:syntastic_check_on_wq = 0
 " Syntastic: enable error signs
 let g:syntastic_enable_signs = 1
 
-" UltiSnips: rebind keys stolen by YCM
-let g:UltiSnipsExpandTrigger = "<C-Tab>"
-let g:UltiSnipsListSnippets = "<C-M-Tab>"
-let g:UltiSnipsJumpForwardTrigger = "<C-Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-S-Tab>"
+" UltiSnips: keybindings that don't conflict with YCM
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsListSnippets = "<C-e>"
 
 " YouCompleteMe: don't confirm .ycm_extra_conf.py files
 let g:ycm_confirm_extra_conf = 0

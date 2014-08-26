@@ -1,6 +1,6 @@
 [user]
-	name = Jamie Liu
-	email = jliu@nixprime.com
+  name = Jamie Liu
+  email = jliu@nixprime.com
 [sendemail]
   from = Jamie Liu <jliu@nixprime.com>
 [core]
@@ -13,9 +13,11 @@
   ignored = ls-files --others -i --exclude-standard
   ignored-paths = clean -ndX
   history = reflog --date=relative
+[branch]
+  autosetupmerge = always
 [color]
   ui = true
 [diff]
   algorithm = patience
 [push]
-	default = simple
+  default = simple
