@@ -1,8 +1,5 @@
 " Use the + register (which aliases to the system clipboard) by default
 set clipboard=unnamedplus
 
-" Disable YCM diagnostics in the sign column
-let g:ycm_enable_diagnostic_signs = 0
-
 " Automatically strip trailing whitespace on save
 autocmd BufWritePre <buffer> :call StripTrailingWhitespace()

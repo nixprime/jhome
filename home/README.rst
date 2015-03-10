@@ -4,4 +4,5 @@ Things that may change when this package is migrated to a new environment:
 
 * .gvimrc: Settings
 
-* .vim/after/ftplugin/: Run make
+* .vim: In .vim/bundle/, do 'git clone https://github.com/gmarik/Vundle.vim';
+  then in Vim, run `:PluginInstall`

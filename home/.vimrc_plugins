@@ -1,0 +1,18 @@
+" Vundle preamble
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+" Vundle-managed plugins
+Plugin 'a.vim'
+Plugin 'godlygeek/csapprox'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+
+" Vundle postamble
+call vundle#end()
+

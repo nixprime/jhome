@@ -8,11 +8,18 @@ set bs=2
 " Remove all existing autocommands
 autocmd!
 
-" Load plugins
-call pathogen#infect()
-
-" Allow use of local .vimrc/.exrc
-set exrc secure
+" Invoke .vimrc_plugins to load plugins
+let vimrc_plugins = ''
+if !empty($VIMRC_PLUGINS)
+  let vimrc_plugins = $VIMRC_PLUGINS
+elseif filereadable(expand('~/.vimrc_plugins'))
+  let vimrc_plugins = '~/.vimrc_plugins'
+elseif filereadable(expand('~/vimrc_plugins'))
+  let vimrc_plugins = '~/vimrc_plugins'
+endif
+if !empty(vimrc_plugins)
+  execute "source " . vimrc_plugins
+endif
 
 " tmux <C-left>, <C-right> compatibility
 if &term =~ '^screen'
@@ -28,7 +35,6 @@ endif
 
 " Colors
 syntax on
-" set t_Co=256 " Assume 256-color terminal
 let g:CSApprox_attr_map = { "bold": "bold", "italic": "", "sp": "" }
 colorscheme jcolor_dark
 
@@ -107,6 +113,9 @@ set history=1000
 " Shell-like autocomplete
 set wildmenu wildmode=list:longest
 
+" Don't autocomplete certain file extensions
+set wildignore+=*.swp,*.o,*.so
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom commands and bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -171,16 +180,18 @@ noremap <silent> <F8> :set fo-=a<CR>
 noremap <silent> <F12> g<C-g>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Settings usually overriden by plugins (but see .vim/after/ftplugin/)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Wrap comments; continue comments after Enter; do not continue comments from o
-set formatoptions+=cr formatoptions-=o
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language-specific settings
 " (that must be present before the syntax file is loaded)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Wrap comments; continue comments after Enter; do not continue comments from o
+" This must be in an autocmd to override ftplugin settings
+" This isn't language-specific, but it clears the filetype autocmd group so it
+" needs to precede all of the following
+augroup filetype
+  au!
+  au FileType * setlocal formatoptions+=cr formatoptions-=o
+augroup END
 
 " C/C++
 " Higher minlines
@@ -193,53 +204,52 @@ let c_no_curly_error=1
 
 " GLSL
 augroup filetype
-  au! BufNewFile,BufRead *.glsl\|*.vert\|*.frag setlocal filetype=glsl
+  au BufNewFile,BufRead *.glsl\|*.vert\|*.frag setlocal filetype=glsl
 augroup END
 
 " Golang
 augroup filetype
-  au! BufRead,BufNewFile *.go setlocal filetype=go
+  au BufRead,BufNewFile *.go setlocal filetype=go
 augroup END
 
 " JSON
 augroup filetype
-  au! BufRead,BufNewFile *.json setlocal filetype=javascript
+  au BufRead,BufNewFile *.json setlocal filetype=javascript
 augroup END
 
 " LLVM
 augroup filetype
-  au! BufRead,BufNewFile *.ll setlocal filetype=llvm
+  au BufRead,BufNewFile *.ll setlocal filetype=llvm
 augroup END
 
 " Markdown
 augroup filetype
-  au! BufRead,BufNewFile *.md setlocal filetype=markdown
+  au BufRead,BufNewFile *.md setlocal filetype=markdown
 augroup END
 
 " Protobuf
 augroup filetype
-  au! BufRead,BufNewFile *.proto setlocal filetype=proto
+  au BufRead,BufNewFile *.proto setlocal filetype=proto
 augroup END
 
 " Rust
 augroup filetype
-  au! BufRead,BufNewFile *.rs setlocal filetype=rust
+  au BufRead,BufNewFile *.rs setlocal filetype=rust
 augroup END
 
 " SCons
 augroup filetype
-  au! BufRead,BufNewFile SCons* setlocal filetype=python
+  au BufRead,BufNewFile SCons* setlocal filetype=python
 augroup END
 
 " TeX (LaTeX)
 let g:tex_flavor = "latex"
 
 " Plain text
-autocmd BufRead,BufNewFile *.txt
-  \ setlocal spell spelllang=en_us
+au BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin settings
+" Plugin settings (harmless if the plugins aren't loaded)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Syntastic: run syntax checks on open
@@ -258,14 +268,23 @@ let g:UltiSnipsListSnippets = "<C-e>"
 " YouCompleteMe: don't confirm .ycm_extra_conf.py files
 let g:ycm_confirm_extra_conf = 0
 
+" YouCompleteMe: Disable YCM diagnostics in the sign column
+let g:ycm_enable_diagnostic_signs = 0
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Local settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if filereadable(expand("~/.vimrc_local"))
-  source ~/.vimrc_local
+let vimrc_local = ''
+if !empty($VIMRC_LOCAL)
+  let vimrc_local = $VIMRC_LOCAL
+elseif filereadable(expand('~/.vimrc_local'))
+  let vimrc_local = '~/.vimrc_local'
+elseif filereadable(expand('~/vimrc_local))
+  let vimrc_local = '~/vimrc_local'
+endif
+if !empty(vimrc_local)
+  execute "source " . vimrc_local
 endif
 
-if filereadable(expand("~/vimrc_local"))
-  source ~/vimrc_local
-endif
