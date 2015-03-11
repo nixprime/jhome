@@ -1,0 +1,9 @@
+" Use the unnamed register (which aliases to the system clipboard) by default
+set clipboard=unnamed
+
+" Hide scrollbars
+set guioptions-=r
+set guioptions-=L
+
+" Automatically strip trailing whitespace on save
+autocmd BufWritePre <buffer> :call StripTrailingWhitespace()
