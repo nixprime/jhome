@@ -5,6 +5,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Vundle-managed plugins
+Plugin 'bling/vim-airline'
 Plugin 'a.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-surround'
