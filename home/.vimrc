@@ -115,6 +115,11 @@ set wildmenu wildmode=list:longest
 " Don't autocomplete certain file extensions
 set wildignore+=*.swp,*.o,*.so
 
+" Use ag instead of grep if available
+if executable("ag")
+  set grepprg=ag\ --nocolor\ --nogroup
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom commands and bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -251,6 +256,27 @@ au BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
 " Plugin settings (harmless if the plugins aren't loaded)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" CtrlP: use ag if available
+if executable("ag")
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .hg
+      \ --ignore .svn
+      \ --ignore .DS_Store
+      \ --ignore "**/*.o"
+      \ --ignore "**/*.pyc"
+      \ --ignore "**/*.so"
+      \ -g ""'
+endif
+
+" CtrlP: use ctrlp-py-matcher if available
+if has("python") && exists("pymatcher#PyMatch")
+  let g:ctrlp_match_func = {"match": "pymatcher#PyMatch"}
+endif
+
+" CtrlP: no file limit
+let g:ctrlp_max_files = 0
+
 " Syntastic: run syntax checks on open
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
@@ -267,7 +293,7 @@ let g:UltiSnipsListSnippets = "<C-e>"
 " YouCompleteMe: don't confirm .ycm_extra_conf.py files
 let g:ycm_confirm_extra_conf = 0
 
-" YouCompleteMe: Disable YCM diagnostics in the sign column
+" YouCompleteMe: disable YCM diagnostics in the sign column
 let g:ycm_enable_diagnostic_signs = 0
 
 
