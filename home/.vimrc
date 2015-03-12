@@ -99,6 +99,12 @@ set completeopt=menuone
 " One space after period
 set nojoinspaces
 
+if has("gui_running")
+  " Hide scrollbars
+  set guioptions-=r
+  set guioptions-=L
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-related settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
