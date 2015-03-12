@@ -1,6 +1,6 @@
 " Use Pragmata Pro
 if has("gui_running")
   set guifont=PragmataPro:h11
-  set linespace=0
+  set linespace=2
   let g:airline_powerline_fonts = 1
 endif
