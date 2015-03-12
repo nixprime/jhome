@@ -276,7 +276,7 @@ if executable("ag")
 endif
 
 " CtrlP: use ctrlp-py-matcher if available
-if has("python") && exists("pymatcher#PyMatch")
+if exists("pymatcher#PyMatch")
   let g:ctrlp_match_func = {"match": "pymatcher#PyMatch"}
 endif
 
