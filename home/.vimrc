@@ -35,7 +35,6 @@ endif
 
 " Colors
 syntax on
-let g:CSApprox_attr_map = { "bold": "bold", "italic": "", "sp": "" }
 colorscheme jcolor_dark
 
 " Line numbers and ruler
