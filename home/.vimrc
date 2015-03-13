@@ -26,6 +26,14 @@ map <S-B> <Plug>CamelCaseMotion_b
 map <S-E> <Plug>CamelCaseMotion_e
 " see https://github.com/bkad/CamelCaseMotion/issues/10
 nmap cW cE
+nmap c2W c2E
+nmap c3W c3E
+nmap c4W c4E
+nmap c5W c5E
+nmap c6W c6E
+nmap c7W c7E
+nmap c8W c8E
+nmap c9W c9E
 " see https://github.com/bkad/CamelCaseMotion/issues/17
 map iW <Plug>CamelCaseMotion_ie
 map aW <Plug>CamelCaseMotion_iw
