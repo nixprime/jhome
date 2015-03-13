@@ -8,6 +8,28 @@ set bs=2
 " Remove all existing autocommands
 autocmd!
 
+" tmux <C-left>, <C-right> compatibility
+if &term =~ '^screen'
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" CamelCaseMotion: use capital W/B/E for CCM W/B/E
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+" see https://github.com/bkad/CamelCaseMotion/issues/10
+nmap cW cE
+" see https://github.com/bkad/CamelCaseMotion/issues/17
+map iW <Plug>CamelCaseMotion_ie
+map aW <Plug>CamelCaseMotion_iw
+
 " Invoke .vimrc_plugins to load plugins
 let vimrc_plugins = ''
 if !empty($VIMRC_PLUGINS)
@@ -21,13 +43,45 @@ if !empty(vimrc_plugins)
   execute "source " . vimrc_plugins
 endif
 
-" tmux <C-left>, <C-right> compatibility
-if &term =~ '^screen'
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
+" CtrlP: use ag if available
+if executable("ag")
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .hg
+      \ --ignore .svn
+      \ --ignore .DS_Store
+      \ --ignore "**/*.o"
+      \ --ignore "**/*.pyc"
+      \ --ignore "**/*.so"
+      \ -g ""'
 endif
+
+" CtrlP: use ctrlp-py-matcher if available
+if exists("pymatcher#PyMatch")
+  let g:ctrlp_match_func = {"match": "pymatcher#PyMatch"}
+endif
+
+" CtrlP: no file limit
+let g:ctrlp_max_files = 0
+
+" Syntastic: run syntax checks on open
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Syntastic: enable error signs
+let g:syntastic_enable_signs = 1
+
+" UltiSnips: keybindings that don't conflict with YCM
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+let g:UltiSnipsListSnippets = "<C-e>"
+
+" YouCompleteMe: don't confirm .ycm_extra_conf.py files
+let g:ycm_confirm_extra_conf = 0
+
+" YouCompleteMe: disable YCM diagnostics in the sign column
+let g:ycm_enable_diagnostic_signs = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Appearance
@@ -253,51 +307,6 @@ let g:tex_flavor = "latex"
 
 " Plain text
 au BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin settings (harmless if the plugins aren't loaded)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" CtrlP: use ag if available
-if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .hg
-      \ --ignore .svn
-      \ --ignore .DS_Store
-      \ --ignore "**/*.o"
-      \ --ignore "**/*.pyc"
-      \ --ignore "**/*.so"
-      \ -g ""'
-endif
-
-" CtrlP: use ctrlp-py-matcher if available
-if exists("pymatcher#PyMatch")
-  let g:ctrlp_match_func = {"match": "pymatcher#PyMatch"}
-endif
-
-" CtrlP: no file limit
-let g:ctrlp_max_files = 0
-
-" Syntastic: run syntax checks on open
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Syntastic: enable error signs
-let g:syntastic_enable_signs = 1
-
-" UltiSnips: keybindings that don't conflict with YCM
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-let g:UltiSnipsListSnippets = "<C-e>"
-
-" YouCompleteMe: don't confirm .ycm_extra_conf.py files
-let g:ycm_confirm_extra_conf = 0
-
-" YouCompleteMe: disable YCM diagnostics in the sign column
-let g:ycm_enable_diagnostic_signs = 0
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Local settings
