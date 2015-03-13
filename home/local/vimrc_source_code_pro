@@ -1,0 +1,8 @@
+" Use Source Code Pro
+if has("gui_running")
+  set guifont=Source\ Code\ Pro:h10
+  set linespace=0
+  " TODO: set this to 1 after the next SCP release, which will include
+  " Powerline glyphs
+  let g:airline_powerline_fonts = 0
+endif
