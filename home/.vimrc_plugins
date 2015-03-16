@@ -14,9 +14,12 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
-if v:version >= 704 && has("python")
-  Plugin 'FelikZ/ctrlp-py-matcher'
-  Plugin 'Valloric/YouCompleteMe'
+if has("python")
+  Plugin 'JazzCore/ctrlp-cmatcher'
+  let g:ctrlp_match_func = {"match": "matcher#cmatch"}
+  if v:version >= 704
+    Plugin 'Valloric/YouCompleteMe'
+  endif
 endif
 
 " Vundle postamble

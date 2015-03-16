@@ -64,11 +64,6 @@ if executable("ag")
       \ -g ""'
 endif
 
-" CtrlP: use ctrlp-py-matcher if available
-if exists("pymatcher#PyMatch")
-  let g:ctrlp_match_func = {"match": "pymatcher#PyMatch"}
-endif
-
 " CtrlP: no file limit
 let g:ctrlp_max_files = 0
 
