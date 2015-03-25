@@ -134,10 +134,10 @@ set gdefault
 set wrap linebreak textwidth=0 wrapmargin=0
 set colorcolumn=80
 
-" Tab settings
-set tabstop=2 softtabstop=2 shiftwidth=2 smarttab
-" Spaces instead of tabs
-set expandtab
+" Render hard tabs as 8 spaces ...
+set tabstop=8
+" ... but use 2 spaces for indentation
+set softtabstop=2 shiftwidth=2 expandtab smarttab
 
 " No overly clever indentation by default
 set nocindent autoindent nosmartindent
