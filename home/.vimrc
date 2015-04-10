@@ -149,6 +149,12 @@ set omnifunc=syntaxcomplete#Complete
 " Do not open preview window for completions
 set completeopt=menuone
 
+" Automatically close quickfix window if it is the last window
+augroup quickfixclose
+  au!
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+augroup END
+
 " One space after period
 set nojoinspaces
 
@@ -217,6 +223,10 @@ nnoremap <silent> g# g#zz
 " Ctrl-a selects all text in current buffer
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
+
+" Ctrl-h pulls up grep
+command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw!
+nnoremap <C-h> :Grepcw<SPACE>
 
 " F2 uses 2 spaces for indentation
 " F3 uses 8-space tabs for indentation
