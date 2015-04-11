@@ -330,7 +330,7 @@ if !empty($VIMRC_LOCAL)
   let vimrc_local = $VIMRC_LOCAL
 elseif filereadable(expand('~/.vimrc_local'))
   let vimrc_local = '~/.vimrc_local'
-elseif filereadable(expand('~/vimrc_local))
+elseif filereadable(expand('~/vimrc_local'))
   let vimrc_local = '~/vimrc_local'
 endif
 if !empty(vimrc_local)
