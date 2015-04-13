@@ -224,9 +224,10 @@ nnoremap <silent> g# g#zz
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
 
-" Ctrl-h pulls up grep
+" Ctrl-h pulls up grep; Ctrl-j greps the word under the cursor
 command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw!
 nnoremap <C-h> :Grepcw<SPACE>
+nnoremap <C-j> :Grepcw <cword><CR>
 
 " F2 uses 2 spaces for indentation
 " F3 uses 8-space tabs for indentation
