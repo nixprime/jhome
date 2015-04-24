@@ -121,6 +121,9 @@ set ffs=unix,dos
 " Careful file overwriting
 set writebackup
 
+" Shorten delay after ESC
+set timeout timeoutlen=100
+
 " Backspace through everything in insert mode
 set backspace=indent,eol,start
 
