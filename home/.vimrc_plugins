@@ -16,8 +16,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 if has("python")
-  Plugin 'JazzCore/ctrlp-cmatcher'
-  let g:ctrlp_match_func = {"match": "matcher#cmatch"}
+  Plugin 'nixprime/cpsm'
+  let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
   if v:version >= 704
     Plugin 'Valloric/YouCompleteMe'
   endif
