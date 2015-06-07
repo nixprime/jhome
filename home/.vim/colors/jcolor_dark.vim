@@ -44,9 +44,9 @@ hi Error guibg=NONE guifg=#fe6850 gui=bold ctermbg=NONE ctermfg=203 cterm=bold
 hi Todo guibg=NONE guifg=#97a9ad gui=bold ctermbg=NONE ctermfg=248 cterm=bold
 
 hi StatusLine guibg=#e2dcce guifg=#000000 gui=NONE ctermbg=253 ctermfg=16 cterm=NONE
-hi CursorLine guibg=#2e2e2e guifg=NONE gui=NONE ctermbg=236 ctermfg=NONE cterm=NONE
-hi CursorColumn guibg=#2e2e2e guifg=NONE gui=NONE ctermbg=236 ctermfg=NONE cterm=NONE
-hi Visual guibg=#3e3e3d guifg=NONE gui=NONE ctermbg=237 ctermfg=NONE cterm=NONE
+hi CursorLine guibg=#3e3e3d guifg=NONE gui=NONE ctermbg=236 ctermfg=NONE cterm=NONE
+hi CursorColumn guibg=#3e3e3d guifg=NONE gui=NONE ctermbg=236 ctermfg=NONE cterm=NONE
+hi Visual guibg=NONE guifg=NONE gui=inverse ctermbg=NONE ctermfg=NONE cterm=inverse
 
 hi LineNr guibg=#1f201f guifg=#97a9ad gui=NONE ctermbg=234 ctermfg=248 cterm=NONE
 hi SignColumn guibg=#1f201f guifg=#97a9ad gui=NONE ctermbg=234 ctermfg=248 cterm=NONE
@@ -54,7 +54,7 @@ hi NonText guibg=NONE guifg=#97a9ad gui=NONE ctermbg=NONE ctermfg=248 cterm=NONE
 
 hi ColorColumn guibg=#111111 guifg=NONE gui=NONE ctermbg=233 ctermfg=NONE cterm=NONE
 
-hi MatchParen guibg=#3e3e3d guifg=NONE gui=NONE ctermbg=237 ctermfg=NONE cterm=NONE
+hi MatchParen guibg=none guifg=NONE gui=NONE ctermbg=NONE ctermfg=NONE cterm=inverse
 
 hi Folded guibg=NONE guifg=NONE gui=italic ctermbg=NONE ctermfg=NONE cterm=italic
 hi FoldColumn guibg=#1f201f guifg=#97a9ad gui=NONE ctermbg=234 ctermfg=248 cterm=NONE
@@ -69,3 +69,5 @@ hi PmenuSel guibg=NONE guifg=NONE gui=underline ctermbg=NONE ctermfg=NONE gui=un
 
 hi SpecialKey guibg=NONE guifg=#405055 gui=NONE ctermbg=NONE ctermfg=239 cterm=NONE
 hi Conceal guibg=NONE guifg=#405055 gui=NONE ctermbg=NONE ctermfg=239 cterm=NONE
+
+hi CtrlPMatch guibg=NONE guifg=NONE gui=inverse ctermbg=NONE ctermfg=NONE cterm=inverse

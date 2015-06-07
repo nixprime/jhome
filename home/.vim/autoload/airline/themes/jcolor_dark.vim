@@ -1,11 +1,11 @@
 let g:airline#themes#jcolor_dark#palette = {}
 
-let s:N1 = [ '#000000' , '#e2dcce' , 16  , 253 , 'NONE' ]
+let s:N1 = [ '#111111' , '#e2dcce' , 233 , 253 , 'NONE' ]
 let s:N2 = [ '#cee0e4' , '#3e3e3d' , 253 , 237 , 'NONE' ]
-let s:N3 = [ '#97a9ad' , '#2e2e2e' , 248 , 236 , 'NONE' ]
+let s:N3 = [ '#dc82f6' , '#111111' , 177 , 233, 'NONE' ]
 let g:airline#themes#jcolor_dark#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#jcolor_dark#palette.normal_modified = {
-      \ 'airline_c': [ '#97a9ad' , '#2e2e2e' , 248 , 236 , 'italic' ] ,
+      \ 'airline_c': [ '#dc82f6' , '#000000' , 177 , 236 , 'italic' ] ,
       \ }
 
 let s:I1 = [ '#000000' , '#4ba5ff' , 16  , 75  , 'NONE' ]
