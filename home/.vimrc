@@ -122,7 +122,7 @@ set ffs=unix,dos
 set writebackup
 
 " Shorten delay after ESC
-set timeout timeoutlen=100
+set timeout timeoutlen=500
 
 " Backspace through everything in insert mode
 set backspace=indent,eol,start
@@ -192,6 +192,11 @@ endif
 " Custom commands and bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Set the leader key to ',', but map space to it, so that the spacebar gets
+" used in practice, but the ',' is visible.
+let mapleader = ','
+map <Space> ,
+
 " jk move visually up and down on wrapped lines
 nnoremap j gj
 vnoremap j gj
@@ -227,10 +232,14 @@ nnoremap <silent> g# g#zz
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
 
-" Ctrl-h pulls up grep; Ctrl-j greps the word under the cursor
+" <Leader>// pulls up grep; <Leader>/w greps the word under the cursor
 command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw!
-nnoremap <C-h> :Grepcw<SPACE>
-nnoremap <C-j> :Grepcw <cword><CR>
+nnoremap <Leader>// :Grepcw<Space>
+nnoremap <Leader>/w :Grepcw <cword><CR>
+
+" <Leader>.w goes to the definition of the identifier under the cursor, or to
+" the declaration if the definition is unavailable
+nnoremap <Leader>.w :YcmCompleter GoTo<CR>
 
 " F2 uses 2 spaces for indentation
 " F3 uses 8-space tabs for indentation
