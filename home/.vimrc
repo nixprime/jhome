@@ -241,6 +241,9 @@ nnoremap <Leader>/w :Grepcw <cword><CR>
 " the declaration if the definition is unavailable
 nnoremap <Leader>.w :YcmCompleter GoTo<CR>
 
+" <Leader>u invokes Gundo
+nnoremap <Leader>u :GundoToggle<CR>
+
 " F2 uses 2 spaces for indentation
 " F3 uses 8-space tabs for indentation
 noremap <F2> :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<CR>
