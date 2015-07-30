@@ -161,6 +161,9 @@ augroup END
 " One space after period
 set nojoinspaces
 
+" Enable spellchecking
+set spell
+
 if has("gui_running")
   " Hide scrollbars
   set guioptions-=r
@@ -269,31 +272,16 @@ noremap <silent> <F8> :set fo-=a<CR>
 noremap <silent> <F12> g<C-g>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Language-specific settings
-" (that must be present before the syntax file is loaded)
+" Filetype detection
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Wrap comments; continue comments after Enter; do not continue comments from o
 " This must be in an autocmd to override ftplugin settings
 " This isn't language-specific, but it clears the filetype autocmd group so it
 " needs to precede all of the following
 augroup filetype
   au!
-  au FileType * setlocal formatoptions+=cr formatoptions-=o
-augroup END
-
-" C/C++
-" Higher minlines
-let c_minlines=100
-" Do not fold comments
-let c_no_comment_fold=1
-let c_no_if0_fold=1
-" Do not highlight weird bracket nesting as an error (C++11 features)
-let c_no_curly_error=1
-
-" GLSL
-augroup filetype
-  au BufNewFile,BufRead *.glsl\|*.vert\|*.frag setlocal filetype=glsl
+  " See :help fo-table
+  au FileType * setlocal formatoptions=crq2lj
 augroup END
 
 " Golang
@@ -316,11 +304,6 @@ augroup filetype
   au BufRead,BufNewFile *.md setlocal filetype=markdown
 augroup END
 
-" Protobuf
-augroup filetype
-  au BufRead,BufNewFile *.proto setlocal filetype=proto
-augroup END
-
 " Rust
 augroup filetype
   au BufRead,BufNewFile *.rs setlocal filetype=rust
@@ -330,12 +313,6 @@ augroup END
 augroup filetype
   au BufRead,BufNewFile SCons* setlocal filetype=python
 augroup END
-
-" TeX (LaTeX)
-let g:tex_flavor = "latex"
-
-" Plain text
-au BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Local settings

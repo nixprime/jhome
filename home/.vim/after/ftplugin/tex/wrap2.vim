@@ -1,2 +1,0 @@
-setlocal fo+=t2
-
