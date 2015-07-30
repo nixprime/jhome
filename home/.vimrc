@@ -201,9 +201,6 @@ augroup END
 " One space after period
 set nojoinspaces
 
-" Enable spellchecking
-set spell
-
 if has('gui_running')
   " Hide scrollbars
   set guioptions-=r
