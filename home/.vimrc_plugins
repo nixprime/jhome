@@ -2,14 +2,14 @@
 filetype off
 set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 " Vundle-managed plugins
 Plugin 'bling/vim-airline'
 Plugin 'a.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'bkad/CamelCaseMotion'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
