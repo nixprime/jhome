@@ -5,8 +5,8 @@ let s:N2 = [ '#cee0e4' , '#3e3e3d' , 253 , 237 , 'NONE' ]
 let s:N3 = [ '#97a9ad' , '#111111' , 248 , 233, 'NONE' ]
 let g:airline#themes#jcolor_dark#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 let g:airline#themes#jcolor_dark#palette.normal_modified = {
-      \ 'airline_c': [ '#dc82f6' , '#111111' , 177 , 236 , 'italic' ] ,
-      \ }
+\ 'airline_c': [ '#dc82f6' , '#111111' , 177 , 236 , 'italic' ] ,
+\ }
 
 let s:I1 = [ '#111111' , '#4ba5ff' , 233 , 75  , 'NONE' ]
 let s:I2 = s:N2
@@ -33,6 +33,6 @@ let g:airline#themes#jcolor_dark#palette.inactive = airline#themes#generate_colo
 let g:airline#themes#jcolor_dark#palette.inactive_modified = copy(g:airline#themes#jcolor_dark#palette.normal_modified)
 
 let g:airline#themes#jcolor_dark#palette.accents = {
-      \ 'red': [ '#fe6850' , '' , 203 , '' ]
-      \ }
+\ 'red': [ '#fe6850' , '' , 203 , '' ]
+\ }
 

@@ -67,6 +67,46 @@ endif
 " CtrlP: no file limit
 let g:ctrlp_max_files = 0
 
+" rainbow_parentheses: custom colors
+let g:rainbow#max_level = 16
+let g:rainbow#colors = {
+\ 'dark': [
+\   ['253', '#cee0e4'],
+\   ['32' , '#3176b4'],
+\   ['131', '#af5951'],
+\   ['29' , '#36804e'],
+\   ['97' , '#8365a5'],
+\   ['94' , '#986831'],
+\   ['30' , '#00837c'],
+\   ['132', '#aa567e'],
+\   ['58' , '#6f772f'],
+\   ['31' , '#0080a4'],
+\   ['68' , '#5470b2'],
+\   ['131', '#aa5d44'],
+\   ['29' , '#13825d'],
+\   ['96' , '#945f9a'],
+\   ['94' , '#8c6e2c'],
+\   ['30' , '#00838b']
+\ ],
+\ 'light': [
+\   ['253', '#cee0e4'],
+\   ['32' , '#3176b4'],
+\   ['131', '#af5951'],
+\   ['29' , '#36804e'],
+\   ['97' , '#8365a5'],
+\   ['94' , '#986831'],
+\   ['30' , '#00837c'],
+\   ['132', '#aa567e'],
+\   ['58' , '#6f772f'],
+\   ['31' , '#0080a4'],
+\   ['68' , '#5470b2'],
+\   ['131', '#aa5d44'],
+\   ['29' , '#13825d'],
+\   ['96' , '#945f9a'],
+\   ['94' , '#8c6e2c'],
+\   ['30' , '#00838b']
+\ ] }
+
 " Syntastic: run syntax checks on open
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
@@ -280,7 +320,7 @@ noremap <silent> <F12> g<C-g>
 " needs to precede all of the following
 augroup filetype
   au!
-  " See :help fo-table
+  " Override format options (see `help fo-table`)
   au FileType * setlocal formatoptions=crq2lj
 augroup END
 
