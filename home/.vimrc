@@ -284,6 +284,12 @@ nnoremap <Leader>/w :Grepcw <cword><CR>
 " the declaration if the definition is unavailable
 nnoremap <Leader>.w :YcmCompleter GoTo<CR>
 
+" <Leader>g does vim-go stuff
+nmap <Leader>g/ <Plug>(go-def)
+nmap <Leader>gt <Plug>(go-info)
+nmap <Leader>gi <Plug>(go-implements)
+nmap <Leader>gc <Plug>(go-rename)
+
 " <Leader>u invokes Gundo
 nnoremap <Leader>u :GundoToggle<CR>
 
