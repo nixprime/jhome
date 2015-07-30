@@ -10,10 +10,10 @@ autocmd!
 
 " tmux <C-left>, <C-right> compatibility
 if &term =~ '^screen'
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
+  execute 'set <xUp>=\e[1;*A'
+  execute 'set <xDown>=\e[1;*B'
+  execute 'set <xRight>=\e[1;*C'
+  execute 'set <xLeft>=\e[1;*D'
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -48,11 +48,11 @@ elseif filereadable(expand('~/vimrc_plugins'))
   let vimrc_plugins = '~/vimrc_plugins'
 endif
 if !empty(vimrc_plugins)
-  execute "source " . vimrc_plugins
+  execute 'source ' . vimrc_plugins
 endif
 
 " CtrlP: use ag if available
-if executable("ag")
+if executable('ag')
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
       \ --ignore .hg
@@ -75,10 +75,10 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs = 1
 
 " UltiSnips: keybindings that don't conflict with YCM
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
-let g:UltiSnipsListSnippets = "<C-e>"
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsListSnippets = '<C-e>'
 
 " YouCompleteMe: don't confirm .ycm_extra_conf.py files
 let g:ycm_confirm_extra_conf = 0
@@ -155,7 +155,7 @@ set completeopt=menuone
 " Automatically close quickfix window if it is the last window
 augroup quickfixclose
   au!
-  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix"|q|endif
+  au WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), '&buftype') == 'quickfix' | q | endif
 augroup END
 
 " One space after period
@@ -164,7 +164,7 @@ set nojoinspaces
 " Enable spellchecking
 set spell
 
-if has("gui_running")
+if has('gui_running')
   " Hide scrollbars
   set guioptions-=r
   set guioptions-=L
@@ -187,7 +187,7 @@ set wildmenu wildmode=list:longest
 set wildignore+=*.swp,*.o,*.so
 
 " Use ag instead of grep if available
-if executable("ag")
+if executable('ag')
   set grepprg=ag\ --nocolor\ --nogroup
 endif
 
@@ -253,12 +253,12 @@ noremap <F2> :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<CR>
 noremap <F3> :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<CR>
 
 " F4 clears search highlight and recomputes syntax highlighting
-noremap <silent> <F4> :let @/ = ""<CR>:syntax sync fromstart<CR>
+noremap <silent> <F4> :let @/ = ''<CR>:syntax sync fromstart<CR>
 
 " F6 strips trailing whitespace
 fun! StripTrailingWhitespace()
-  let l = line(".")
-  let c = col(".")
+  let l = line('.')
+  let c = col('.')
   %s/\s\+$//e
   call cursor(l, c)
 endfun
@@ -327,6 +327,5 @@ elseif filereadable(expand('~/vimrc_local'))
   let vimrc_local = '~/vimrc_local'
 endif
 if !empty(vimrc_local)
-  execute "source " . vimrc_local
+  execute 'source ' . vimrc_local
 endif
-
