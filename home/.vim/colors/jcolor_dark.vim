@@ -54,7 +54,7 @@ hi NonText guibg=NONE guifg=#97a9ad gui=NONE ctermbg=NONE ctermfg=248 cterm=NONE
 
 hi ColorColumn guibg=#111111 guifg=NONE gui=NONE ctermbg=233 ctermfg=NONE cterm=NONE
 
-hi MatchParen guibg=none guifg=NONE gui=bold ctermbg=NONE ctermfg=NONE cterm=bold
+hi MatchParen guibg=NONE guifg=NONE gui=bold ctermbg=NONE ctermfg=NONE cterm=bold
 
 hi Folded guibg=NONE guifg=NONE gui=italic ctermbg=NONE ctermfg=NONE cterm=italic
 hi FoldColumn guibg=#1f201f guifg=#97a9ad gui=NONE ctermbg=234 ctermfg=248 cterm=NONE
