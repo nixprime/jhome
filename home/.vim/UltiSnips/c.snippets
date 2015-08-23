@@ -71,7 +71,7 @@ snippet /** "Doxygen-style comment"
 endsnippet
 
 snippet once "Include guard"
-#ifndef ${1:`!v toupper(Filename('', 'untitled').'_H_')`}
+#ifndef ${1:`!v toupper(expand('%:t:r').'_H_')`}
 #define $1
 
 ${2}
