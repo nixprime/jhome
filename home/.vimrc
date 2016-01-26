@@ -201,6 +201,9 @@ augroup END
 " One space after period
 set nojoinspaces
 
+" Disable folding
+set nofoldenable
+
 if has('gui_running')
   " Hide scrollbars
   set guioptions-=r
