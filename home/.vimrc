@@ -51,6 +51,9 @@ if !empty(vimrc_plugins)
   execute 'source ' . vimrc_plugins
 endif
 
+" CtrlP: do not overwrite mapping for C-p set below
+let g:ctrlp_map = ''
+
 " CtrlP: use ag if available
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
@@ -274,6 +277,11 @@ nnoremap <silent> g# g#zz
 " Ctrl-a selects all text in current buffer
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
+
+" Ctrl-o invokes CtrlPMRU after disabling cpsm empty query matching
+" Ctrl-p invokes CtrlP after enabling cpsm empty query matching
+nnoremap <silent> <C-o> :let g:cpsm_match_empty_query = 0<CR>:CtrlPMRU<CR>
+nnoremap <silent> <C-p> :let g:cpsm_match_empty_query = 1<CR>:CtrlP<CR>
 
 " <Leader>// pulls up grep; <Leader>/w greps the word under the cursor
 command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw!
