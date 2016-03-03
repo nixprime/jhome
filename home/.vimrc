@@ -51,6 +51,9 @@ if !empty(vimrc_plugins)
   execute 'source ' . vimrc_plugins
 endif
 
+" cpsm: use space as query inverting delimiter
+let g:cpsm_query_inverting_delimiter = ' '
+
 " CtrlP: do not overwrite mapping for C-p set below
 let g:ctrlp_map = ''
 
