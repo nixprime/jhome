@@ -6,13 +6,15 @@
 [core]
 
 [alias]
-  st = status
-  ci = commit
+  br = branch
   changes = diff --name-status -r
-  unstage = reset HEAD
+  ci = commit
+  co = checkout
+  history = reflog --date=relative
   ignored = ls-files --others -i --exclude-standard
   ignored-paths = clean -ndX
-  history = reflog --date=relative
+  unstage = reset HEAD
+  st = status
 [branch]
   autosetupmerge = always
 [color]
