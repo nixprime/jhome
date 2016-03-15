@@ -4,7 +4,7 @@
 [sendemail]
   from = Jamie Liu <jliu@nixprime.com>
 [core]
-
+  abbrev = 12
 [alias]
   br = branch
   changes = diff --name-status -r
