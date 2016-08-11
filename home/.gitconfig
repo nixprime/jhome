@@ -7,13 +7,10 @@
   abbrev = 12
 [alias]
   br = branch
-  changes = diff --name-status -r
   ci = commit
   co = checkout
-  history = reflog --date=relative
   ignored = ls-files --others -i --exclude-standard
-  ignored-paths = clean -ndX
-  unstage = reset HEAD
+  rb = rebase
   st = status
 [branch]
   autosetupmerge = always
@@ -21,5 +18,7 @@
   ui = true
 [diff]
   algorithm = patience
+[pull]
+  rebase = true
 [push]
   default = simple
