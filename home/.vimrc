@@ -281,6 +281,9 @@ nnoremap <silent> g# g#zz
 nnoremap <silent> <C-a> ggVG
 vnoremap <silent> <C-a> ggVG
 
+" Ctrl-c uses OSC 52 to copy to the terminal clipboard
+vnoremap <C-c> y:call SendViaOSC52(getreg('"'))<CR>
+
 " Ctrl-o invokes CtrlPMRU after disabling cpsm empty query matching
 " Ctrl-p invokes CtrlP after enabling cpsm empty query matching
 nnoremap <silent> <C-o> :let g:cpsm_match_empty_query = 0<CR>:CtrlPMRU<CR>
