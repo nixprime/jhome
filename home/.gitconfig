@@ -9,9 +9,10 @@
   br = branch
   ci = commit
   co = checkout
-  ignored = ls-files --others -i --exclude-standard
+  cp = cherry-pick
   rb = rebase
   st = status
+  ignored = ls-files --others -i --exclude-standard
 [branch]
   autosetupmerge = always
 [color]
