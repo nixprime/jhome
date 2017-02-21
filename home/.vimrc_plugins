@@ -20,7 +20,7 @@ Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
-if has('python')
+if has('python') || has('python3')
   Plugin 'nixprime/cpsm'
   let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
   if v:version >= 704
