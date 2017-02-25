@@ -287,10 +287,12 @@ vnoremap <silent> <C-a> ggVG
 " Ctrl-c uses OSC 52 to copy to the terminal clipboard
 vnoremap <C-c> y:call SendViaOSC52(getreg('"'))<CR>
 
-" Ctrl-o invokes CtrlPMRU after disabling cpsm empty query matching
-" Ctrl-p invokes CtrlP after enabling cpsm empty query matching
-nnoremap <silent> <C-o> :let g:cpsm_match_empty_query = 0<CR>:CtrlPMRU<CR>
-nnoremap <silent> <C-p> :let g:cpsm_match_empty_query = 1<CR>:CtrlP<CR>
+" Ctrl-p invokes CtrlP using cpsm
+" Ctrl-o invokes CtrlPMRU without cpsm empty query matching
+" Ctrl-i invokes CtrlPBuffer without cpsm
+nnoremap <silent> <C-p> :let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}<CR>:let g:cpsm_match_empty_query = 1<CR>:CtrlP<CR>
+nnoremap <silent> <C-o> :let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}<CR>:let g:cpsm_match_empty_query = 0<CR>:CtrlPMRU<CR>
+nnoremap <silent> <C-i> :unlet g:ctrlp_match_func<CR>:CtrlPBuffer<CR>
 
 " <Leader>// pulls up grep; <Leader>/w greps the word under the cursor
 command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw!
