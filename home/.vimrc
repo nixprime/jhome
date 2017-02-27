@@ -297,26 +297,20 @@ command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw
 nnoremap <Leader>// :Grepcw<Space>
 nnoremap <Leader>/w :Grepcw <cword><CR>
 
-" <Leader>.w goes to the definition of the identifier under the cursor, or to
-" the declaration if the definition is unavailable
-nnoremap <Leader>.w :YcmCompleter GoTo<CR>
-
-" <Leader>g does vim-go stuff
-nmap <Leader>g/ <Plug>(go-def)
-nmap <Leader>gt <Plug>(go-info)
-nmap <Leader>gi <Plug>(go-implements)
-nmap <Leader>gc <Plug>(go-rename)
+" <Leader>n clears search highlight and recomputes syntax highlighting
+nnoremap <silent> <Leader>n :let @/ = ''<CR>:syntax sync fromstart<CR>
 
 " <Leader>u invokes Gundo
 nnoremap <Leader>u :GundoToggle<CR>
 
 " F2 uses 2 spaces for indentation
-" F3 uses 8-space tabs for indentation
-noremap <F2> :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<CR>
-noremap <F3> :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<CR>
-
-" F4 clears search highlight and recomputes syntax highlighting
-noremap <silent> <F4> :let @/ = ''<CR>:syntax sync fromstart<CR>
+" F3 uses 4 spaces for indentation
+" F4 uses 8 spaces for indentation
+" F5 toggles between spaces and tabs
+noremap <F2> :setlocal tabstop=2 softtabstop=2 shiftwidth=2<CR>
+noremap <F3> :setlocal tabstop=4 softtabstop=4 shiftwidth=4<CR>
+noremap <F4> :setlocal tabstop=8 softtabstop=8 shiftwidth=8<CR>
+noremap <F5> :setlocal expandtab!<CR>
 
 " F6 strips trailing whitespace
 fun! StripTrailingWhitespace()
