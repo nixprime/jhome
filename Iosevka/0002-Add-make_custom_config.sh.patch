@@ -1,0 +1,29 @@
+From 64152df5609d476d951b24bba916f176fd4cb251 Mon Sep 17 00:00:00 2001
+From: Jamie Liu <jliu@nixprime.com>
+Date: Sat, 1 Apr 2017 00:46:05 -0700
+Subject: [PATCH 2/2] Add make_custom_config.sh
+
+---
+ make_custom_config.sh | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100755 make_custom_config.sh
+
+diff --git a/make_custom_config.sh b/make_custom_config.sh
+new file mode 100755
+index 000000000000..3c0074f6dbaf
+--- /dev/null
++++ b/make_custom_config.sh
+@@ -0,0 +1,10 @@
++#!/bin/bash
++set -o errexit
++set -o nounset
++set -o pipefail
++
++COMMON='v-l-italic v-asterisk-low v-at-long v-dollar-open'
++UPRIGHT_OBLIQUE='v-g-doublestorey'
++ITALIC='v-g-singlestorey'
++
++make custom-config design="${COMMON}" upright="${UPRIGHT_OBLIQUE}" italic="${ITALIC}" oblique="${UPRIGHT_OBLIQUE}"
+-- 
+2.7.4
+
