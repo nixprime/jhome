@@ -1,20 +1,20 @@
-From 054a584b7291720e82c9369db1c87d0ca3260347 Mon Sep 17 00:00:00 2001
+From 356f4b2fea6e5e5d58f3d7e7a41441f4e768b514 Mon Sep 17 00:00:00 2001
 From: Jamie Liu <jliu@nixprime.com>
-Date: Sat, 1 Apr 2017 00:48:13 -0700
+Date: Fri, 11 Aug 2017 20:25:58 -0700
 Subject: [PATCH 1/2] Disable arrows
 
 ---
- meta/feature/ligation.ptl | 127 ----------------------------------------------
- 1 file changed, 127 deletions(-)
+ meta/feature/ligation.ptl | 163 +---------------------------------------------
+ 1 file changed, 1 insertion(+), 162 deletions(-)
 
 diff --git a/meta/feature/ligation.ptl b/meta/feature/ligation.ptl
-index cf0de570527e..8432cf889e86 100644
+index af311eca4457..fcb222d5e2e3 100644
 --- a/meta/feature/ligation.ptl
 +++ b/meta/feature/ligation.ptl
-@@ -184,133 +184,6 @@ export all : define [buildLigations chain-rule lookupOrder commonList features l
- 			chain-rule ({'colon'} ~> {'colon.dright'}) {'colon'}
+@@ -245,168 +245,7 @@ export : define [buildLigations chain-rule lookupOrder commonList features looku
+ 					inputIndex 0
  
- 	do "Arrows"
+ 	do "Arrows" 
 -		includeLookup
 -			.type 'gsub_chaining'
 -			.subtables : list
@@ -40,6 +40,11 @@ index cf0de570527e..8432cf889e86 100644
 -					less       ~> preserved
 -					arrowStick ~> [lsx 'lr']
 -					greater    ~> preserved
+-				chain-rule # <--<, <==<
+-					less       ~> preserved
+-					arrowStick ~> [lsx 'lc']
+-					arrowStick ~> [lsx 'cj']
+-					less       ~> preserved
 -				chain-rule # <-<, <=<
 -					less       ~> preserved
 -					arrowStick ~> [lsx 'lj']
@@ -60,6 +65,9 @@ index cf0de570527e..8432cf889e86 100644
 -				chain-rule # <-
 -					less       ~> preserved
 -					hyphen     ~> [lsx 'lf']
+-				chain-rule # <=
+-					less       ~> preserved
+-					equal      ~> [only 'arrowZALE' : lsx 'lf']
 -				chain-rule # <!---
 -					less       ~> preserved
 -					exclam     ~> [lsx 'htmlcommentstart']
@@ -75,7 +83,12 @@ index cf0de570527e..8432cf889e86 100644
 -					greater    ~> preserved
 -					greater    ~> [only 'arrow2' : lsx 'shiftN1']
 -					arrowStick ~> [only 'arrow2' : lsx 'j1f']
--				chain-rule # >->
+-				chain-rule # >-->, >==>
+-					greater    ~> preserved
+-					arrowStick ~> [lsx 'jc']
+-					arrowStick ~> [lsx 'cr']
+-					greater    ~> preserved
+-				chain-rule # >->, >=>
 -					greater    ~> preserved
 -					arrowStick ~> [lsx 'jr']
 -					greater    ~> preserved
@@ -113,6 +126,27 @@ index cf0de570527e..8432cf889e86 100644
 -				chain-rule # -<, =<
 -					arrowStick ~> [only 'arrow2' : lsx 'fj']
 -					less       ~> preserved
+-				chain-rule # >=
+-					greater    ~> preserved
+-					equal      ~> [only 'arrowZAGE' : lsx 'jf']
+-		# <<, >>, <<<, >>>
+-		includeLookup
+-			.type 'gsub_chaining'
+-			.subtables : list
+-				chain-rule # <<<
+-					less       ~> [only 'arrow2' : lsx 'shiftN0t']
+-					less       ~> preserved
+-					less       ~> [only 'arrow2' : lsx 'shift0t']
+-				chain-rule # >>>
+-					greater    ~> [only 'arrow2' : lsx 'shift0t']
+-					greater    ~> preserved
+-					greater    ~> [only 'arrow2' : lsx 'shiftN0t']
+-				chain-rule # <<
+-					less       ~> [only 'arrow2' : lsx 'shiftN0t']
+-					less       ~> [only 'arrow2' : lsx 'shift0t']
+-				chain-rule # >>
+-					greater    ~> [only 'arrow2' : lsx 'shift0t']
+-					greater    ~> [only 'arrow2' : lsx 'shiftN0t']
 -		# Extended arrow sticks
 -		# --------------------->
 -		includeLookup
@@ -134,6 +168,7 @@ index cf0de570527e..8432cf889e86 100644
 -		includeLookup
 -			.type 'gsub_chaining'
 -			.subtables : list
+-				chain-rule ([stickClass 'cf'] ~> [stickClass 'cc']) ([stickClass 'fc'] ~> [stickClass 'cc'])
 -				chain-rule ([stickClass 'zf'] ~> [stickClass 'zc']) ([stickClass 'fr'] ~> [stickClass 'cr'])
 -				chain-rule ([stickClass 'zf'] ~> [stickClass 'zc']) ([stickClass 'fc'] ~> [stickClass 'cc'])
 -				chain-rule ([stickClass 'lf'] ~> [stickClass 'lc']) ([stickClass 'fz'] ~> [stickClass 'cz'])
@@ -142,9 +177,10 @@ index cf0de570527e..8432cf889e86 100644
 -				chain-rule [stickClass 'lf'] [stick 'zf']
 -				chain-rule [stickClass 'cf'] [stick 'zf']
 -				chain-rule [stickClass 'zf'] [stick 'zf']
- 		# /\ and \/
- 		includeLookup
- 			.type 'gsub_chaining'
++
+ 	# /\ and \/
+ 	do "logical" : includeLookup
+ 		.type 'gsub_chaining'
 -- 
 2.7.4
 

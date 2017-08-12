@@ -1,19 +1,19 @@
-From 64152df5609d476d951b24bba916f176fd4cb251 Mon Sep 17 00:00:00 2001
+From 6ac1809a7632c5f03fd9879ddafbe4a76d24bc74 Mon Sep 17 00:00:00 2001
 From: Jamie Liu <jliu@nixprime.com>
 Date: Sat, 1 Apr 2017 00:46:05 -0700
 Subject: [PATCH 2/2] Add make_custom_config.sh
 
 ---
- make_custom_config.sh | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ make_custom_config.sh | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
  create mode 100755 make_custom_config.sh
 
 diff --git a/make_custom_config.sh b/make_custom_config.sh
 new file mode 100755
-index 000000000000..3c0074f6dbaf
+index 000000000000..6c17cc7712bf
 --- /dev/null
 +++ b/make_custom_config.sh
-@@ -0,0 +1,10 @@
+@@ -0,0 +1,12 @@
 +#!/bin/bash
 +set -o errexit
 +set -o nounset
@@ -24,6 +24,8 @@ index 000000000000..3c0074f6dbaf
 +ITALIC='v-g-singlestorey'
 +
 +make custom-config design="${COMMON}" upright="${UPRIGHT_OBLIQUE}" italic="${ITALIC}" oblique="${UPRIGHT_OBLIQUE}"
++make custom custom-web
++
 -- 
 2.7.4
 
