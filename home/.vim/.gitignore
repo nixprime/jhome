@@ -1,3 +1,6 @@
 /.netrwhist
 /bundle/
 /spell/
+
+# neovim
+init.vim
