@@ -1,0 +1,4 @@
+# Workaround for LightDM idiocy:
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=636108
+. ~/.profile
+

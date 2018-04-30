@@ -8,6 +8,11 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+if [ -n "$EXECED_PROFILE" ]; then
+    exit 0
+fi
+export EXECED_PROFILE=1
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
