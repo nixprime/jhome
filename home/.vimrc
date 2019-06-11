@@ -156,6 +156,9 @@ set hlsearch
 set statusline=%(%F\ %y%m%r%h%w%)%=%([%l/%L,\ %c%V]\ %P%)
 set laststatus=2
 
+" No modelines
+set nomodeline modelines=0
+
 " Show leading whitespace
 set lcs=tab:┊\  list
 
@@ -186,10 +189,8 @@ set gdefault
 set wrap linebreak textwidth=0 wrapmargin=0
 set colorcolumn=80
 
-" Render hard tabs as 8 spaces ...
-set tabstop=8
-" ... but use 2 spaces for indentation
-set softtabstop=2 shiftwidth=2 expandtab smarttab
+" Use 4 spaces for indentation by default
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
 
 " No overly clever indentation by default
 set nocindent autoindent nosmartindent
@@ -286,6 +287,7 @@ vnoremap <silent> <C-a> ggVG
 
 " Ctrl-c uses OSC 52 to copy to the terminal clipboard
 vnoremap <C-c> y:call SendViaOSC52(getreg('"'))<CR>
+vnoremap <C-x> y:call SendViaOSC52(getreg('"'))<CR>
 
 " Ctrl-p invokes CtrlP using cpsm
 " Ctrl-o invokes CtrlPMRU without cpsm empty query matching
@@ -367,6 +369,9 @@ augroup END
 augroup filetype
   au BufRead,BufNewFile *.rs setlocal filetype=rust
 augroup END
+
+" TeX
+au FileType tex setlocal indentexpr=
 
 " SCons
 augroup filetype
