@@ -12,20 +12,12 @@ Plugin 'bkad/CamelCaseMotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
 Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'rust-lang/rust.vim'
 Plugin 'wellle/targets.vim'
-Plugin 'davidzchen/vim-bazel'
-Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
 if has('python') || has('python3')
   Plugin 'nixprime/cpsm'
   let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-  if v:version >= 704
-    Plugin 'Valloric/YouCompleteMe'
-  endif
 endif
 
 " Vundle postamble

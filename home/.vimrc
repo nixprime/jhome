@@ -113,27 +113,8 @@ let g:rainbow#colors = {
 \   ['30' , '#00838b']
 \ ] }
 
-" Syntastic: run syntax checks on open
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Syntastic: enable error signs
-let g:syntastic_enable_signs = 1
-
-" UltiSnips: keybindings that don't conflict with YCM
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsListSnippets = '<C-e>'
-
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
-
-" YouCompleteMe: don't confirm .ycm_extra_conf.py files
-let g:ycm_confirm_extra_conf = 0
-
-" YouCompleteMe: disable YCM diagnostics in the sign column
-let g:ycm_enable_diagnostic_signs = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Appearance
