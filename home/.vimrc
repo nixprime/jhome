@@ -57,17 +57,9 @@ let g:cpsm_query_inverting_delimiter = ' '
 " CtrlP: do not overwrite mapping for C-p set below
 let g:ctrlp_map = ''
 
-" CtrlP: use ag if available
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
-      \ --ignore .git
-      \ --ignore .hg
-      \ --ignore .svn
-      \ --ignore .DS_Store
-      \ --ignore "**/*.o"
-      \ --ignore "**/*.pyc"
-      \ --ignore "**/*.so"
-      \ -g ""'
+" CtrlP: use ripgrep if available
+if executable('rg')
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 endif
 
 " CtrlP: no file limit
@@ -217,9 +209,9 @@ set wildmenu wildmode=list:longest
 " Don't autocomplete certain file extensions
 set wildignore+=*.swp,*.o,*.so
 
-" Use ag instead of grep if available
-if executable('ag')
-  set grepprg=ag\ --nocolor\ --nogroup
+" Use ripgrep instead of grep if available
+if executable('rg')
+  set grepprg=rg\ --color=never
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
