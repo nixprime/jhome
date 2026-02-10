@@ -65,6 +65,12 @@ endif
 " CtrlP: no file limit
 let g:ctrlp_max_files = 0
 
+" llama.vim: custom keybindings
+let g:llama_config = {
+\ 'keymap_fim_accept_full': '<C-k>',
+\ 'keymap_fim_accept_line': "<C-j>"
+\ }
+
 " rainbow_parentheses: custom colors
 let g:rainbow#max_level = 16
 let g:rainbow#colors = {
