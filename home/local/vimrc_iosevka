@@ -1,0 +1,5 @@
+if has('gui_running')
+  set guifont=Iosevka\ Custom\ 10
+  let g:airline_powerline_fonts = 1
+  " set lines=? columns=?
+endif

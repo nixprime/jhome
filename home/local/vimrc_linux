@@ -1,2 +1,0 @@
-" Use the + register (which aliases to the system clipboard) by default
-set clipboard=unnamedplus

@@ -194,9 +194,29 @@ set nojoinspaces
 set nofoldenable
 
 if has('gui_running')
-  " Hide scrollbars
-  set guioptions-=r
-  set guioptions-=L
+  " Hide menu bar, toolbar, scrollbars
+  set guioptions-=m guioptions-=T guioptions-=r guioptions-=L
+  " Show the status line only when there are at least 2 windows, since
+  " otherwise the status line is redundant with the title bar
+  set laststatus=1
+endif
+
+if has('win64') || has('win32')
+  " Use the unnamed register (which aliases to the system clipboard) by default
+  set clipboard=unnamed
+  " Fix swap file location for unsaved buffers
+  set directory=.$TEMP
+else
+  let uname = system('uname')
+  if uname =~ '^Darwin'
+    " Use the unnamed register (which aliases to the system clipboard) by
+    " default
+    set clipboard=unnamed
+  elseif uname =~ '^Linux'
+    " Use the unnamedplus register (which aliases to the system clipboard) by
+    " default
+    set clipboard=unnamedplus
+  endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
