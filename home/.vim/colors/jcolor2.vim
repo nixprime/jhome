@@ -39,7 +39,7 @@ highlight Type guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=
 highlight Special guifg=#e88c02 guibg=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 highlight Underlined guifg=NONE guibg=NONE gui=underline ctermfg=NONE ctermbg=NONE cterm=underline
 highlight Ignore guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
-highlight Error guifg=#ff7076 guibg=NONE gui=inverse ctermfg=203 ctermbg=NONE cterm=inverse
+highlight Error guifg=#ff7076 guibg=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 highlight Todo guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
 highlight SpecialKey guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 

@@ -559,7 +559,7 @@ set background=dark""")
         hi("Special", "orange")
         hi("Underlined", attrs="underline")
         hi("Ignore", None)
-        hi("Error", "red", attrs="inverse")
+        hi("Error", "red")
         hi("Todo", "white")
         hi("SpecialKey", "grey") # listchars showing tabs
         print()
