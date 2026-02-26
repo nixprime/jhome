@@ -11,7 +11,6 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'ggml-org/llama.vim'
 Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'fatih/vim-go'
@@ -21,6 +20,21 @@ if has('python') || has('python3')
   let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Local plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let vimrc_plugins_local = ''
+if !empty($VIMRC_PLUGINS_LOCAL)
+  let vimrc_plugins_local = $VIMRC_PLUGINS_LOCAL
+elseif filereadable(expand('~/.vimrc_plugins_local'))
+  let vimrc_plugins_local = '~/.vimrc_plugins_local'
+elseif filereadable(expand('~/vimrc_plugins_local'))
+  let vimrc_plugins_local = '~/vimrc_plugins_local'
+endif
+if !empty(vimrc_plugins_local)
+  execute 'source ' . vimrc_plugins_local
+endif
+
 " Vundle postamble
 call vundle#end()
-
