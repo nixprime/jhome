@@ -3,7 +3,7 @@ This repo just contains configuration files and some private stylistic stuff.
 All files in this repository for which I, Jamie Liu, am the original author are
 provided under the MIT License unless otherwise stated:
 
-> Copyright (C) 2012-2013 Jamie Liu
+> Copyright (C) 2012-2026 Jamie Liu
 >
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the “Software”), to deal
@@ -24,8 +24,3 @@ provided under the MIT License unless otherwise stated:
 > SOFTWARE.
 
 Vim plugins are copyright of their respective owners.
-
-[Anonymous Pro](http://www.ms-studio.com/FontSales/anonymouspro.html) is
-copyright Mark Simonson and included in this repository under the SIL [Open
-Font License](http://scripts.sil.org/OFL). All of the documentation provided
-with Anonymous Pro is included in doc/AnonymousPro/.

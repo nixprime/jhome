@@ -7,7 +7,16 @@ exportGlyphNames = false
 noLigation = true
 
 [buildPlans.IosevkaCustom.variants.design]
+l = "serifed-flat-tailed"
+lower-iota = "zshaped"
 asterisk = "penta-low"
+
+[buildPlans.IosevkaCustom.variants.italic]
+i = "serifed"
+k = "straight-serifless"
+v = "straight-motion-serifed"
+w = "straight-motion-serifed"
+x = "straight-bilateral-motion-serifed"
 
 [buildPlans.IosevkaCustom.weights.Regular]
 shape = 400
