@@ -1,0 +1,3 @@
+if (has('python') || has('python3')) && v:version >= 704
+  Plugin 'Valloric/YouCompleteMe'
+endif

@@ -20,6 +20,19 @@ endif
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Invoke .vimrc_plugins to load plugins
+let vimrc_plugins = ''
+if !empty($VIMRC_PLUGINS)
+  let vimrc_plugins = $VIMRC_PLUGINS
+elseif filereadable(expand('~/.vimrc_plugins'))
+  let vimrc_plugins = '~/.vimrc_plugins'
+elseif filereadable(expand('~/vimrc_plugins'))
+  let vimrc_plugins = '~/vimrc_plugins'
+endif
+if !empty(vimrc_plugins)
+  execute 'source ' . vimrc_plugins
+endif
+
 " CamelCaseMotion: use capital W/B/E for CCM W/B/E
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
@@ -37,19 +50,6 @@ nmap c9W c9E
 " see https://github.com/bkad/CamelCaseMotion/issues/17
 map iW <Plug>CamelCaseMotion_ie
 map aW <Plug>CamelCaseMotion_iw
-
-" Invoke .vimrc_plugins to load plugins
-let vimrc_plugins = ''
-if !empty($VIMRC_PLUGINS)
-  let vimrc_plugins = $VIMRC_PLUGINS
-elseif filereadable(expand('~/.vimrc_plugins'))
-  let vimrc_plugins = '~/.vimrc_plugins'
-elseif filereadable(expand('~/vimrc_plugins'))
-  let vimrc_plugins = '~/vimrc_plugins'
-endif
-if !empty(vimrc_plugins)
-  execute 'source ' . vimrc_plugins
-endif
 
 " cpsm: use space as query inverting delimiter
 let g:cpsm_query_inverting_delimiter = ' '
@@ -81,6 +81,12 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
+
+" YouCompleteMe: don't confirm .ycm_extra_conf.py files
+let g:ycm_confirm_extra_conf = 0
+
+" YouCompleteMe: disable YCM diagnostics in the sign column
+let g:ycm_enable_diagnostic_signs = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Appearance
