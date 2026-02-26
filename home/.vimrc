@@ -65,51 +65,19 @@ endif
 " CtrlP: no file limit
 let g:ctrlp_max_files = 0
 
-" llama.vim: custom keybindings
+" llama.vim: hide inference info; custom keybindings
 let g:llama_config = {
+\ 'show_info': 0,
 \ 'keymap_fim_accept_full': '<C-k>',
-\ 'keymap_fim_accept_line': "<C-j>"
+\ 'keymap_fim_accept_line': '<C-j>',
+\ 'keymap_fim_accept_word': '<C-l>',
 \ }
 
-" rainbow_parentheses: custom colors
-let g:rainbow#max_level = 16
-let g:rainbow#colors = {
-\ 'dark': [
-\   ['243', '#647579'],
-\   ['32' , '#3176b4'],
-\   ['131', '#af5951'],
-\   ['29' , '#36804e'],
-\   ['97' , '#8365a5'],
-\   ['94' , '#986831'],
-\   ['30' , '#00837c'],
-\   ['132', '#aa567e'],
-\   ['58' , '#6f772f'],
-\   ['31' , '#0080a4'],
-\   ['68' , '#5470b2'],
-\   ['131', '#aa5d44'],
-\   ['29' , '#13825d'],
-\   ['96' , '#945f9a'],
-\   ['94' , '#8c6e2c'],
-\   ['30' , '#00838b']
-\ ],
-\ 'light': [
-\   ['243', '#647579'],
-\   ['32' , '#3176b4'],
-\   ['131', '#af5951'],
-\   ['29' , '#36804e'],
-\   ['97' , '#8365a5'],
-\   ['94' , '#986831'],
-\   ['30' , '#00837c'],
-\   ['132', '#aa567e'],
-\   ['58' , '#6f772f'],
-\   ['31' , '#0080a4'],
-\   ['68' , '#5470b2'],
-\   ['131', '#aa5d44'],
-\   ['29' , '#13825d'],
-\   ['96' , '#945f9a'],
-\   ['94' , '#8c6e2c'],
-\   ['30' , '#00838b']
-\ ] }
+" rainbow_parentheses: increase max nesting
+let g:rainbow#max_level = 32
+
+" rainbow_parentheses: match square brackets and braces
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
@@ -120,7 +88,7 @@ let g:go_template_autocreate = 0
 
 " Colors
 syntax on
-colorscheme jcolor_dark
+colorscheme jcolor2
 
 " Line numbers and ruler
 set number ruler
@@ -139,7 +107,7 @@ set laststatus=2
 set nomodeline modelines=0
 
 " Show leading whitespace
-set lcs=tab:┊\  list
+set listchars=tab:┊\  list
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editor behavior
