@@ -479,9 +479,9 @@ palette = {
 
 def seq_color(i):
     """Returns an unnamed color for the ith element in a sequence of unbounded
-    length. Works best for i < 9."""
+    length."""
     theta_0 = 20.0
-    hue = theta_0 + van_der_corput(i, 3) * 360.0
+    hue = theta_0 + van_der_corput(i, 2) * 360.0
     return OklchColor(L_seq, C_seq, hue).to_rgb()
 
 if __name__ == "__main__":
@@ -595,7 +595,7 @@ set background=dark""")
         hi("llama_hl_inst_virt_ready", "cyan")
         rainbow_colors = ",\n".join(
                 f"\\     ['{term256_code(color)}', '{color}']"
-                for color in [grey(L_seq)] + [seq_color(i) for i in range(9)])
+                for color in [grey(L_seq)] + [seq_color(i) for i in range(16)])
         print("""
 " rainbow_parentheses
 if !exists('g:rainbow#colors')
