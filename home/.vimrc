@@ -83,6 +83,9 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
 
+" vim-go: don't automatically open location list with errors
+let g:go_fmt_fail_silently = 1
+
 " YouCompleteMe: don't confirm .ycm_extra_conf.py files
 let g:ycm_confirm_extra_conf = 0
 
