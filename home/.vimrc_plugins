@@ -18,9 +18,6 @@ Plugin 'tpope/vim-surround'
 if has('python') || has('python3')
   Plugin 'nixprime/cpsm'
   let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-  if v:version >= 704
-    Plugin 'Valloric/YouCompleteMe'
-  endif
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
