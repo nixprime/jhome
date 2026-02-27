@@ -65,12 +65,13 @@ endif
 " CtrlP: no file limit
 let g:ctrlp_max_files = 0
 
-" llama.vim: hide inference info; custom keybindings
+" llama.vim: hide inference info; custom keybindings; disable at startup
 let g:llama_config = {
 \ 'show_info': 0,
 \ 'keymap_fim_accept_full': '<C-k>',
 \ 'keymap_fim_accept_line': '<C-j>',
 \ 'keymap_fim_accept_word': '<C-l>',
+\ 'enable_at_startup': v:false,
 \ }
 
 " rainbow_parentheses: increase max nesting
@@ -274,8 +275,13 @@ command! -nargs=+ -complete=file -bar Grepcw silent! grep! <args>|cwindow|redraw
 nnoremap <Leader>// :Grepcw<Space>
 nnoremap <Leader>/w :Grepcw <cword><CR>
 
+" <Leader>llk switches to YouCompleteMe auto-completion
+" <Leader>lll switches to llama.vim
+nnoremap <Leader>llk :call llama#disable()<CR>:let g:ycm_auto_trigger = 1<CR>
+nnoremap <Leader>lll :let g:ycm_auto_trigger = 0<CR>:call llama#enable()<CR>
+
 " <Leader>n clears search highlight and recomputes syntax highlighting
-nnoremap <silent> <Leader>n :let @/ = ''<CR>:syntax sync fromstart<CR>
+nnoremap <silent> <Leader>n :let @/ = ''<CR>:syntax sync fromstart<CR>:redraw!<CR>
 
 " <Leader>u invokes Gundo
 nnoremap <Leader>u :GundoToggle<CR>
