@@ -6,6 +6,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Vundle-managed plugins
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'a.vim'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'bkad/CamelCaseMotion'

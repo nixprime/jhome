@@ -80,6 +80,9 @@ let g:rainbow#max_level = 32
 " rainbow_parentheses: match square brackets and braces
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
+" vim-airline: set theme
+let g:airline_theme='wombat'
+
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
 
