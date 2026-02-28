@@ -411,9 +411,10 @@ def term256_code(c: RGBColor) -> int:
 # Display color scheme
 ###############################################################################
 
-def van_der_corput(n: int, base: float) -> float:
-    """Returns the nth element of the van der Corput sequence with the given
+def van_der_corput(i: int, base: float) -> float:
+    """Returns the ith element of the van der Corput sequence with the given
     base."""
+    n = float(i)
     vdc, denom = 0.0, 1.0
     while n:
         denom *= base
@@ -437,6 +438,8 @@ def saturate(L: float, h: float) -> RGBColor:
             C_good = C
             color_good = color
         dC /= 2
+    if color_good is None:
+        raise Exception(f"no acceptable chroma for L={L} h={h}")
     return color_good
 
 named_hues = {
@@ -525,18 +528,22 @@ set background=dark""")
             c_term = term256_code(c)
             print(f"\" {name}: {c} (cterm={c_term} {term256_rgb[c_term]})")
         print()
-        def hi(group: str, fg_name: str = None, bg_name: str = None, attrs: str = None, sp_name: str = None):
+        def hi(group: str,
+               fg_name: str | None = None,
+               bg_name: str | None = None,
+               attrs: str | None = None,
+               sp_name: str | None = None):
             if fg_name:
                 fg = palette[fg_name]
                 fg_gui = str(fg)
-                fg_term = term256_code(fg)
+                fg_term = str(term256_code(fg))
             else:
                 fg_gui = "NONE"
                 fg_term = "NONE"
             if bg_name:
                 bg = palette[bg_name]
                 bg_gui = str(bg)
-                bg_term = term256_code(bg)
+                bg_term = str(term256_code(bg))
             else:
                 bg_gui = "NONE"
                 bg_term = "NONE"
@@ -549,7 +556,7 @@ set background=dark""")
                 guisp = ""
             print(f"highlight {group} guifg={fg_gui} guibg={bg_gui}{guisp} gui={attrs} ctermfg={fg_term} ctermbg={bg_term} cterm={attrs}")
         hi("Normal", "white", "black")
-        print()
+        print("\n\" From :help E669")
         hi("Comment", "grey")
         hi("Constant", "blue")
         hi("Identifier", "white")
@@ -558,33 +565,39 @@ set background=dark""")
         hi("Type", "white")
         hi("Special", "orange")
         hi("Underlined", attrs="underline")
-        hi("Ignore", None)
+        hi("Bold", attrs="bold")
+        hi("Italic", attrs="italic")
+        hi("BoldItalic", attrs="bold,italic")
+        hi("Ignore", "black")
         hi("Error", "red")
         hi("Todo", "white")
-        hi("SpecialKey", "grey") # listchars showing tabs
+        hi("Added", "green")
+        hi("Changed", "blue")
+        hi("Removed", "red")
         print()
-        hi("Search", "yellow", attrs="inverse")
-        hi("StatusLine", "white_dark", "black_dark")
-        hi("CursorLine", None, "black_light")
-        hi("CursorColumn", None, "black_light")
-        hi("Visual", attrs="inverse")
-        hi("VertSplit", "grey", "black_dark")
-        hi("WinSeparator", "grey", "black_dark")
-        hi("LineNr", "grey")
-        hi("CursorLineNr", None, "black_light")
-        hi("SignColumn", "white")
-        hi("NonText", "grey") # ~ lines after EOF, @ after truncation
         hi("ColorColumn", None, "black_dark")
+        hi("Conceal", attrs="italic")
+        hi("CursorColumn", None, "black_light")
+        hi("CursorLine", None, "black_light")
+        hi("CursorLineNr", None, "black_light")
+        hi("LineNr", "grey")
         hi("MatchParen", attrs="bold")
+        hi("NonText", "grey") # ~ lines after EOF, @ after truncation
         hi("Folded", attrs="italic")
         hi("FoldColumn", "white")
-        hi("SpellBad", attrs="undercurl", sp_name="red")
-        hi("SpellCap", attrs="undercurl", sp_name="orange")
-        hi("SpellRare", attrs="undercurl", sp_name="yellow")
-        hi("SpellLocal", attrs="undercurl", sp_name="pink")
         hi("Pmenu", None, "black_dark")
         hi("PmenuSel", attrs="inverse")
-        hi("Conceal", attrs="italic")
+        hi("Search", "yellow", attrs="inverse")
+        hi("SignColumn", "white")
+        hi("SpecialKey", "grey") # listchars showing tabs
+        hi("SpellBad", attrs="undercurl", sp_name="red")
+        hi("SpellCap", attrs="undercurl", sp_name="orange")
+        hi("SpellLocal", attrs="undercurl", sp_name="pink")
+        hi("SpellRare", attrs="undercurl", sp_name="yellow")
+        hi("StatusLine", "white_dark", "black_dark")
+        hi("VertSplit", "grey", "black_dark")
+        hi("Visual", attrs="inverse")
+        hi("WinSeparator", "grey", "black_dark")
         print()
         hi("CtrlPMatch", attrs="inverse")
         print("\n\" llama.vim")

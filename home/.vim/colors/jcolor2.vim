@@ -30,6 +30,7 @@ set background=dark
 
 highlight Normal guifg=#dedede guibg=#1f1f1f gui=NONE ctermfg=253 ctermbg=234 cterm=NONE
 
+" From :help E669
 highlight Comment guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight Constant guifg=#3cacfe guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
 highlight Identifier guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
@@ -38,33 +39,39 @@ highlight PreProc guifg=#a491ff guibg=NONE gui=NONE ctermfg=141 ctermbg=NONE cte
 highlight Type guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
 highlight Special guifg=#e88c02 guibg=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 highlight Underlined guifg=NONE guibg=NONE gui=underline ctermfg=NONE ctermbg=NONE cterm=underline
-highlight Ignore guifg=NONE guibg=NONE gui=NONE ctermfg=NONE ctermbg=NONE cterm=NONE
+highlight Bold guifg=NONE guibg=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
+highlight Italic guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cterm=italic
+highlight BoldItalic guifg=NONE guibg=NONE gui=bold,italic ctermfg=NONE ctermbg=NONE cterm=bold,italic
+highlight Ignore guifg=#1f1f1f guibg=NONE gui=NONE ctermfg=234 ctermbg=NONE cterm=NONE
 highlight Error guifg=#ff7076 guibg=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 highlight Todo guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight SpecialKey guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
+highlight Added guifg=#02c471 guibg=NONE gui=NONE ctermfg=42 ctermbg=NONE cterm=NONE
+highlight Changed guifg=#3cacfe guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
+highlight Removed guifg=#ff7076 guibg=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 
-highlight Search guifg=#abac05 guibg=NONE gui=inverse ctermfg=142 ctermbg=NONE cterm=inverse
-highlight StatusLine guifg=#cacaca guibg=#121212 gui=NONE ctermfg=251 ctermbg=233 cterm=NONE
-highlight CursorLine guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
-highlight CursorColumn guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
-highlight Visual guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
-highlight VertSplit guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
-highlight WinSeparator guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
-highlight LineNr guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
-highlight CursorLineNr guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
-highlight SignColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight NonText guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight ColorColumn guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=233 cterm=NONE
+highlight Conceal guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cterm=italic
+highlight CursorColumn guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
+highlight CursorLine guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
+highlight CursorLineNr guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
+highlight LineNr guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight MatchParen guifg=NONE guibg=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
+highlight NonText guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight Folded guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cterm=italic
 highlight FoldColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight SpellBad guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellCap guifg=NONE guibg=NONE guisp=#e88c02 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellRare guifg=NONE guibg=NONE guisp=#abac05 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellLocal guifg=NONE guibg=NONE guisp=#ff4ee3 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
 highlight Pmenu guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=233 cterm=NONE
 highlight PmenuSel guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
-highlight Conceal guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cterm=italic
+highlight Search guifg=#abac05 guibg=NONE gui=inverse ctermfg=142 ctermbg=NONE cterm=inverse
+highlight SignColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
+highlight SpecialKey guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
+highlight SpellBad guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellCap guifg=NONE guibg=NONE guisp=#e88c02 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellLocal guifg=NONE guibg=NONE guisp=#ff4ee3 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellRare guifg=NONE guibg=NONE guisp=#abac05 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight StatusLine guifg=#cacaca guibg=#121212 gui=NONE ctermfg=251 ctermbg=233 cterm=NONE
+highlight VertSplit guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
+highlight Visual guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
+highlight WinSeparator guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
 
 highlight CtrlPMatch guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
 
