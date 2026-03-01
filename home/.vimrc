@@ -101,6 +101,9 @@ let g:ycm_enable_diagnostic_signs = 0
 
 " Colors
 syntax on
+if has('termguicolors') && !&termguicolors && $COLORTERM =~# "truecolor"
+  set termguicolors
+endif
 colorscheme jcolor2
 
 " Line numbers and ruler
@@ -328,40 +331,13 @@ augroup filetype
   au!
   " Override format options (see `help fo-table`)
   au FileType * setlocal formatoptions=crq2lj
-augroup END
 
-" Golang
-augroup filetype
-  au BufRead,BufNewFile *.go setlocal filetype=go
-augroup END
-
-" JSON
-augroup filetype
-  au BufRead,BufNewFile *.json setlocal filetype=javascript
-augroup END
-
-" LLVM
-augroup filetype
-  au BufRead,BufNewFile *.ll setlocal filetype=llvm
-augroup END
-
-" Markdown
-augroup filetype
-  au BufRead,BufNewFile *.md setlocal filetype=markdown
-augroup END
-
-" Rust
-augroup filetype
-  au BufRead,BufNewFile *.rs setlocal filetype=rust
+  " To add a file type:
+  " au BufRead,BufNewFile <glob, e.g. *.foo> setlocal filetype=<filetype>
 augroup END
 
 " TeX
 au FileType tex setlocal indentexpr=
-
-" SCons
-augroup filetype
-  au BufRead,BufNewFile SCons* setlocal filetype=python
-augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Local settings

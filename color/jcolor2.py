@@ -518,17 +518,8 @@ endif
 
 let colors_name = 'jcolor2'
 
-if !has('gui_running')
-  if has('termguicolors')
-    if !&termguicolors
-      if $COLORTERM !~# "truecolor"
-        finish
-      endif
-      set termguicolors
-    endif
-  elseif &t_Co != 256
-    finish
-  endif
+if !has('gui_running') && !(has('termguicolors') && &termguicolors) && &t_Co != 256
+  finish
 endif
 
 set background=dark""")
