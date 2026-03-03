@@ -27,6 +27,23 @@ set background=dark
 " blue: #3bacff (cterm=39 #00afff)
 " purple: #a491ff (cterm=141 #af87ff)
 " pink: #ff4ee3 (cterm=206 #ff5fd7)
+" grey_dark: #929292 (cterm=246 #949494)
+" redorange_dark_weak: #bc826b (cterm=137 #af875f)
+" redorange_dark_strong: #cb7a59 (cterm=173 #d7875f)
+" orangeyellow_dark_weak: #a78f57 (cterm=137 #af875f)
+" orangeyellow_dark_strong: #af8d36 (cterm=136 #af8700)
+" yellowgreen_dark_weak: #809d6a (cterm=108 #87af87)
+" yellowgreen_dark_strong: #78a157 (cterm=71 #5faf5f)
+" greencyan_dark_weak: #57a292 (cterm=72 #5faf87)
+" greencyan_dark_strong: #29a891 (cterm=36 #00af87)
+" cyanblue_dark_weak: #569db6 (cterm=73 #5fafaf)
+" cyanblue_dark_strong: #29a1c4 (cterm=38 #00afd7)
+" bluepurple_dark_weak: #7d91c4 (cterm=103 #8787af)
+" bluepurple_dark_strong: #748fd7 (cterm=104 #8787d7)
+" purplepink_dark_weak: #a384b6 (cterm=139 #af87af)
+" purplepink_dark_strong: #aa7dc3 (cterm=140 #af87d7)
+" pinkred_dark_weak: #bb7e92 (cterm=138 #af8787)
+" pinkred_dark_strong: #c97492 (cterm=168 #d75f87)
 
 highlight Normal guifg=#dedede guibg=#1f1f1f gui=NONE ctermfg=253 ctermbg=234 cterm=NONE
 

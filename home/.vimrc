@@ -81,7 +81,7 @@ let g:rainbow#max_level = 32
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 " vim-airline: set theme
-let g:airline_theme='wombat'
+let g:airline_theme='jcolor2'
 
 " vim-go: don't pre-populate new files
 let g:go_template_autocreate = 0
