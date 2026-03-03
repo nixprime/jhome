@@ -429,7 +429,7 @@ def saturate(L: float, h: float) -> RGBColor:
     C_good = 0.0
     color_good = None
     dC = 0.125
-    for _ in range(8):
+    for _ in range(12):
         while True:
             C = C_good + dC
             color = OklchColor(L, C, h).to_rgb()

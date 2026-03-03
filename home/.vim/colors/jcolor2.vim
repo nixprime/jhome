@@ -20,11 +20,11 @@ set background=dark
 " white: #dedede (cterm=253 #dadada)
 " grey: #a4a4a4 (cterm=248 #a8a8a8)
 " red: #ff7076 (cterm=203 #ff5f5f)
-" orange: #e88c02 (cterm=172 #d78700)
-" yellow: #abac05 (cterm=142 #afaf00)
-" green: #02c471 (cterm=42 #00d787)
-" cyan: #03bbc3 (cterm=37 #00afaf)
-" blue: #3cacfe (cterm=39 #00afff)
+" orange: #e88c00 (cterm=172 #d78700)
+" yellow: #abac00 (cterm=142 #afaf00)
+" green: #00c471 (cterm=42 #00d787)
+" cyan: #00bbc3 (cterm=37 #00afaf)
+" blue: #3bacff (cterm=39 #00afff)
 " purple: #a491ff (cterm=141 #af87ff)
 " pink: #ff4ee3 (cterm=206 #ff5fd7)
 
@@ -32,12 +32,12 @@ highlight Normal guifg=#dedede guibg=#1f1f1f gui=NONE ctermfg=253 ctermbg=234 ct
 
 " From :help E669
 highlight Comment guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
-highlight Constant guifg=#3cacfe guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
+highlight Constant guifg=#3bacff guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
 highlight Identifier guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight Statement guifg=#02c471 guibg=NONE gui=NONE ctermfg=42 ctermbg=NONE cterm=NONE
+highlight Statement guifg=#00c471 guibg=NONE gui=NONE ctermfg=42 ctermbg=NONE cterm=NONE
 highlight PreProc guifg=#a491ff guibg=NONE gui=NONE ctermfg=141 ctermbg=NONE cterm=NONE
 highlight Type guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight Special guifg=#e88c02 guibg=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
+highlight Special guifg=#e88c00 guibg=NONE gui=NONE ctermfg=172 ctermbg=NONE cterm=NONE
 highlight Underlined guifg=NONE guibg=NONE gui=underline ctermfg=NONE ctermbg=NONE cterm=underline
 highlight Bold guifg=NONE guibg=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 highlight Italic guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cterm=italic
@@ -45,8 +45,8 @@ highlight BoldItalic guifg=NONE guibg=NONE gui=bold,italic ctermfg=NONE ctermbg=
 highlight Ignore guifg=#1f1f1f guibg=NONE gui=NONE ctermfg=234 ctermbg=NONE cterm=NONE
 highlight Error guifg=#ff7076 guibg=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 highlight Todo guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
-highlight Added guifg=#02c471 guibg=NONE gui=NONE ctermfg=42 ctermbg=NONE cterm=NONE
-highlight Changed guifg=#3cacfe guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
+highlight Added guifg=#00c471 guibg=NONE gui=NONE ctermfg=42 ctermbg=NONE cterm=NONE
+highlight Changed guifg=#3bacff guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
 highlight Removed guifg=#ff7076 guibg=NONE gui=NONE ctermfg=203 ctermbg=NONE cterm=NONE
 
 highlight ColorColumn guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=233 cterm=NONE
@@ -61,13 +61,13 @@ highlight Folded guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cter
 highlight FoldColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
 highlight Pmenu guifg=NONE guibg=#121212 gui=NONE ctermfg=NONE ctermbg=233 cterm=NONE
 highlight PmenuSel guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
-highlight Search guifg=#abac05 guibg=NONE gui=inverse ctermfg=142 ctermbg=NONE cterm=inverse
+highlight Search guifg=#abac00 guibg=NONE gui=inverse ctermfg=142 ctermbg=NONE cterm=inverse
 highlight SignColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
 highlight SpecialKey guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight SpellBad guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellCap guifg=NONE guibg=NONE guisp=#e88c02 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellCap guifg=NONE guibg=NONE guisp=#e88c00 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
 highlight SpellLocal guifg=NONE guibg=NONE guisp=#ff4ee3 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellRare guifg=NONE guibg=NONE guisp=#abac05 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellRare guifg=NONE guibg=NONE guisp=#abac00 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
 highlight StatusLine guifg=#cacaca guibg=#121212 gui=NONE ctermfg=251 ctermbg=233 cterm=NONE
 highlight VertSplit guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
 highlight Visual guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
@@ -76,11 +76,11 @@ highlight WinSeparator guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=
 highlight CtrlPMatch guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
 
 " llama.vim
-highlight llama_hl_fim_hint guifg=#03bbc3 guibg=#1f1f1f gui=NONE ctermfg=37 ctermbg=234 cterm=NONE
+highlight llama_hl_fim_hint guifg=#00bbc3 guibg=#1f1f1f gui=NONE ctermfg=37 ctermbg=234 cterm=NONE
 highlight llama_hl_inst_src guifg=#dedede guibg=NONE gui=italic ctermfg=253 ctermbg=NONE cterm=italic
 highlight llama_hl_inst_virt_proc guifg=#a4a4a4 guibg=NONE gui=italic ctermfg=248 ctermbg=NONE cterm=italic
-highlight llama_hl_inst_virt_gen guifg=#03bbc3 guibg=NONE gui=italic ctermfg=37 ctermbg=NONE cterm=italic
-highlight llama_hl_inst_virt_ready guifg=#03bbc3 guibg=NONE gui=NONE ctermfg=37 ctermbg=NONE cterm=NONE
+highlight llama_hl_inst_virt_gen guifg=#00bbc3 guibg=NONE gui=italic ctermfg=37 ctermbg=NONE cterm=italic
+highlight llama_hl_inst_virt_ready guifg=#00bbc3 guibg=NONE gui=NONE ctermfg=37 ctermbg=NONE cterm=NONE
 
 " rainbow_parentheses
 if !exists('g:rainbow#colors')
