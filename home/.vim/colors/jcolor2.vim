@@ -54,6 +54,7 @@ highlight Conceal guifg=NONE guibg=NONE gui=italic ctermfg=NONE ctermbg=NONE cte
 highlight CursorColumn guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
 highlight CursorLine guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
 highlight CursorLineNr guifg=NONE guibg=#333333 gui=NONE ctermfg=NONE ctermbg=236 cterm=NONE
+highlight Directory guifg=#3bacff guibg=NONE gui=NONE ctermfg=39 ctermbg=NONE cterm=NONE
 highlight LineNr guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
 highlight MatchParen guifg=NONE guibg=NONE gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 highlight NonText guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
@@ -64,10 +65,10 @@ highlight PmenuSel guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE c
 highlight Search guifg=#abac00 guibg=NONE gui=inverse ctermfg=142 ctermbg=NONE cterm=inverse
 highlight SignColumn guifg=#dedede guibg=NONE gui=NONE ctermfg=253 ctermbg=NONE cterm=NONE
 highlight SpecialKey guifg=#a4a4a4 guibg=NONE gui=NONE ctermfg=248 ctermbg=NONE cterm=NONE
-highlight SpellBad guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellCap guifg=NONE guibg=NONE guisp=#e88c00 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellLocal guifg=NONE guibg=NONE guisp=#ff4ee3 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
-highlight SpellRare guifg=NONE guibg=NONE guisp=#abac00 gui=undercurl ctermfg=NONE ctermbg=NONE cterm=undercurl
+highlight SpellBad guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE ctermul=203 cterm=undercurl
+highlight SpellCap guifg=NONE guibg=NONE guisp=#ff7076 gui=undercurl ctermfg=NONE ctermbg=NONE ctermul=203 cterm=undercurl
+highlight SpellLocal guifg=NONE guibg=NONE guisp=#3bacff gui=undercurl ctermfg=NONE ctermbg=NONE ctermul=39 cterm=undercurl
+highlight SpellRare guifg=NONE guibg=NONE guisp=#abac00 gui=undercurl ctermfg=NONE ctermbg=NONE ctermul=142 cterm=undercurl
 highlight StatusLine guifg=#cacaca guibg=#121212 gui=NONE ctermfg=251 ctermbg=233 cterm=NONE
 highlight VertSplit guifg=#a4a4a4 guibg=#121212 gui=NONE ctermfg=248 ctermbg=233 cterm=NONE
 highlight Visual guifg=NONE guibg=NONE gui=inverse ctermfg=NONE ctermbg=NONE cterm=inverse
@@ -88,39 +89,19 @@ if !exists('g:rainbow#colors')
 \   'dark': [
 \     ['102', '#868686'],
 \     ['131', '#bd6b6c'],
+\     ['68', '#6086c5'],
+\     ['65', '#639658'],
+\     ['133', '#a271ad'],
 \     ['30', '#03999f'],
-\     ['100', '#8a8b39'],
-\     ['104', '#857bc1'],
-\     ['137', '#b1783c'],
-\     ['67', '#4a8cc1'],
-\     ['65', '#4c996a'],
-\     ['132', '#ad6d9f'],
-\     ['131', '#bb7052'],
-\     ['31', '#2694b4'],
-\     ['65', '#6e944f'],
-\     ['133', '#9c73b4'],
-\     ['136', '#a18231'],
-\     ['68', '#6a83c6'],
-\     ['36', '#259b86'],
-\     ['132', '#b86a86']
+\     ['136', '#a77e33']
 \   ],
 \   'light': [
 \     ['102', '#868686'],
 \     ['131', '#bd6b6c'],
+\     ['68', '#6086c5'],
+\     ['65', '#639658'],
+\     ['133', '#a271ad'],
 \     ['30', '#03999f'],
-\     ['100', '#8a8b39'],
-\     ['104', '#857bc1'],
-\     ['137', '#b1783c'],
-\     ['67', '#4a8cc1'],
-\     ['65', '#4c996a'],
-\     ['132', '#ad6d9f'],
-\     ['131', '#bb7052'],
-\     ['31', '#2694b4'],
-\     ['65', '#6e944f'],
-\     ['133', '#9c73b4'],
-\     ['136', '#a18231'],
-\     ['68', '#6a83c6'],
-\     ['36', '#259b86'],
-\     ['132', '#b86a86']
+\     ['136', '#a77e33']
 \   ] }
 endif
